@@ -9,6 +9,8 @@
  * Unit tests for the Theme API.
  */
 class ThemeUnitTest extends DrupalWebTestCase {
+  protected $profile = 'testing';
+
   public static function getInfo() {
     return array(
       'name' => 'Theme API',
@@ -194,7 +196,7 @@ class ThemeItemListUnitTest extends DrupalWebTestCase {
 /**
  * Unit tests for theme_links().
  */
-class ThemeLinksUnitTest extends DrupalUnitTestCase {
+class ThemeLinksTest extends DrupalWebTestCase {
   public static function getInfo() {
     return array(
       'name' => 'Links',

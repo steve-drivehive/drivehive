@@ -95,7 +95,7 @@ class Messaging_Template {
   // Current template elements, renderable array
   public $elements;
   // Default format
-  public $fomat = MESSAGING_FORMAT;
+  public $format = MESSAGING_FORMAT;
   // Parent element
   protected $parent;
   // Store multiple objects for token replacement
