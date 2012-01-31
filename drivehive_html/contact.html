@@ -1,0 +1,101 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+   	<title>Drive Hive</title>
+    
+	<link rel="stylesheet" href="css/reset.css" type="text/css" media="screen, projection"/>
+	<link rel="stylesheet" href="css/style.css" type="text/css" media="screen, projection"/>
+
+	<script src="js/jquery-1.6.1.min.js" type="text/javascript" charset="utf-8"></script>
+	<script src="js/functions.js" type="text/javascript" charset="utf-8"></script>
+    
+</head>
+
+<body>
+	<div id="page">
+		<div class="wrapper">
+        	<div id="header">
+            	<div id="head-static">
+	            	<ul id="top-nav">
+							<li><a href="#">SIGN OUT</a></li>
+		            		<li>LOGGED IN AS <a href="account.html"><span class="blue">JANE DOE</span></a></li>
+							<li><a href="faq.html">HELP</a></li>
+						</ul>
+						<a href="index.html" id="logo" class="linked">Drive Hive</a>
+						<a href="donate.html" id="donate">DONATE</a>
+						<ul id="nav">
+							<li><a href="current_event.html">CURRENT&nbsp;EVENT</a></li>
+							<li>//</li>
+		            		<li><a href="#">PAST EVENTS</a></li>
+		            		<li>//</li>
+							<li><a href="about.html">ABOUT DH</a></li>
+						</ul>
+				</div><!-- /head-static -->
+				<h2 id="hear-from-you">WE WANT TO HEAR FROM YOU</h2>
+				<form action="#" method="post" id="contact-form">
+					<label for="con_first_name">FIRST <strong>NAME</strong></label>
+					<input type="text" name="first_name" class="text-input" id="con_first_name"/>
+					<label for="con_last_name">LAST <strong>NAME</strong></label>
+					<input type="text" name="last_name" class="text-input" id="con_last_name"/>
+					<label for="con_email">EMAIL <strong>ADDRESS</strong></label>
+					<input type="text" name="email" class="text-input" id="con_email"/>
+					<label for="con_txt_email" id="email-label">MESSAGE</label>
+					<textarea cols="20" rows="10" id="con_txt_email"></textarea>
+					<input type="submit" id="submit" />
+				</form>
+				<h1 id="slogan">TALK TO US</h1>
+				<div class="countdown">
+					<div id="countdown-img-wrapper">
+						<ul>
+							<li><a href="#"><img src="img/baners/nav1.jpg" alt="" /></a></li>
+							<li><a href="#"><img src="img/baners/nav2.jpg" alt="" /></a></li>
+							<li><a href="#"><img src="img/baners/nav3.jpg" alt="" /></a></li>
+							<li class="last"><a href="#"><img src="img/baners/nav4.jpg" alt="" /></a></li>
+						</ul>
+					</div><!-- /countdown-img-wrapper -->
+					<div id="countdown-to">
+						COLDPLAY SONG RELEASE
+					</div><!-- countdown-to -->
+					<div id="numbers">
+						<span>02 W</span> <span>02 D</span> <span id="minutes"></span> <span id="seconds" class="last"></span>
+					</div><!-- /numbers -->
+				</div><!-- /contdown -->
+            </div><!-- /header -->
+            <div id="footer">
+            	<div id="copyright">Copyright ©2011 DRIVE HIVE, LLC    |   website by onefastbuffalo</div>
+            	<div id="footer-wrap">
+                    <div class="fl">
+                    <ul>
+                        <li><a href="current_event.html">current event</a></li>
+                        <li><a href="#">past events</a></li>
+                        <li><a href="about.html">about drive hive</a></li>
+                        <li><a href="#">privacy &amp; legal</a></li>
+                        <li><a href="news.html">news</a></li>
+                        <li class="last"><a href="contact.html">Contact US</a></li>      
+                    </ul>
+                    
+                    </div>
+                    <div class="fr">
+                        
+                        <ul>
+                            <li><a href="#" id="footer-twitter">twitter</a></li>
+                            <li><a href="#" id="footer-tube">youtube</a></li>
+                            <li><a href="#" id="footer-fb">facebook</a></li>
+                            <li><a href="#" id="footer-in">linkedin</a></li>
+                            <li><a href="#" id="footer-rss">rss</a></li>
+                        </ul>
+                        <div class="fix"></div>
+                        <form action="#" method="post">
+                            <input type="text" name="mail" id="footer-text-input" value="ENTER EMAIL ADDRESS" onfocus="if (this.value == 'ENTER EMAIL ADDRESS') {this.value = '';}" onblur="if (this.value == '') {this.value = 'ENTER EMAIL ADDRESS';}"/>
+                            <input type="submit" name="submit" id="footer-submit" class="linked" />
+                        </form>
+                    </div><!-- /fr -->
+                    <div class="fix"></div>
+                </div><!-- /footer-wrap -->
+            </div><!-- /footer -->
+        </div><!-- /wrapper -->
+	</div><!-- /page -->
+</body>
+</html>

@@ -1,0 +1,121 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+   	<title>Drive Hive</title>
+    
+	<link rel="stylesheet" href="css/reset.css" type="text/css" media="screen, projection"/>
+	<link rel="stylesheet" href="css/style.css" type="text/css" media="screen, projection"/>
+
+	<script src="js/jquery-1.6.1.min.js" type="text/javascript" charset="utf-8"></script>
+   	<script type="text/javascript" src="js/jquery.main.js" ></script>
+</head>
+
+<body>
+	<div id="page">
+		<div class="wrapper">
+        	<div id="header">
+            	<div id="head-static">
+	            	<ul id="top-nav">
+							<li><a href="#">SIGN OUT</a></li>
+		            		<li>LOGGED IN AS <a href="account.html"><span class="blue">JANE DOE</span></a></li>
+							<li><a href="faq.html">HELP</a></li>
+						</ul>
+						<a href="index.html" id="logo" class="linked">Drive Hive</a>
+						<a href="donate.html" id="donate">DONATE</a>
+						<ul id="nav">
+							<li><a href="current_event.html">CURRENT&nbsp;EVENT</a></li>
+							<li>//</li>
+		            		<li><a href="#">PAST EVENTS</a></li>
+		            		<li>//</li>
+							<li><a href="about.html">ABOUT DH</a></li>
+						</ul>
+				</div><!-- /head-static -->
+				<div id="donate-box">
+					<h1>Ellen to present Stand Up Live</h1>
+					<div id="donate-desc">
+						<img src="img/temp/donate-pic2.jpg" alt="" />
+						<p>With the donation below you are automatically able to watch the event from your com- puter.  We will send reminders leading up to the event.  A unique key will be sent to your email on file so make sure you keep this updated within the system. At least 3 hours before the event, we will send your unique key login to be used for viewing!</p>
+					</div><!-- /donate-desc -->
+					<div id="submit-donation">
+						<form action="#" method="post">
+							<label for="donation">AMOUNT MINIMUM OF $7</label>
+							<div id="donation-placeholder">
+                            	<select style="width:83px;">
+                                	<option>$7</option>
+                                    <option>$10</option>
+                                    <option>$15</option>
+                                    <option>$25</option>
+                                    <option>$50</option>
+                                    <option>$75</option>
+                                    <option>$100</option>
+                                </select>
+                                <strong>OR</strong>
+                                <input value="Enter Amt" onclick="if(this.value == 'Enter Amt') {this.value = '';}" onblur="if (this.value == '') {this.value = 'Enter Amt';}">
+                            </div>
+							<div id="donation-info">
+								<div id="info-det">
+									DETAILS ON FILE: <a href="account.html">edit profile</a>
+								</div>
+								<p>Name: Jane Doe</p>
+								<p>CC: xxxx xxxx xxxx 1567</p>
+								<p>Email: j.doe@gmail.com</p>
+								<div id="submit-wrapper">
+									<input type="submit" id="donate-submit-button" />
+								</div><!-- /submit-wrapper -->
+							</div><!-- /donation-info -->
+						</form>
+					</div><!-- /submit-donation -->
+					<div id="d-faq" class="frame-wrapper">
+						<div class="frame">
+							<h5>FAQs:</h5>
+							<h6>What is Drive Hive?</h6>
+							<p>Drive Hive provides fans and celebri- ties the opportunity to work together to raise money for various charities. Fans can pool money together to incetivize celebrities to participate in an exciting, exclusive, live event. If the targeted pledge is not met, the donors won’t get charged and nothing will be produced.</p> 
+							<h6>What does your pledge mean?</h6>
+							<h6>What if I don’t like the event?</h6>
+							<a href="faq.html" id="faq-see-all">see all</a>
+						</div><!-- /frame -->
+					</div><!-- /faq -->
+					<div id="explanation">
+						In the event the full funding for the fundraising goal is not met, a refund will be returned to your account on file within 48 hours of the event timeline. A notification will be sent to your email on file on or before the date of the event to notify you of this refund. No refunds or exchanges allowed during the fundraising process and all funds will be placed on hold until otherwise notified. For full details on the usage rights of the funding please visit the Help section. 
+					</div><!-- /explanation -->
+				</div><!-- /donate-box -->
+				
+            </div><!-- /header -->
+            <div id="footer">
+            	<div id="copyright"></div>
+            	<div id="footer-wrap">
+                    <div class="fl">
+                    <ul>
+                        <li><a href="current_event.html">current event</a></li>
+                        <li><a href="#">past events</a></li>
+                        <li><a href="about.html">about drive hive</a></li>
+                        <li><a href="#">privacy &amp; legal</a></li>
+                        <li><a href="news.html">news</a></li>
+                        <li class="last"><a href="contact.html">Contact US</a></li>      
+                    </ul>
+                    
+                    </div>
+                    <div class="fr">
+                        
+                        <ul>
+                            <li><a href="#" id="footer-twitter">twitter</a></li>
+                            <li><a href="#" id="footer-tube">youtube</a></li>
+                            <li><a href="#" id="footer-fb">facebook</a></li>
+                            <li><a href="#" id="footer-in">linkedin</a></li>
+                            <li><a href="#" id="footer-rss">rss</a></li>
+                        </ul>
+                        <div class="fix"></div>
+                        <form action="#" method="post">
+                            <input type="text" name="mail" id="footer-text-input" value="ENTER EMAIL ADDRESS" onfocus="if (this.value == 'ENTER EMAIL ADDRESS') {this.value = '';}" onblur="if (this.value == '') {this.value = 'ENTER EMAIL ADDRESS';}"/>
+                            <input type="submit" name="submit" id="footer-submit" class="linked" />
+                        </form>
+                    </div><!-- /fr -->
+                    <div class="fix"></div>
+                </div><!-- /footer-wrap -->
+            </div><!-- /footer -->
+        </div><!-- /wrapper -->
+	</div><!-- /page -->
+</body>
+</html>

@@ -1,0 +1,404 @@
+﻿<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+   	<title>Drive Hive</title>
+    
+	<link rel="stylesheet" href="css/reset.css" type="text/css" media="screen, projection"/>
+	<link rel="stylesheet" href="css/style.css" type="text/css" media="screen, projection"/>
+
+	<script src="js/jquery-1.6.1.min.js" type="text/javascript" charset="utf-8"></script>
+	<script src="js/functions.js" type="text/javascript" charset="utf-8"></script>
+	<script src="js/jquery.cycle.all.js" type="text/javascript" charset="utf-8"></script>
+    <script src="js/jquery.main.js" type="text/javascript" charset="utf-8"></script>
+ 
+ 	<script type="text/javascript">
+		$(function(){
+		  var count = 144553;
+		  countdown = setInterval(function(){
+			$(".dollars").html(formatDollar(count));
+			count--;
+		  }, 1000);
+		});
+		
+		function formatDollar(num) { 
+			var p = num.toFixed(2).split("."); 
+			return "$" + p[0].split("").reverse().reduce(function(acc, num, i, orig) { 
+				return  num + (i && !(i % 3) ? "," : "") + acc; 
+			}, ""); 
+		} 
+    </script>
+</head>
+
+<body>
+	<div id="page">
+		<div class="wrapper">
+        	<div id="baner-part">
+            	<div id="head-static">
+	            	<ul id="top-nav">
+							<li><a href="#">SIGN OUT</a></li>
+		            		<li>LOGGED IN AS <a href="account.html"><span class="blue">JANE DOE</span></a></li>
+							<li><a href="faq.html">HELP</a></li>
+						</ul>
+						<a href="index.html" id="logo" class="linked">Drive Hive</a>
+						<a href="donate.html" id="donate">DONATE</a>
+						<ul id="nav">
+							<li><a href="current_event.html">CURRENT&nbsp;EVENT</a></li>
+							<li>//</li>
+		            		<li><a href="#">PAST EVENTS</a></li>
+		            		<li>//</li>
+							<li><a href="about.html">ABOUT DH</a></li>
+						</ul>
+				</div><!-- /head-static -->
+				<div id="current-event-placeholder">
+	                <div class="dollars">$144,553</div>
+				</div>
+                <a href="donate.html" class="donatebutton">Do your part donate</a>
+				<!--<div class="countdown">
+					<div id="countdown-img-wrapper">
+						<ul>
+							<li><a href="#"><img src="img/baners/nav1.jpg" alt="" /></a></li>
+							<li><a href="#"><img src="img/baners/nav2.jpg" alt="" /></a></li>
+							<li><a href="#"><img src="img/baners/nav3.jpg" alt="" /></a></li>
+							<li class="last"><a href="#"><img src="img/baners/nav4.jpg" alt="" /></a></li>
+						</ul>
+					</div>
+					<div id="countdown-to">
+						COLDPLAY SONG RELEASE
+					</div>
+					<div id="numbers">
+						<span>02 W</span> <span>02 D</span> <span id="minutes"></span> <span id="seconds" class="last"></span>
+					</div>
+				</div>--><!-- /contdown -->
+            </div><!-- /baner-part -->
+            <div class="cols">
+            	<div id="celebrity-wrapper">
+                	<div id="celebrity">
+                    	<h3>CELEBRITY / / <span>CHARITY</span></h3>
+                        <div class="fl">
+                        	<img src="img/chriss_martin.jpg" alt="" />
+                        </div><!-- /fl -->
+                        <div id="quote">
+                        	<!--
+                        	"Americans are good at charity. They like to give, and they give a lot, even those who can't afford it. But justice is a higher standard."
+                            <span>- Chris Martin</span>
+                             -->
+                        </div><!-- /quote -->
+                        <div class="fix"></div>
+                        <div class="fl">
+                        	<img src="img/ths.jpg" alt="" />
+                        </div><!-- /fl -->
+                        <div id="about">
+                        	<h5>ABOUT THE HUMANE SOCIETY</h5>
+                            <p>Our vision is of a world in which justice and sustainable development are at the heart of trade structures and practices so that everyone, through their work, can maintain a decent and dignified livelihood and develop their full potential. To achieve this vision, Fairtrade seeks to transform trading structures and practices in favour of the poor and disadvantaged. By facilitating trading partnerships based on equity and transparency, Fairtrade contributes to sustainable development for marginalised producers, workers and their communities. Through demonstration of alternatives to conventional trade and other forms of advocacy, the Fairtrade movement empowers citizens to campaign for an international trade system based on justice and fairness.</p>
+                        </div><!-- about -->
+                        <div class="fix"></div>
+                    </div><!-- /celebrity -->
+                </div><!-- /celebrity-wrapper -->
+                <div id="sponsors">
+                	<h3>Sposored <span>by</span></h3>
+                    <a href="#" id="gibson" class="linked">gibson</a>
+                    <a href="#" id="nike" class="linked">nike</a>
+                    <a href="#" id="vw" class="linked">vw</a>
+                    <a href="#" id="star" class="linked">star</a>
+                </div><!-- /sponsors -->
+            </div><!-- /cols -->
+            <div class="cols">
+            	<div id="blog" class="frame-wrapper">
+                	<div class="frame">
+                    	<div id="rss_update" class="cols">
+                    		<h6>UPDATES</h6>
+                            <a href="#"> / / / / / / / / / / / / </a>
+                        </div><!-- /rss_update -->
+                        <h2>FINAL TIME ANNOUNCED FOR STAND UP EVENT</h2>
+                        <div id="posted">
+                        	Posted <span>September 9th</span> | <a href="#comments">1 COMMENT</a>
+                        </div><!-- /posted -->
+                        <img src="img/temp/blog-pic.jpg" alt="" />
+                        <div id="article">
+                        	<p>It's official so mark your calendars. We have been working with the whole crew and Coldplay management team to finalize the concert date and time. We have made the final choice of</p>
+							<h5>MONDAY, DECEMBER 30th at 10:00 pm EST</h5>
+							<p>Make sure to mark your calendars, but we will also send out a reminder email 3 hours before the event takes place to make sure you don't forget!</p>
+                        </div><!-- /article -->
+                        <div id="social-media">
+                        	<a href="#" id="facebook">Like</a>
+                            <a href="#" id="twitter">Tweet</a>
+                        </div><!-- /social-media -->
+                        <div id="comments">
+                        	<h4>1 Comment</h4>
+                            <ul>
+                            	<li>
+                                	<div class="pic">
+                                    	<img src="img/temp/comment-pic.jpg" alt="" />
+                                    </div><!-- /pic -->
+                                    <div class="comm-text">
+                                        <div class="title">
+                                            Christine Johnson
+                                            <span>17 hours ago</span>
+                                        </div><!-- /title -->
+                                    	<p>I literally just set an alarm on my iPhone to go off every hour on December 30th. THIS MAKES MY NIGHT!!!!</p> 
+                                    </div><!-- /comm-text -->
+                                    <a href="#" class="reply">REPLY</a>
+                                </li>
+                            </ul>
+                            <div id="leave-comment">
+                            	<span class="box-title">LEAVE COMMENT</span>
+                                Signed in as a <span>Guest</span>
+                                <div id="login">
+                                	<a href="#">SIGN IN</a> or <a href="#">JOIN</a>
+                                </div><!-- /login -->
+                                <form action="#" method="post">
+                                	<textarea cols="20" rows="10"></textarea>
+                                    <div id="form-name">
+                                    	<label for="name">Name (Visible)</label>
+                                        <input type="text" name="name" class="text-input"/>
+                                    </div><!-- /form-name -->
+                                    <div id="form-email">
+                                    	<label for="email">Email (Required, Not Visible)</label>
+                                        <input type="text" name="email" class="text-input"/>
+                                    </div><!-- /form-email-->
+                                    <input type="submit" id="leave-submit" class="linked" value="submit"/>
+                                </form>
+                            </div><!-- /leave-comment -->
+                        </div><!-- /comments -->
+                    </div><!-- /frame -->
+                </div><!-- /frame-wrapper -->
+                <div id="recent" class="frame-wrapper">
+                	<div class="frame">
+                    	<h4>Recent posts</h4>
+                        <ul>
+                        	<li>
+                            	<div class="recent-pic">
+                                	<img src="img/temp/recent-pic1.jpg" alt="" />
+                                </div><!-- /recent-pic -->
+                                <div class="recent-txt">
+                                	<a href="#">Location for the Concert Event Announced</a>
+                                    <p>Be there or be square...no seriously</p>
+                                    <span>September 1, 2011</span>
+                                </div><!-- /recent-text -->
+                            </li>
+                            <li>
+                            	<div class="recent-pic">
+                                	<img src="img/temp/recent-pic2.jpg" alt="" />
+                                </div><!-- /recent-pic -->
+                                <div class="recent-txt">
+                                	<a href="#">Starbucks Giveaway</a>
+                                    <p>Free Starbucks on the day of the event to any members with a code!</p>
+                                    <span>August 30, 2011</span>
+                                </div><!-- /recent-text -->
+                            </li>
+                            <li>
+                            	<div class="recent-pic">
+                                	<img src="img/temp/recent-pic3.jpg" alt="" />
+                                </div><!-- /recent-pic -->
+                                <div class="recent-txt">
+                                	<a href="#">Coldplay Preview</a>
+                                    <p>Coldplay releases a video message encouraging fans</p>
+                                    <span>August 25, 2011</span>
+                                </div><!-- /recent-text -->
+                            </li>
+                            <li>
+                            	<div class="recent-pic">
+                                	<img src="img/temp/recent-pic4.jpg" alt="" />
+                                </div><!-- /recent-pic -->
+                                <div class="recent-txt">
+                                	<a href="#">Event Selected!</a>
+                                    <p>Coldplay to Release Unheard Single. See what all the hubub is about</p>
+                                    <span>August 20, 2011</span>
+                                </div><!-- /recent-text -->
+                            </li>
+                        </ul>
+                        <div id="see-all">
+                        	<a href="#">see all</a>
+                        </div><!-- /see-all -->
+                    </div><!-- /frame -->
+                </div><!-- /recent -->
+                <div id="media-box" class="frame-wrapper">
+                	<div class="frame">
+                    	<h4>TWITTER</h4>
+                    	<div id="divTweet">
+                    	   <ul class="tweet">
+                        	<li>
+                            	<div class="media-pic">
+                                	<img src="img/temp/tweet-pic1.jpg" alt="" />
+                                </div><!-- /media-pic -->
+                                <div class="media-txt">
+                                	<a href="#">Chris Martin</a> : I can't believe it is just 12 days away. Waiting to see all our fans tune in &rarr; 18 minutes ago
+                                </div><!-- /media-txt -->
+                            </li>
+							<li>
+                            	<div class="media-pic">
+                                	<img src="img/temp/tweet-pic2.jpg" alt="" />
+                                </div><!-- /media-pic -->
+                                <div class="media-txt">
+									<a href="#">anieprice@DriveHive</a> : you rule what would I do without you guys???? Listening to Rush of Blood right now #:) &rarr; 2 hours ago
+								</div><!-- /media-txt -->
+                            </li>
+                            <li>
+                            	<div class="media-pic">
+                                	<img src="img/temp/tweet-pic3.jpg" alt="" />
+                                </div><!-- /media-pic -->
+                                <div class="media-txt">
+									<a href="#">Katie Williams</a> : Counting down to the DriveHive amazingness!!! Get ready players #yeahbuddy &rarr; 18 hours ago
+                                </div><!-- /media-txt -->
+                            </li>
+							<li>
+                            	<div class="media-pic">
+                                	<img src="img/temp/tweet-pic4.jpg" alt="" />
+                                </div><!-- /media-pic -->
+                                <div class="media-txt">
+									<a href="#">John Weber@Coldplay</a> : What took so long buds?? Counting the seconds to hear Angel #DriveHive &rarr; 22 hours ago
+								</div><!-- /media-txt -->
+                            </li>
+                        </ul>
+                        <ul class="tweet">
+                        	<li>
+                            	<div class="media-pic">
+                                	<img src="img/temp/tweet-pic1.jpg" alt="" />
+                                </div><!-- /media-pic -->
+                                <div class="media-txt">
+                                	<a href="#">Chris Martin</a> : I can't believe it is just 12 days away. Waiting to see all our fans tune in &rarr; 18 minutes ago
+                                </div><!-- /media-txt -->
+                            </li>
+							<li>
+                            	<div class="media-pic">
+                                	<img src="img/temp/tweet-pic2.jpg" alt="" />
+                                </div><!-- /media-pic -->
+                                <div class="media-txt">
+									<a href="#">anieprice@DriveHive</a> : you rule what would I do without you guys???? Listening to Rush of Blood right now #:) &rarr; 2 hours ago
+								</div><!-- /media-txt -->
+                            </li>
+                            <li>
+                            	<div class="media-pic">
+                                	<img src="img/temp/tweet-pic3.jpg" alt="" />
+                                </div><!-- /media-pic -->
+                                <div class="media-txt">
+									<a href="#">Katie Williams</a> : Counting down to the DriveHive amazingness!!! Get ready players #yeahbuddy &rarr; 18 hours ago
+                                </div><!-- /media-txt -->
+                            </li>
+							<li>
+                            	<div class="media-pic">
+                                	<img src="img/temp/tweet-pic4.jpg" alt="" />
+                                </div><!-- /media-pic -->
+                                <div class="media-txt">
+									<a href="#">John Weber@Coldplay</a> : What took so long buds?? Counting the seconds to hear Angel #DriveHive &rarr; 22 hours ago
+								</div><!-- /media-txt -->
+                            </li>
+                        </ul>
+                    	</div>
+                    	
+                        
+                        <h4>FACEBOOK</h4>
+                        <div id="divFace">
+                        <ul class="face">
+                        	<li>
+                            	<div class="media-pic">
+                                	<img src="img/temp/face-pic1.jpg" alt="" />
+                                </div><!-- /media-pic -->
+                                <div class="media-txt">
+                                	<a href="#">Awwwww snap! Coldplay = Awesome...this is all</a> by Jered Wilkerson 
+                                </div><!-- /media-txt -->
+                            </li>
+							<li>
+                            	<div class="media-pic">
+                                	<img src="img/temp/face-pic2.jpg" alt="" />
+                                </div><!-- /media-pic -->
+                                <div class="media-txt">
+									<a href="#">Can't wait to see this! I can't wait for the next album to come out either. Great pic Drive Hive!!!!!  </a> by Christine Edgington
+								</div><!-- /media-txt -->
+                            </li>
+                            <li>
+                            	<div class="media-pic">
+                                	<img src="img/temp/face-pic3.jpg" alt="" />
+                                </div><!-- /media-pic -->
+                                <div class="media-txt">
+									<a href="#">And the Countdown Begins</a> 1,259 people recommend this
+                                </div><!-- /media-txt -->
+                            </li>
+							<li>
+                            	<div class="media-pic">
+                                	<img src="img/temp/face-pic4.jpg" alt="" />
+                                </div><!-- /media-pic -->
+                                <div class="media-txt">
+									<a href="#">Dig - N - It. Why we have to wait until December???</a> by Curtis Meyers
+								</div><!-- /media-txt -->
+                            </li>
+                        </ul>
+                        <ul class="face">
+                        	<li>
+                            	<div class="media-pic">
+                                	<img src="img/temp/face-pic1.jpg" alt="" />
+                                </div><!-- /media-pic -->
+                                <div class="media-txt">
+                                	<a href="#">Awwwww snap! Coldplay = Awesome...this is all</a> by Jered Wilkerson 
+                                </div><!-- /media-txt -->
+                            </li>
+							<li>
+                            	<div class="media-pic">
+                                	<img src="img/temp/face-pic2.jpg" alt="" />
+                                </div><!-- /media-pic -->
+                                <div class="media-txt">
+									<a href="#">Can't wait to see this! I can't wait for the next album to come out either. Great pic Drive Hive!!!!!  </a> by Christine Edgington
+								</div><!-- /media-txt -->
+                            </li>
+                            <li>
+                            	<div class="media-pic">
+                                	<img src="img/temp/face-pic3.jpg" alt="" />
+                                </div><!-- /media-pic -->
+                                <div class="media-txt">
+									<a href="#">And the Countdown Begins</a> 1,259 people recommend this
+                                </div><!-- /media-txt -->
+                            </li>
+							<li>
+                            	<div class="media-pic">
+                                	<img src="img/temp/face-pic4.jpg" alt="" />
+                                </div><!-- /media-pic -->
+                                <div class="media-txt">
+									<a href="#">Dig - N - It. Why we have to wait until December???</a> by Curtis Meyers
+								</div><!-- /media-txt -->
+                            </li>
+                        </ul>
+                        </div>
+                        
+                        <div class="fix"></div>
+                    </div><!-- /frame -->
+                </div><!-- /media-box -->
+            </div><!-- /cols -->
+            <div id="footer">
+            	<div id="copyright"></div>
+            	<div id="footer-wrap">
+                    <div class="fl">
+                    <ul>
+                        <li><a href="current_event.html">current event</a></li>
+                        <li><a href="#">past events</a></li>
+                        <li><a href="about.html">about drive hive</a></li>
+                        <li><a href="#">privacy &amp; legal</a></li>
+                        <li><a href="news.html">news</a></li>
+                        <li class="last"><a href="contact.html">Contact US</a></li>      
+                    </ul>
+                    
+                    </div>
+                    <div class="fr">
+                        
+                        <ul>
+                            <li><a href="#" id="footer-twitter">twitter</a></li>
+                            <li><a href="#" id="footer-tube">youtube</a></li>
+                            <li><a href="#" id="footer-fb">facebook</a></li>
+                            <li><a href="#" id="footer-in">linkedin</a></li>
+                            <li><a href="#" id="footer-rss">rss</a></li>
+                        </ul>
+                        <div class="fix"></div>
+                        <form action="#" method="post">
+                            <input type="text" name="mail" id="footer-text-input" value="ENTER EMAIL ADDRESS" onfocus="if (this.value == 'ENTER EMAIL ADDRESS') {this.value = '';}" onblur="if (this.value == '') {this.value = 'ENTER EMAIL ADDRESS';}"/>
+                            <input type="submit" name="submit" id="footer-submit" class="linked" />
+                        </form>
+                    </div><!-- /fr -->
+                    <div class="fix"></div>
+                </div><!-- /footer-wrap -->
+                <div id="bottom-copyright">Copyright ©2011 DRIVE HIVE, LLC    |   website by onefastbuffalo</div>
+            </div><!-- /footer -->
+        </div><!-- /wrapper -->
+	</div><!-- /page -->
+</body>
+</html>
