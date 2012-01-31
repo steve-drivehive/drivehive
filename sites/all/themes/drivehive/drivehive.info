@@ -54,15 +54,21 @@ css[global.css][name] = Your custom global styles
 css[global.css][description] = This file holds all the globally active custom CSS of your theme.
 css[global.css][options][weight] = 10
 
+css[style.css][name] = style.css from client
+css[style.css][description] = Custom stylesheet from client
+
+css[reset.css][name] = reset.css from client
+css[reset.css][description] = Custom stylesheet from client
+
 ; THEME SETTINGS (DEFAULTS)
 
 settings[alpha_grid] = 'alpha_default'
-settings[alpha_primary_alpha_default] = 'normal'
+settings[alpha_primary_alpha_default] = 'wide'
 settings[alpha_responsive] = '1'
-settings[alpha_layouts_alpha_fluid_primary] = 'normal'
+settings[alpha_layouts_alpha_fluid_primary] = 'wide'
 settings[alpha_layouts_alpha_fluid_normal_responsive] = '0'
 settings[alpha_layouts_alpha_fluid_normal_media] = 'all and (min-width: 740px) and (min-device-width: 740px), (max-device-width: 800px) and (min-width: 740px) and (orientation:landscape)'
-settings[alpha_layouts_alpha_default_primary] = 'normal'
+settings[alpha_layouts_alpha_default_primary] = 'wide'
 settings[alpha_layouts_alpha_default_fluid_responsive] = '0'
 settings[alpha_layouts_alpha_default_fluid_media] = 'all and (min-width: 740px) and (min-device-width: 740px), (max-device-width: 800px) and (min-width: 740px) and (orientation:landscape)'
 settings[alpha_layouts_alpha_default_fluid_weight] = '0'
