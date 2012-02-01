@@ -1,6 +1,5 @@
 <article<?php print $attributes; ?>>
   <?php print $user_picture; ?>
-  howdy
   <?php if (!$page && $title): ?>
   <header>
     <?php print render($title_prefix); ?>
