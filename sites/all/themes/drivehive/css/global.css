@@ -1714,3 +1714,10 @@ dd.act2 a {
     width:100%;
     height:0.0001em;
 }
+.grid-12{
+	margin-left:0 !important;
+	margin-right:0 !important;
+}
+.container-12 .grid-12{
+width:1200px !important;	
+}
