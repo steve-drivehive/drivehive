@@ -4,7 +4,7 @@
 	<div id="baner-images">
 		<ul>
 			<li id="no1">
-				<img src="img/temp/baner-text.png" alt="" class="fake-text"/>
+				<img src="/sites/all/themes/drivehive/images/temp/baner-text.png" alt="" class="fake-text"/>
 			</li>
 		</ul>
 	</div><!-- /baner-images -->

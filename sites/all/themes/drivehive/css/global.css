@@ -197,7 +197,7 @@ a:hover {
 #baner-part {
 	height: 797px;
 	width: 100%;
-	background: url(../img/banner.jpg) no-repeat;
+	background: url(/sites/all/themes/drivehive/images/banner.jpg) no-repeat;
 	margin-bottom: 15px;
 }
 .cols {
@@ -236,7 +236,7 @@ a:hover {
 	-webkit-box-shadow: 0 5px 14px 0 #b2b2b2;
 	-moz-box-shadow: 0 5px 14px 0 #b2b2b2;
 	box-shadow: 0 5px 14px 0 #b2b2b2;
-	background: url(../img/quote.jpg) no-repeat 18px 16px #efdf11;
+	background: url(/sites/all/themes/drivehive/images/quote.jpg) no-repeat 18px 16px #efdf11;
 }
 #quote span {
 	float: right;
@@ -258,7 +258,7 @@ a:hover {
 	font-size: 11px;
 }
 #sponsors {
-	background: url(../img/sponsors.jpg) no-repeat right 70px;
+	background: url(/sites/all/themes/drivehive/images/sponsors.jpg) no-repeat right 70px;
 	width: 310px;
 	height: 380px;
 	float: right;
@@ -331,7 +331,7 @@ a:hover {
 }
 #rss_update a {
 	display: block;
-	background: url(../img/rss.jpg) no-repeat;
+	background: url(/sites/all/themes/drivehive/images/rss.jpg) no-repeat;
 	float: left;
 	padding: 13px 0 36px 45px;
 	font-style: italic;
@@ -376,10 +376,10 @@ a:hover {
 	color: #efdf11;
 }
 #facebook {
-	background: url(../img/facebook.jpg) no-repeat;
+	background: url(/sites/all/themes/drivehive/images/facebook.jpg) no-repeat;
 }
 #twitter {
-	background: url(../img/twitter.jpg) no-repeat;
+	background: url(/sites/all/themes/drivehive/images/twitter.jpg) no-repeat;
 }
 #comments h4 {
 	text-transform: uppercase;
@@ -484,7 +484,7 @@ a:hover {
 	margin-right: 10px;
 }
 #leave-comment #leave-submit {
-	background: url(../img/comment-submit.jpg) no-repeat;
+	background: url(/sites/all/themes/drivehive/images/comment-submit.jpg) no-repeat;
 	width: 80px;
 	height: 23px;
 	float: left;
@@ -631,13 +631,13 @@ a:hover {
 	background: url(/sites/all/themes/drivehive/images/img1.jpg) no-repeat;
 }
 #baner-images ul #no2 {
-	background: url(../img/baners/img2.jpg) no-repeat;
+	background: url(/sites/all/themes/drivehive/images/img2.jpg) no-repeat;
 }
 #baner-images ul #no3 {
-	background: url(../img/baners/img3.jpg) no-repeat;
+	background: url(/sites/all/themes/drivehive/images/img3.jpg) no-repeat;
 }
 #baner-images ul #no4 {
-	background: url(../img/baners/img4.jpg) no-repeat;
+	background: url(/sites/all/themes/drivehive/images/img4.jpg) no-repeat;
 }
 #baner-contents {
 	position: absolute;
@@ -705,7 +705,7 @@ a:hover {
 #header {
 	height: 797px;
 	width: 100%;
-	background: url(../img/head-bg.jpg) no-repeat;
+	background: url(/sites/all/themes/drivehive/images/head-bg.jpg) no-repeat;
 	margin-bottom: 10px;
 }
 #head-static {
@@ -801,7 +801,7 @@ a:hover {
 	display: block;
 }
 #submit {
-	background: url(../img/submit.jpg) no-repeat;
+	background: url(/sites/all/themes/drivehive/images/submit.jpg) no-repeat;
 	width: 55px;
 	height: 28px;
 	float: right;
@@ -822,19 +822,19 @@ a:hover {
 	width: 600px;
 	padding: 0 44px 42px 140px;
 	line-height: 130px;
-	background: url(../img/slogan-underline.png) no-repeat right bottom;
+	background: url(/sites/all/themes/drivehive/images/slogan-underline.png) no-repeat right bottom;
 	font-family: Gotham-b;
 	letter-spacing: -4px;
 }
 #index-countdown {
-	background: url(../img/countdown.png) no-repeat right 0;
+	background: url(/sites/all/themes/drivehive/images/countdown.png) no-repeat right 0;
 	width: 911px;
 	height: 68px;
 	clear: both;
 	margin: 20px 0 0 176px;
 }
 .countdown {
-	background: url(../img/temp/countdown.png) no-repeat right 0;
+	background: url(/sites/all/themes/drivehive/images/temp/countdown.png) no-repeat right 0;
 	width: 911px;
 	height: 68px;
 	clear: both;
@@ -947,7 +947,7 @@ a:hover {
 	padding-top: 18px
 }
 #donate-submit-button {
-	background: url(../img/donate-submit.jpg) no-repeat;
+	background: url(/sites/all/themes/drivehive/images/donate-submit.jpg) no-repeat;
 	width: 55px;
 	height: 28px;
 	float: right;
@@ -988,7 +988,7 @@ a:hover {
 	display: block;
 	width: 51px;
 	height: 18px;
-	background: url(../img/faq-see-all.jpg) no-repeat;
+	background: url(/sites/all/themes/drivehive/images/faq-see-all.jpg) no-repeat;
 	overflow: hidden;
 	text-indent: -999px;
 	margin: 15px 0 2px 121px;
@@ -1021,7 +1021,7 @@ a:hover {
 	padding: 10px 0 0 47px;
 	width: 205px;
 	height: 68px;
-	background: url(../img/title-label.jpg) no-repeat;
+	background: url(/sites/all/themes/drivehive/images/title-label.jpg) no-repeat;
 	position: absolute;
 	top: -38px;
 	left: -37px;
@@ -1118,7 +1118,7 @@ a:hover {
 	display: block;
 	width: 51px;
 	height: 18px;
-	background: url(../img/faq-submit.jpg) no-repeat;
+	background: url(/sites/all/themes/drivehive/images/faq-submit.jpg) no-repeat;
 	overflow: hidden;
 	text-indent: -999px;
 	border: 0;
@@ -1130,7 +1130,7 @@ a:hover {
 	border: 3px solid #fff;
 }
 #faq.not-logged-in h1 {
-	background: url(../img/title-label-notlogged.jpg) no-repeat;
+	background: url(/sites/all/themes/drivehive/images/title-label-notlogged.jpg) no-repeat;
 	top: -39px;
 }
 #faq.not-logged-in #faq-col1 {
@@ -1241,7 +1241,7 @@ a:hover {
 /*=== about ===*/
 
 #about-text {
-	background: url(../img/about-text.jpg) no-repeat;
+	background: url(/sites/all/themes/drivehive/images/about-text.jpg) no-repeat;
 	margin: 23px 0 25px 51px;
 	padding: 93px 0 0 10px;
 	width: 320px;
@@ -1265,7 +1265,7 @@ a:hover {
 	float: right;
 	margin-top: 35px;
 	margin-right: 12px;
-	background: url(../img/slogan-underline.png) no-repeat right bottom;
+	background: url(/sites/all/themes/drivehive/images/slogan-underline.png) no-repeat right bottom;
 	padding-bottom: 20px;
 	
 }
@@ -1419,7 +1419,7 @@ a:hover {
 #ac-submit {
 	width: 67px;
 	height: 27px;
-	background: url(../img/ac-submit.jpg) no-repeat;
+	background: url(/sites/all/themes/drivehive/images/ac-submit.jpg) no-repeat;
 	overflow: hidden;
 	text-indent: -999px;
 	border: 0;
@@ -1658,7 +1658,7 @@ dd.act2 a {
 	right: 0;
 	width:24px;
 	height:21px;
-	background: url(../img/bg-select.gif) no-repeat;
+	background: url(/sites/all/themes/drivehive/images/bg-select.gif) no-repeat;
 }
 .selectArea .center{
 	height: 21px;
