@@ -9,7 +9,9 @@ html, body, div, span, applet, object, iframe, h1, h2, h3, h4, h5, h6, p, blockq
     vertical-align: baseline;
     background: transparent;
 }
-
+#user{
+	background:#fff;
+}
 body {
     line-height: 1;
 }
@@ -1476,7 +1478,7 @@ dd.act2 a {
 	border: 3px solid #efdf11;
 	margin: 0 0 7px 176px;
 	width: 897px;
-	background: url(../img/footer-signes.png) no-repeat;
+	background: url(/sites/all/themes/drivehive/images/footer-signes.png) no-repeat #000;
 }
 #footer .fl {
 	color: #efdf11;
@@ -1530,7 +1532,7 @@ dd.act2 a {
 	text-indent: -999px;
 	width: 36px;
 	height: 36px;
-	background: url(../img/footer-social.jpg) no-repeat;
+	background: url(/sites/all/themes/drivehive/images/footer-social.jpg) no-repeat;
 }
 #footer-tube {
 	background-position: -37px 0 !important;
@@ -1545,7 +1547,7 @@ dd.act2 a {
 	background-position: -150px 0 !important;
 }
 #footer form {
-	background: url(../img/footer-form.jpg) no-repeat;
+	background: url(/sites/all/themes/drivehive/images/footer-form.jpg) no-repeat;
 }
 #footer-text-input {
 	width: 278px;
@@ -1720,4 +1722,12 @@ dd.act2 a {
 }
 .container-12 .grid-12{
 width:1200px !important;	
+}
+#block-block-3{
+float:right;
+width:400px;	
+}
+#block-block-2{
+	float:left;
+	width:400px;
 }

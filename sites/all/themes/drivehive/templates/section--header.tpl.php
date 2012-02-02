@@ -1,5 +1,6 @@
 <header<?php print $attributes; ?>>
-<div id="baner-part2">jarjar5
+<?php if(drupal_is_front_page()){ ?>
+<div id="baner-part2">
 	<div id="baner-images">
 		<ul>
 			<li id="no1">
@@ -11,4 +12,7 @@
   <?php print $content; ?>
 	</div><!-- /baner-contents -->
 </div><!-- /baner-part2 -->
+<?php }else{
+	print $content;
+} ?>
 </header>

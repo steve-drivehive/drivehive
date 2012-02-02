@@ -10,9 +10,14 @@
  * for your subtheme grows. Please read the README.txt in the /preprocess and /process subfolders
  * for more information on this topic.
  */
+
+
+
 function drivehive_body_id(){
 if(drupal_is_front_page()){
 	return 'home';
+}elseif(arg(0) == 'user'){
+	return 'user';
 }
 
 }
