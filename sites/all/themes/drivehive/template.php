@@ -11,13 +11,42 @@
  * for more information on this topic.
  */
 
-
-
+function drivehive_preprocess_node(&$vars) {
+	$vars['timestamp'] = $vars['created'];
+	// if this is a blog post, find what event it is referencing.
+	if($vars['type'] == 'blog'){
+			$last_related_blog = db_query("select field_event_ref_target_id from field_data_field_event_ref where entity_id = :nid", array(':nid' => $vars['nid']))->fetchField();
+			if(!empty($last_related_blog)){
+				$vars['parent_event_comment_count'] = db_query("select count(cid) from {comment} where nid = :nid", array(':nid' => $last_related_blog))->fetchField();
+				$vars['related_event_node'] = node_load($last_related_blog);
+			}
+	}
+}
+/**
+* Pick an id to apply to the body of the page for different parts of the site.
+*/
 function drivehive_body_id(){
-if(drupal_is_front_page()){
-	return 'home';
-}elseif(arg(0) == 'user'){
-	return 'user';
+	$type = '';
+	if(is_numeric(arg(1)) && arg(0) == 'node'){
+		$type = db_query("select type from {node} where nid = :nid", array('nid' => arg(1)))->fetchField();
+	}
+	if(drupal_is_front_page()){
+		return 'home';
+		}elseif(arg(0) == 'user'){
+			return 'user';
+		}elseif($type == 'blog' || arg(0) == 'blog'){
+			return 'page-blog';
+		}
 }
 
+function drupal_print($var, $color = 'blue'){
+    if($color == 'blue'){
+        return drupal_set_message('<pre style="font-size:11px;">' . var_export($var, true) . '</pre>', 'status');
+    }	elseif($color == 'red'){
+        return drupal_set_message('<pre style="font-size:11px;">' . var_export($var, true) . '</pre>', 'error');
+    }	elseif($color == 'yellow'){
+        return drupal_set_message('<pre style="font-size:11px;">' . var_export($var, true) . '</pre>', 'warning');
+    }else{
+        return drupal_set_message('<pre style="font-size:11px;">' . var_export($var, true) . '</pre>', 'white');
+    }
 }

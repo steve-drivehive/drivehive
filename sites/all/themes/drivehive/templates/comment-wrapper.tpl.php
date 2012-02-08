@@ -41,17 +41,13 @@
 	// Pull in the last blog post that references this event.
 	$nid = arg(1);
 	$last_related_blog = db_query("SELECT entity_id from {field_data_field_event_ref} where field_event_ref_target_id = :nid order by entity_id desc", array(':nid' => $nid))->fetchField();
-	$last_blog_node = node_load($last_related_blog);
-	/*
-	print '<pre style="font-size:11px; color:green;">';
-	print_r($last_blog_node);
-	print '</pre>';
-	print '<pre style="font-size:11px; color:red;">';
-	print_r(node_show($last_blog_node));
-	print '</pre>';
-	*/
-	print drupal_render(node_show($last_blog_node));
-	//print $last_blog_node->body['und'][0]['value'];
+
+	if(!empty($last_related_blog)){
+			$last_blog_node = node_load($last_related_blog);
+			print drupal_render(node_show($last_blog_node));
+			//print $last_blog_node->body['und'][0]['value'];
+	}
+
 
 	?>
 <div id="comments" class="<?php print $classes; ?>"<?php print $attributes; ?>>
