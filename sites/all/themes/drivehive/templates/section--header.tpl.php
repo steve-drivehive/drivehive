@@ -1,5 +1,6 @@
 <header<?php print $attributes; ?>>
-<?php if(drupal_is_front_page()){ ?>
+<?php $node = node_load(arg(1)); ?>
+<?php if(drupal_is_front_page() || $node->type == 'event'){ ?>
 <div id="baner-part2">
 	<div id="baner-images">
 		<ul>

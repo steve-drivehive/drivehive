@@ -26,6 +26,6 @@
       <nav class="links node-links clearfix"><?php print render($content['links']); ?></nav>
     <?php endif; ?>
 
-    <?php print render($content['comments']); ?>
+    <?php  //print render($content['comments']); ?>
   </div>
 </article>

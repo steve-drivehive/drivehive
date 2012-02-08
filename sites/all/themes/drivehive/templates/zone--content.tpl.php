@@ -1,6 +1,8 @@
 <?php if ($wrapper): ?><div<?php print $attributes; ?>><?php endif; ?>  
   <div<?php print $content_attributes; ?>>    
-    <?php if ($breadcrumb): ?>
+    <?php
+$donotprint = false;
+ if ($breadcrumb && $donotprint): ?>
       <div id="breadcrumb" class="grid-<?php print $columns; ?>"><?php print $breadcrumb; ?></div>
     <?php endif; ?>    
     <?php if ($messages): ?>
