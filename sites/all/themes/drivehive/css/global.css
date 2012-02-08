@@ -308,13 +308,16 @@ a:hover {
 	border-radius: 3px;
 	background-color: #fff;
 }
-#blog {
+#blog * {
 	float: left;
 	width: 614px;
+	font-family: Arial,Helvetica,Sans-Serif;
+	
 }
 #blog .frame {
 	padding: 15px 20px 76px 34px;
 }
+
 #blog .frame h2 {
 	font-size: 30px;
 	text-transform: uppercase;
