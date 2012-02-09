@@ -439,6 +439,7 @@ a:hover {
 	margin: 23px 13px 0 1px;
 	padding: 7px 0 10px 15px;
 	font-size: 13px;
+	overflow:auto;
 }
 #leave-comment span {
 	font-weight: bold;
@@ -467,9 +468,13 @@ a:hover {
 	border: 0;
 	margin: 10px 0 5px;
 }
-#leave-comment input {
+#leave-comment input, .comment-form input {
 	border: 0;
-	background:none;
+	background: url("/sites/all/themes/drivehive/images/comment-submit.jpg");
+	float: left;
+    height: 23px;
+    margin-top: 13px;
+    width: 80px; 
 }
 #leave-comment form label {
 	display: block;

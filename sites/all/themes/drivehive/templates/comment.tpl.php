@@ -57,6 +57,7 @@
  * @see theme_comment()
  */
 ?>
+
 <div class="<?php print $classes; ?> clearfix"<?php print $attributes; ?>>
   <?php print $picture ?>
 
