@@ -34,35 +34,37 @@
  * @see template_preprocess_comment_wrapper()
  * @see theme_comment_wrapper()
  */
+global $user;
 ?>
-<div class="frame-wrapper" id="blog">
+<div id="blog">
+	<div class="frame-wrapper">
  	<div class="frame">
 	<?php
 	// Pull in the last blog post that references this event.
 	$nid = arg(1);
 	$last_related_blog = db_query("SELECT entity_id from {field_data_field_event_ref} where field_event_ref_target_id = :nid order by entity_id desc", array(':nid' => $nid))->fetchField();
-
 	if(!empty($last_related_blog)){
 			$last_blog_node = node_load($last_related_blog);
 			print drupal_render(node_show($last_blog_node));
-			//print $last_blog_node->body['und'][0]['value'];
 	}
-
-
 	?>
 <div id="comments" class="<?php print $classes; ?>"<?php print $attributes; ?>>
   <?php if ($content['comments'] && $node->type != 'forum'): ?>
     <?php print render($title_prefix); ?>
-    <h2 class="title"><?php print t('Comments'); ?></h2>
     <?php print render($title_suffix); ?>
   <?php endif; ?>
 
   <?php print render($content['comments']); ?>
 
   <?php if ($content['comment_form']): ?>
-    <h2 class="title comment-form"><?php print t('Add new comment'); ?></h2>
+    <h2 class="title comment-form"><?php //print t('Add new comment'); ?></h2>
+<div id="leave-comment"><span class="box-title">LEAVE COMMENT</span>
+	Signed in as <?php print l($user->name, '/' . $user->uid); ?>
+	
     <?php print render($content['comment_form']); ?>
+</div>
   <?php endif; ?>
+</div>
 </div>
 </div><!--.frame-wrapper-->
 </div><!--.frame-->

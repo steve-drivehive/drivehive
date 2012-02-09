@@ -300,6 +300,7 @@ a:hover {
 .frame-wrapper {
 	background-color: #eef0dd;
 	padding: 15px;
+	
 }
 .frame {
 	border: 3px solid #efdf11;
@@ -309,15 +310,15 @@ a:hover {
 	background-color: #fff;
 }
 #blog * {
-	float: left;
-	width: 614px;
 	font-family: Arial,Helvetica,Sans-Serif;
-	
 }
 #blog .frame {
 	padding: 15px 20px 76px 34px;
 }
-
+#blog .frame-wrapper{
+		width: 614px;
+	
+}
 #blog .frame h2 {
 	font-size: 30px;
 	text-transform: uppercase;
@@ -445,6 +446,7 @@ a:hover {
 #leave-comment .box-title {
 	font-size: 14px;
 	padding-right: 24px;
+	width: 125px;
 }
 #login {
 	margin-top: 5px;
