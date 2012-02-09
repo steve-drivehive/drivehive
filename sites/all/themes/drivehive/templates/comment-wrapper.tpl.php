@@ -60,7 +60,7 @@ global $user;
 <div id="leave-comment"><span class="box-title">LEAVE COMMENT</span>
 	<?php
 	if($user->uid != 0){
-		print 'Signed in as ' . l($user->name, '/' . $user->uid);
+		print 'Signed in as ' . l($user->name, '/user/' . $user->uid);
 	}else{
 		print '<div id="login"><a href="/user">SIGN IN</a> or <a href="/user/register">JOIN</a></div>';
 	}
