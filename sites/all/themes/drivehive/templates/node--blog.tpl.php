@@ -1,5 +1,4 @@
 <article<?php print $attributes; ?>>
-  <?php print $user_picture; ?>
   <?php if (!$page && $title): ?>
   <header>
 	<div class="cols" id="rss_update">
@@ -13,7 +12,7 @@
   <?php endif; ?> 
 
   <div id="posted">
-                        	<span>Posted <?php print date('F, jS', $timestamp); ?> | <?php print $parent_event_comment_count; ?> COMMENT(S)</span>
+                        	<span>Posted <?php print date('F, jS', $timestamp); ?> | <?php print $parent_event_comment_count; ?></span>
                         </div>
   
   <div<?php print $content_attributes; ?>>

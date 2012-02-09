@@ -12,13 +12,7 @@ function drivehive_page_alter(&$page){
 */
 function drivehive_form_alter(&$form, &$form_state, $form_id){
 	global $user;
-	
-if($form_id == 'comment_node_event_form'){
-	$form['actions']['submit']['#value'] = '';
-	//print '<pre style="color:red; font-size:11px;">';
-	//print_r($form['actions']['submit']);
-	//print '</pre>';
-	unset($form['author']);
-
-}	
+	if($form_id == 'comment_node_event_form'){
+		$form['actions']['submit']['#value'] = '';
+	}	
 }

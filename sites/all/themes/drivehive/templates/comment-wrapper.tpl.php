@@ -47,8 +47,12 @@ global $user;
 			$last_blog_node = node_load($last_related_blog);
 			print drupal_render(node_show($last_blog_node));
 	}
-	?>
+	?><div id="social-media">
+	                        	<a id="facebook" href="#">Like</a>
+	                            <a id="twitter" href="#">Tweet</a>
+	                        </div>
 <div id="comments" class="<?php print $classes; ?>"<?php print $attributes; ?>>
+	<h4><?php print $comment_count; ?></h4>
   <?php if ($content['comments'] && $node->type != 'forum'): ?>
     <?php print render($title_prefix); ?>
     <?php print render($title_suffix); ?>

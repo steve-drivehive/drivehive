@@ -1,5 +1,5 @@
 <article<?php print $attributes; ?>>
-  <?php print $user_picture; ?>
+  <?php //print $user_picture; ?>
   <?php if (!$page && $title): ?>
   <header>
     <?php print render($title_prefix); ?>

@@ -312,6 +312,9 @@ a:hover {
 #blog * {
 	font-family: Arial,Helvetica,Sans-Serif;
 }
+#blog .comment-form .form-actions input:hover{
+	background: url("/sites/all/themes/drivehive/images/comment-submit.jpg") repeat scroll 0 0 transparent;
+}
 #blog .frame {
 	padding: 15px 20px 76px 34px;
 }
@@ -387,18 +390,24 @@ a:hover {
 #twitter {
 	background: url(/sites/all/themes/drivehive/images/twitter.jpg) no-repeat;
 }
+#comments .comment_container {
+	margin-top:10px;
+}
+#comments #edit-author--2 {
+	display:none;
+}
 #comments h4 {
 	text-transform: uppercase;
 	font-size: 14px;
-	border-bottom: 1px solid #828282;
+	border-bottom: 1px solid #ABABAB;
 	font-style: italic;
 	line-height: 6px;
 	padding-bottom: 10px;
-	margin-right: 20px;
-	margin-left: 4px;
+}
+#comments .permalink{
+	display:none;
 }
 #comments ul {
-	border-top: 1px solid #000;
 	margin-right: 20px;
 	margin-left: 4px;
 }
@@ -406,6 +415,7 @@ a:hover {
 	padding: 15px 0 0 5px;
 }
 #comments .pic {
+	clear:left;
 	float: left;
 	margin-right: 10px;
 }
@@ -413,6 +423,7 @@ a:hover {
 	float: left;
 	width: 470px;
 }
+
 #comments .title {
 	font-size: 12px;
 	font-weight: bold;
@@ -421,13 +432,14 @@ a:hover {
 }
 #comments .title span {
 	font-weight: normal;
-	padding-left: 24px;
 }
 #comments p {
 	font-size: 13px;
 }
 #comments .reply {
-	clear: both;
+	border-bottom: 1px solid #ABABAB;
+}
+#comments .reply a {
 	color: #ffe915;
 	line-height: 23px;
 	padding-left: 53px;
@@ -440,6 +452,7 @@ a:hover {
 	padding: 7px 0 10px 15px;
 	font-size: 13px;
 	overflow:auto;
+	clear:both;
 }
 #leave-comment span {
 	font-weight: bold;
