@@ -14,11 +14,11 @@ function drivehive_form_alter(&$form, &$form_state, $form_id){
 	global $user;
 	
 if($form_id == 'comment_node_event_form'){
-	//$form['#prefix'] = '<div id="leave-comment"><span class="box-title">LEAVE COMMENT</span>';
-	//$form['#prefix'] .= 'Signed in as ' . $user->name;
-	//$form['#suffix'] = '</div>';
-//print '<pre style="color:red; font-size:11px;">';
-//print_r($form);
-//print '</pre>';
+	$form['actions']['submit']['#value'] = '';
+	//print '<pre style="color:red; font-size:11px;">';
+	//print_r($form['actions']['submit']);
+	//print '</pre>';
+	unset($form['author']);
+
 }	
 }

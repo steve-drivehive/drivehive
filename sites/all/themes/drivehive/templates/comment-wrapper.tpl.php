@@ -59,7 +59,14 @@ global $user;
   <?php if ($content['comment_form']): ?>
     <h2 class="title comment-form"><?php //print t('Add new comment'); ?></h2>
 <div id="leave-comment"><span class="box-title">LEAVE COMMENT</span>
-	Signed in as <?php print l($user->name, '/' . $user->uid); ?>
+	<?php
+	if($user->uid != 0){
+		print 'Signed in as ' . l($user->name, '/' . $user->uid);
+	}else{
+		print '<div id="login"><a href="/user">SIGN IN</a> or <a href="/user/register">JOIN</a></div>';
+	}
+	
+	?>
 	
     <?php print render($content['comment_form']); ?>
 </div>

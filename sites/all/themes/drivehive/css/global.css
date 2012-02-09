@@ -469,6 +469,7 @@ a:hover {
 }
 #leave-comment input {
 	border: 0;
+	background:none;
 }
 #leave-comment form label {
 	display: block;
@@ -490,7 +491,8 @@ a:hover {
 	width: 183px;
 	margin-right: 10px;
 }
-#leave-comment #leave-submit {
+
+#leave-comment #edit-submit {
 	background: url(/sites/all/themes/drivehive/images/comment-submit.jpg) no-repeat;
 	width: 80px;
 	height: 23px;
