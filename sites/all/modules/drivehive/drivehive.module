@@ -4,7 +4,9 @@
 * Implementation of hook_page_alter()
 */
 function drivehive_page_alter(&$page){
-
+//print '<pre style="color:orange;font-size:11px;">';
+//print_r($page);
+//print '</pre>';
 }
 
 /**
@@ -18,7 +20,7 @@ function drivehive_form_alter(&$form, &$form_state, $form_id){
 }
 
 /**
-*
+* function to handle rendering of event sponsors via entity reference.
 */
 
 function drivehive_event_sponsors($nid){

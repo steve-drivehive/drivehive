@@ -516,7 +516,7 @@ a:hover {
 }
 #recent {
 	float: right;
-	width: 589px;
+	width: 500px;
 	padding-right: 18px !important;
 	margin-bottom: 10px;
 }
@@ -1754,4 +1754,10 @@ width:400px;
 #block-block-2{
 	float:left;
 	width:400px;
+}
+#event-detail #blog{
+	width:645px;
+}
+#event-detail-lower #blog{
+	float:left;
 }

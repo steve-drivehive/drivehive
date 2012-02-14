@@ -59,6 +59,8 @@ function drivehive_body_id(){
 			return 'user';
 		}elseif($type == 'blog' || arg(0) == 'blog'){
 			return 'page-blog';
+		}elseif($type == 'event'){
+			return 'event-detail';
 		}
 }
 
