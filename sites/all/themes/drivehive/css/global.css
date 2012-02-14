@@ -206,7 +206,7 @@ a:hover {
 #celebrity-wrapper {
 	padding: 15px;
 	background-color: #807e7e;
-	width: 860px;
+	width: 835px;
 	float: left;
 	margin-bottom: 15px;
 }
@@ -258,7 +258,6 @@ a:hover {
 	font-size: 11px;
 }
 #sponsors {
-	background: url(/sites/all/themes/drivehive/images/sponsors.jpg) no-repeat right 70px;
 	width: 310px;
 	height: 380px;
 	float: right;
@@ -270,9 +269,7 @@ a:hover {
 	font-size: 15px;
 	letter-spacing: 2px;
 }
-#sponsors a {
-	position: absolute;
-}
+
 #gibson {
 	top: 81px;
 	left: 1px;

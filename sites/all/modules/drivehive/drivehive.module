@@ -16,3 +16,44 @@ function drivehive_form_alter(&$form, &$form_state, $form_id){
 		$form['actions']['submit']['#value'] = '';
 	}	
 }
+
+/**
+*
+*/
+
+function drivehive_event_sponsors($nid){
+	$output = '';
+   // find all the sponsors for this event using the entity reference db table
+	$sponsor_nids = db_query("SELECT field_event_sponsors_target_id from {field_data_field_event_sponsors} where entity_id = :nid", array('nid' => $nid));
+	$count = 0;
+	foreach($sponsor_nids as $key=>$value){
+		$sponsor_nid = $value->field_event_sponsors_target_id;
+		$sponsor_node = node_load($sponsor_nid);
+		$sponsor_img_file = $sponsor_node->field_sponsor_logo['und'][0]['filename'];
+		$sponsor_link = $sponsor_node->field_logo_link['und'][0]['value'];
+		
+	//	drupal_print($sponsor_node->field_sponsor_logo['und'][0]);
+		if(!empty($sponsor_img_file)){
+			// swtich between large, small image settings (even, odd), stagger
+			if($count == 2){
+				$count++;
+			}
+			if($count % 2 == 0){
+				$img_setting = 'sponsor_logo_small';
+			}else{
+				$img_setting = 'sponsor_logo_large';
+			}
+			$sponsor_img_uri = $sponsor_node->field_sponsor_logo['und'][0]['uri'];
+			$sponsor_img_path = '/sites/default/files/' . $sponsor_img_file;
+			$sponsor_img_alt = $sponsor_node->field_sponsor_logo['und'][0]['alt'];
+			$sponsor_img_title = $sponsor_node->field_sponsor_logo['und'][0]['title'];
+			if(!empty($sponsor_link)){
+				$output .= '<a href = "' . $sponsor_link . '">' . theme('image_style', array('style_name' => $img_setting, 'path' => $sponsor_img_uri, 'alt' => 'image alt', 'title' => $sponsor_img_title, )) . '</a>';
+			}else{
+				$output .= theme('image_style', array('style_name' => $img_setting, 'path' => $sponsor_img_uri, 'alt' => 'image alt', 'title' => $sponsor_img_title, ));
+			}
+		}
+$count++;
+	}
+	return $output;
+}

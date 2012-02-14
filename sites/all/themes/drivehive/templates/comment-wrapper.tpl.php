@@ -40,19 +40,18 @@ global $user;
 	<div class="frame-wrapper">
  	<div class="frame">
 	<?php
-	// Pull in the last blog post that references this event.
-	$nid = arg(1);
-	$last_related_blog = db_query("SELECT entity_id from {field_data_field_event_ref} where field_event_ref_target_id = :nid order by entity_id desc", array(':nid' => $nid))->fetchField();
-	if(!empty($last_related_blog)){
-			$last_blog_node = node_load($last_related_blog);
-			print drupal_render(node_show($last_blog_node));
-	}
+
 	?><div id="social-media">
 	                        	<a id="facebook" href="#">Like</a>
 	                            <a id="twitter" href="#">Tweet</a>
 	                        </div>
 <div id="comments" class="<?php print $classes; ?>"<?php print $attributes; ?>>
-	<h4><?php print $comment_count; ?></h4>
+	<?php
+	if($comment_count){
+		print '<h4>' . $comment_count . '</h4>';
+	}
+	
+	?>
   <?php if ($content['comments'] && $node->type != 'forum'): ?>
     <?php print render($title_prefix); ?>
     <?php print render($title_suffix); ?>

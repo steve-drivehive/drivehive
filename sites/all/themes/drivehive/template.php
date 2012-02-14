@@ -10,6 +10,7 @@
  * for your subtheme grows. Please read the README.txt in the /preprocess and /process subfolders
  * for more information on this topic.
  */
+
 function drivehive_preprocess_comment(&$vars){
 	/*
 	print '<pre style="color:red; font-size:11px;">';
@@ -27,8 +28,8 @@ function drivehive_preprocess_comment(&$vars){
 function drivehive_preprocess_comment_wrapper(&$vars){
 	if(arg(0) == 'node'){
 		$parent_event_comment_count = db_query("select count(cid) from {comment} where nid = :nid", array(':nid' => arg(1)))->fetchField();
-	$vars['comment_count'] =  $parent_event_comment_count . ' ' . format_plural($parent_event_comment_count, 'Comment', 'Comments');
-}
+		$vars['comment_count'] =  $parent_event_comment_count . ' ' . format_plural($parent_event_comment_count, 'Comment', 'Comments');
+	}
 }
 
 function drivehive_preprocess_node(&$vars) {
