@@ -20,6 +20,22 @@ function drivehive_form_alter(&$form, &$form_state, $form_id){
 }
 
 /**
+* Implementation of hook_menu()
+*/
+function drivehive_menu(){
+	$items['event_rss/%'] = array(
+    'title' => 'Event Updates',
+    'description' => 'Subscibe to this event',
+    'page callback' => 'drivehive_event_rss',
+    'file' => 'pages.inc',
+	 //'access arguments' => array('access administration pages'),
+	 'access arguments' => array('view content'), 
+    'file path' => drupal_get_path('module', 'drivehive'),
+  );
+return $items;
+}
+
+/**
 * function to handle rendering of event sponsors via entity reference.
 */
 
