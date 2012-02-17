@@ -515,10 +515,9 @@ a:hover {
 	margin-top: 13px;
 }
 #recent {
-	float: right;
+	float: left;
 	width: 500px;
-	padding-right: 18px !important;
-	margin-bottom: 10px;
+	margin: 10px 0 0 10px;
 }
 #recent .frame {
 	padding: 30px 0 0 20px;
@@ -1757,6 +1756,8 @@ width:400px;
 }
 #event-detail #blog{
 	width:645px;
+	float:left;
+	margin-top:10px;
 }
 #event-detail-lower #blog{
 	float:left;

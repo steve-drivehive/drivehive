@@ -12,7 +12,12 @@
   <?php endif; ?> 
 
   <div id="posted">
-                        	<span>Posted <?php print date('F, jS', $timestamp); ?> | <?php print $parent_event_comment_count; ?></span>
+                        	<span>Posted <?php print date('F, jS', $timestamp); ?> | <?php 
+if(!empty($parent_event_comment_count)){
+	print $parent_event_comment_count;
+}
+
+ ?></span>
                         </div>
   
   <div<?php print $content_attributes; ?>>

@@ -47,20 +47,14 @@ print drivehive_event_sponsors($nid);
 				<?php 
 				print drupal_render(node_show($last_blog_node));
 				?>
-				</div>
-				</div>
-				</div>
+				</div> <!-- .frame -->
+				</div> <!-- .frame-wrapper -->
+				</div> <!-- #blog -->
+				
 				<?php
 		}
 		
 		?>
-
-  <div class="clearfix">
-    <?php if (!empty($content['links'])): ?>
-      <nav class="links node-links clearfix"><?php print render($content['links']); ?></nav>
-    <?php endif; ?>
-	    <?php  print render($content['comments']); ?>
-
 		<div class="frame-wrapper" id="recent">
 		                	<div class="frame">
 		                    	<h4>Recent posts</h4>
@@ -109,8 +103,16 @@ print drivehive_event_sponsors($nid);
 		                        <div id="see-all">
 		                        	<a href="#">see all</a>
 		                        </div><!-- /see-all -->
-		                    </div><!-- /frame -->
-		                </div>
+		                    </div> <!-- /frame -->
+		                </div> <!-- .frame-wrapper -->
+
+  <div class="clearfix">
+    <?php if (!empty($content['links'])): ?>
+      <nav class="links node-links clearfix"><?php //print render($content['links']); ?></nav>
+    <?php endif; ?>
+	    <?php  print render($content['comments']); ?>
+
+
 	<div id="event-detail-lower">
 
 
