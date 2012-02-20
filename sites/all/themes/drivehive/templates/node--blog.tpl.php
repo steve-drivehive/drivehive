@@ -3,7 +3,7 @@
   <header>
 	<div class="cols" id="rss_update">
 	                    		<span><h6>UPDATES</h6>
-	                            <a href="#"> / / / / / / / / / / / / </a></span>
+	                            <a href="/event_rss/<?php print $related_event_node->nid; ?>" target="_blank"> / / / / / / / / / / / / </a></span>
 	                        </div>
     <?php print render($title_prefix); ?>
     <h2><?php print $title ?></h2>

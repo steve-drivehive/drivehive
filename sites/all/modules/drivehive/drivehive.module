@@ -4,9 +4,7 @@
 * Implementation of hook_page_alter()
 */
 function drivehive_page_alter(&$page){
-//print '<pre style="color:orange;font-size:11px;">';
-//print_r($page);
-//print '</pre>';
+
 }
 
 /**
@@ -28,7 +26,6 @@ function drivehive_menu(){
     'description' => 'Subscibe to this event',
     'page callback' => 'drivehive_event_rss',
     'file' => 'pages.inc',
-	 //'access arguments' => array('access administration pages'),
 	 'access arguments' => array('view content'), 
     'file path' => drupal_get_path('module', 'drivehive'),
   );
