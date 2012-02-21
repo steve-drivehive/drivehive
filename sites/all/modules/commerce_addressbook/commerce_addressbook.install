@@ -1,0 +1,22 @@
+<?php
+
+/**
+ * Implements hook_field_schema().
+ */
+function commerce_addressbook_field_schema($field) {
+  if ($field['type'] == 'commerce_addressbook_saved_profiles') {
+    return array(
+      'columns' => array(
+        'saved_address_profiles' => array(
+          'description' => 'Reference to the saved address profile',
+          'type' => 'int',
+          'not null' => FALSE,
+          'default' => NULL,
+        ),
+      ),
+      'indexes' => array(
+        'saved_address_profiles' => array('saved_address_profiles'),
+      ),
+    );
+  }
+}

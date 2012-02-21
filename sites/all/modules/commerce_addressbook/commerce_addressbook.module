@@ -1,0 +1,620 @@
+<?php
+
+/**
+ * @file:
+ *
+ * Provides Commerce Address functionality
+ *
+ */
+
+/**
+ * Implementation of hook_menu().
+ */
+function commerce_addressbook_menu() {
+  $items = array();
+
+  $items['admin/commerce/config/addressbook'] = array(
+    'title' => 'Addressbook',
+    'description' => 'Addressbook settings',
+    'page callback' => 'drupal_get_form',
+    'page arguments' => array('commerce_addressbook_admin_settings'),
+    'access arguments' => array('configure store'),
+    'type' => MENU_NORMAL_ITEM,
+    'file' => 'commerce_addressbook.admin.inc',
+  );
+
+  return $items;
+}
+
+/**
+ * ==============================================================
+ *       Field API code to create saved addresses dropdown
+ * ==============================================================
+ */
+
+/**
+ * Implements hook_field_info().
+ */
+function commerce_addressbook_field_info() {
+  return array(
+    'commerce_addressbook_saved_profiles' => array(
+      'label' => t('Saved Address Profiles'),
+      'description' => t("This field lists a user's saved addresses which are used to populate empty address fields."),
+      'settings' => array('allowed_values' => array(), 'allowed_values_function' => ''),
+      'default_widget' => 'commerce_addressbook_select',
+      'default_formatter' => 'commerce_addressbook_default',
+    ),
+  );
+}
+
+/**
+ * Implements hook_field_validate().
+ */
+function commerce_addressbook_field_validate($entity_type, $entity, $field, $instance, $langcode, $items, &$errors) {
+  foreach ($items as $delta => $item) {
+    // @TODO Add some validation checks here.
+    // @TODO Make sure submitted value is in generated saved profile list.
+    /*if (empty($item['saved_address_profiles'])) {
+      $errors[$field['field_name']][$langcode][$delta][] = array(
+        'error' => 'field_empty',
+        'message' => t('%name: the value may not be empty.', array('%name' => $instance['label'])),
+      );
+    }*/
+  }
+}
+
+/**
+ * Implements hook_field_is_empty().
+ */
+function commerce_addressbook_field_is_empty($item, $field) {
+  if ((empty($item['saved_address_profiles']) && (string) $item['saved_address_profiles'] !== '0') || (!isset($item['saved_address_profiles'])) || ($item['saved_address_profiles'] == '')) {
+    return TRUE;
+  }
+  return FALSE;
+}
+
+/**
+ * Implements hook_field_widget_info().
+ */
+function commerce_addressbook_field_widget_info() {
+  return array(
+      'commerce_addressbook_select' => array(
+      'label' => t('Saved Address Profiles'),
+      'field types' => array('commerce_addressbook_saved_profiles'),
+    ),
+  );
+}
+
+/**
+ * Implements hook_field_attach_form().
+ */
+function commerce_addressbook_field_attach_form($entity_type, $entity, &$form, &$form_state, $langcode) {
+  // Exit if form is not a customer profile.
+  if (!in_array($entity_type, commerce_addressbook_enabled_entities())) {
+    return;
+  }
+
+  // Exit if not on an order.
+  if (empty($entity->entity_context) || empty($entity->entity_context['entity_type']) || $entity->entity_context['entity_type'] != 'commerce_order') {
+    return;
+  }
+
+  // Wrap the entity to be able to fill its fields through AJAX
+  $wrapper = $entity_type . '_' . $entity->type . '_wrapper';
+  $form['#prefix'] = '<div id="' . str_replace('_', '-', $wrapper) . '">';
+  $form['#suffix'] = '</div>';
+}
+
+/**
+ * Implements hook_field_widget_form().
+ */
+function commerce_addressbook_field_widget_form(&$form, &$form_state, $field, $instance, $langcode, $items, $delta, $element) {
+  global $user;
+  // @TODO: $uid shouldn't be gathered from the currently logged in user!
+  $uid = $user->uid;
+  switch ($instance['widget']['type']) {
+    case 'commerce_addressbook_select':
+      // Get a list of saved address entities, filtered on the current entity type & bundle
+      // @TODO: test if this still works when the same commerce_addressbook_saved_profiles field
+      // is attached to multiple bundles. Has currently only been tested with different fields per bundle.
+      $options = commerce_addressbook_get_saved_addresses_options($uid, $instance['entity_type'], $instance['bundle']);
+
+      $default = 0;
+      // Don't show if no saved addresses are available.
+      if (count($options) > 1) {
+        // @TODO: remove hard coded customer reference
+        $fieldname = 'commerce_customer_' . $instance['bundle'];
+        // Try to get the currently selected address from the order first
+        if (isset($form_state['order'])) {
+          $order_wrapper = entity_metadata_wrapper('commerce_order', $form_state['order']);
+          if ($val = $order_wrapper->{$fieldname}->raw()) {
+            $default = $val;
+          }
+        }
+        // Otherwise try to get it from the $items array.
+        elseif (isset($items[$delta]['saved_address_profiles'])) {
+          $default = $items[$delta]['saved_address_profiles'];
+        }
+
+        $element['saved_address_profiles'] = array(
+          // @TODO: better access control?
+          '#access' => user_is_logged_in(),
+          '#attributes' => array('class' => array('edit-commerce-addressbook-saved-address-profiles'), 'title' => '', 'rel' => ''),
+          '#type' => 'select',
+          '#title' => filter_xss($element['#title']),
+          '#options' => $options,
+          '#default_value' => $default,
+          '#required' => FALSE,
+          '#ajax' => array(
+            'callback' => 'commerce_addressbook_address_form_refresh',
+            // @TODO: make more generic
+            'wrapper' => 'commerce-customer-profile-' . $instance['bundle'] . '-wrapper',
+          ),
+          '#element_validate' => array('commerce_addressbook_saved_addresses_validate'),
+          '#prefix' => '<div class="commerce-addressbook-saved-address-profiles-field commerce-addressbook-saved-address-profiles-saved_address_profiles-field commerce-addressbook-saved-address-profiles-saved_address_profiles-field">',
+          '#suffix' => '</div>',
+          // Create the field name for the corresponding checkout pane.
+          // TODO: This should actually be determined by the checkout pane's settings.
+          '#order_fieldname' => $fieldname,
+        );
+      }
+      else {
+        // @TODO: what should we do here?
+        $element['saved_address_profiles'] = array(
+          '#type' => 'markup',
+          '#value' => '',
+        );
+      }
+      break;
+  }
+  return $element;
+}
+
+/**
+ * Implements hook_field_formatter_info().
+ */
+function commerce_addressbook_field_formatter_info() {
+  return array(
+    'commerce_addressbook_default' => array(
+      'label' => t('Saved Address Profiles formatter'),
+      'field types' => array('commerce_addressbook_saved_profiles'),
+    ),
+  );
+}
+
+/**
+ * Implements hook_field_formatter_view().
+ */
+function commerce_addressbook_field_formatter_view($entity_type, $entity, $field, $instance, $langcode, $items, $display) {
+  $element = array();
+  $settings = $display['settings'];
+
+  switch ($display['type']) {
+    case 'commerce_addressbook_default':
+      // TODO Figure out best way to display field if needed.
+      foreach ($items as $delta => $item) {
+        $element[$delta] = array('#markup' => '');
+      }
+      break;
+  }
+}
+
+/**
+ * Implements hook_field_storage_pre_insert().
+ *
+ * This function makes sure that each bundle containing a commerce_addressbook_saved_profiles field
+ * has the value of that field set to it's own entity ID.
+ * This avoids duplication of entities. If this wouldn't be here, the commerce_addressbook_saved_profiles field
+ * might be different on bundles that have exactly the same address info, thus creating a copy instead of reusing it.
+ *
+ * @TODO: should we also implement hook_field_storage_pre_update()?
+ */
+function commerce_addressbook_field_storage_pre_insert($type, $entity, &$skip_fields) {
+  $profile_bundles = commerce_addressbook_get_bundles_with_field('commerce_addressbook_saved_profiles');
+  list($id) = entity_extract_ids($type, $entity);
+  // Look for entities & bundles that have a commerce_addressbook_saved_profiles field
+  if ($profile_bundles) {
+    foreach ($profile_bundles as $entity_type => $bundles) {
+      if ($type == $entity_type) {
+        if (in_array($entity->type, array_keys($bundles))) {
+          $field = $bundles[$entity->type];
+          // @TODO: is there a better way to set the value for this field?
+          $entity->{$field}[LANGUAGE_NONE][0]['saved_address_profiles'] = (int)$id;
+        }
+      }
+    }
+  }
+}
+
+/**
+ * ==============================================================
+ *       Automatically add default saved addresses field
+ * ==============================================================
+ */
+
+/**
+ * Implements hook_enable().
+ */
+function commerce_addressbook_enable() {
+  // Add the saved profiles select field to customer profile bundles.
+  if (module_exists('commerce_customer')) {
+    foreach (commerce_customer_profile_types() as $type => $profile_type) {
+      commerce_addressbook_configure_customer_profile_type($profile_type);
+    }
+  }
+}
+
+/**
+ * Implements hook_modules_enabled().
+ *
+ * @TODO: do we really need this? What if a customer profile is being added that doesn't
+ * have an addressfield, or doesn't need the saved addresses feature?
+ */
+function commerce_addressbook_modules_enabled($modules) {
+  // Loop through all the enabled modules.
+  foreach ($modules as $module) {
+    // If the module implements hook_commerce_customer_profile_type_info()
+    // add the saved addresses field to it
+    if (module_hook($module, 'commerce_customer_profile_type_info')) {
+      $profile_types = module_invoke($module, 'commerce_customer_profile_type_info');
+
+      // Loop through and configure the customer profile types defined by the module.
+      foreach ($profile_types as $type => $profile_type) {
+        commerce_addressbook_configure_customer_profile_type($profile_type);
+      }
+    }
+  }
+}
+
+/**
+ * Adds a saved addresses field on the specified customer profile bundle.
+ */
+function commerce_addressbook_configure_customer_profile_type($profile_type) {
+  // If a field type we know should exist isn't found, clear the Field cache.
+  if (!field_info_field_types('commerce_addressbook_saved_profiles')) {
+    field_cache_clear();
+  }
+
+  // Look for or add an address field to the customer profile type.
+  $field_name = 'addressbook_saved_profiles';
+  $field = field_info_field($field_name);
+  $instance = field_info_instance('commerce_customer_profile', $field_name, $profile_type['type']);
+
+  if (empty($field)) {
+    $field = array(
+      'field_name' => $field_name,
+      'type' => 'commerce_addressbook_saved_profiles',
+      'cardinality' => 1,
+      'entity_types' => array('commerce_customer_profile'),
+      'translatable' => FALSE,
+    );
+
+    $field = field_create_field($field);
+  }
+
+  if (empty($instance)) {
+    $instance = array(
+      'field_name' => $field_name,
+      'entity_type' => 'commerce_customer_profile',
+      'bundle' => $profile_type['type'],
+      'label' => t('Select saved address'),
+      'required' => FALSE,
+      'widget' => array(
+        'type' => 'commerce_addressbook_select',
+        'weight' => -100,
+        'settings' => array(),
+      ),
+      'display' => array(),
+    );
+
+    // Set the default display formatters for various view modes.
+    foreach (array('default', 'customer', 'administrator') as $view_mode) {
+      $instance['display'][$view_mode] = array(
+        'label' => 'hidden',
+        'type' => 'commerce_addressbook_default',
+        'weight' => -10,
+      );
+    }
+
+    field_create_instance($instance);
+  }
+}
+
+/**
+ * ==========================================================
+ *            AJAX & dropdown validation code
+ * ==========================================================
+ */
+
+/**
+ * AJAX reload callback function. Decides which part of the form to refresh
+ */
+function commerce_addressbook_address_form_refresh($form, $form_state) {
+  if ($bundle = $form_state['triggering_element']['#parents'][0]) {
+    return $form[$bundle];
+  }
+  return NULL;
+}
+
+/**
+ * Element validate callback: processes input of the address select list.
+ */
+function commerce_addressbook_saved_addresses_validate($element, &$form_state, $form) {
+  // Only perform the validation update if this address selector was used to
+  // trigger it.
+  if (in_array('saved_address_profiles', $form_state['triggering_element']['#parents']) &&
+    $form_state['triggering_element']['#id'] == $element['#id']) {
+    // Extract the field name - @TODO: can this be done better / more generic?
+    $field_name = $element['#order_fieldname'];
+    $order_wrapper = entity_metadata_wrapper('commerce_order', $form_state['order']);
+
+    // If we detect a change in the element's value, and the customer profile
+    // reference isn't already set to the specified value...
+    if ($order_wrapper->{$field_name}->raw() != $element['#value']) {
+      // Update the order based on the value and rebuild the form.
+      if ($element['#value'] == 0) {
+        $order_wrapper->{$field_name} = NULL;
+      }
+      else {
+        $order_wrapper->{$field_name} = $element['#value'];
+      }
+
+      $order_wrapper->save();
+      $form_state['rebuild'] = TRUE;
+
+      // Remove input data pertaining to the customer profile from the form
+      // state so the form gets rebuilt with the proper values.
+      $parent = $form_state['triggering_element']['#parents'][0];
+
+      unset($form_state['input'][$parent]);
+
+      // Remove addressfield data based on its element_key value.
+      $element_key = $form[$parent]['commerce_customer_address'][$form[$parent]['commerce_customer_address']['#language']][0]['element_key']['#value'];
+      unset($form_state['addressfield'][$element_key]);
+    }
+  }
+}
+
+/**
+ * Implements hook_commerce_order_presave().
+ */
+function commerce_addressbook_commerce_order_presave($order) {
+  global $user;
+  $uid = $user->uid;
+  // If enabled, prefill the customer profiles on checkout form automatically with the latest saved customer profile
+  if (variable_get('commerce_addressbook_auto_prefill') == TRUE && empty($order->order_id)) {
+    $order_wrapper = entity_metadata_wrapper('commerce_order', $order);
+    $profile_bundles = commerce_addressbook_get_bundles_with_field('commerce_addressbook_saved_profiles');
+    $saved_addresses = commerce_addressbook_get_saved_addresses($uid);
+    if ($profile_bundles) {
+      foreach ($profile_bundles as $entity_type => $bundles) {
+        foreach ($bundles as $bundlename => $fieldname) {
+          if (isset($saved_addresses[$entity_type][$bundlename])) {
+            $property = 'commerce_customer_' . $bundlename;
+            $default_value = key($saved_addresses[$entity_type][$bundlename]);
+            $order_wrapper->{$property} = $default_value;
+          }
+        }
+      }
+    }
+  }
+}
+
+/**
+ * =========================================================
+ *          Helper & data retrieval functions
+ * =========================================================
+ */
+
+/**
+ * Implements hook_field_attach_form().
+ * TODO There might be a better hook to get these changes performed to all commerce_addressbook_saved_profiles fields.
+ *  As is, this gets called for ALL form loads.
+ */
+/*function commerce_addressbook_field_attach_form($entity_type, $entity, &$form, &$form_state, $langcode) {
+  //TODO The next block of lines should probably be a cached function since this function is called on every form load.
+  // Find bundles that have an commerce_addressbook_saved_profiles.
+  $field_info = field_info_field_by_ids();
+  $bundles = array();
+  foreach ($field_info as $fields) {
+    if ($fields['type'] == 'commerce_addressbook_saved_profiles') {
+      foreach($fields['bundles'] as $bundle_name => $bundle) {
+        $bundles[] = $bundle_name;
+      }
+    }
+  }
+
+  // If the $entity_type matches one of our bundle_names, we need to modify the form.
+  if (in_array($entity_type, $bundles)) {
+    // Get the saved address fields.
+    $profiles = commerce_addressbook_get_fields($form, $entity_type);
+    if(!empty($profiles)){
+      // Populate the select options list and add the json string of fields.
+      commerce_addressbook_list_field($form, $profiles);
+    }
+  }
+}*/
+
+/**
+ * Get all available addressbook select list options, per customer profile entity bundle.
+ *
+ * @param $uid
+ *   user ID to retrieve saved addresses for
+ * @param $entity_type
+ *   The entity type to retrieve saved addresses for.
+ *   @TODO: won't this always be commerce_customer_profile?
+ * @param $bundle
+ *   The bundle name to retrieve saved addresses for, e.g. 'billing', 'shipping, ...
+ * @return array
+ *   A list of all saved entities, in the form entity_id => address label
+ */
+function commerce_addressbook_get_saved_addresses_options($uid, $entity_type = "commerce_customer_profile", $bundle) {
+  $options = array(0 => t('-- Select a saved address --'));
+  $customer_profiles = commerce_addressbook_get_saved_addresses($uid);
+  // Now filter, so we only get the addresses for this bundle
+  if (isset($customer_profiles[$entity_type][$bundle])) {
+    $options += $customer_profiles[$entity_type][$bundle];
+  }
+  return $options;
+}
+
+/**
+ * Get field items from a user's saved entities that have an addressfield in their bundle.
+ * @TODO: do we really need to get all entities, or can be have hardcoded default to commerce_customer_profile?
+ *
+ * @param $uid
+ *   The uid of the user you want to pull saved field data.
+ * @return
+ *   An array of saved user entity profiles with associated field items.
+ */
+function commerce_addressbook_get_saved_addresses($uid) {
+  $results = &drupal_static(__FUNCTION__);
+  if (!isset($results[$uid])) {
+
+    // Don't return addresses for anonymous users
+    if (!user_is_logged_in()) {
+      return array();
+    }
+
+    $addressfield_bundles = commerce_addressbook_get_bundles_with_field('addressfield');
+
+    // Query entity_types that match our bundles.
+    $entity_data = array();
+    foreach ($addressfield_bundles as $entity_type => $bundles) {
+      $entity_profiles = array();
+      // $bundles is an array with key => value : bundlename => addressfield name
+      $bundle_names = array_keys($bundles);
+      $query = new EntityFieldQuery();
+      $query
+        ->entityCondition('entity_type', $entity_type)
+        ->entityCondition('bundle', $bundle_names, 'IN')
+        ->propertyCondition('uid', $uid);
+
+      // Specific additions for commerce_customer_profile entities
+      if ($entity_type == 'commerce_customer_profile') {
+        $query->propertyOrderBy('profile_id', 'DESC');
+        $query->propertyCondition('status', 1);
+      }
+      $result = $query->execute();
+
+      // $result contains entity objects with the current entity_type and one of the selected bundles
+      if (!empty($result[$entity_type])) {
+        $entity_profiles = entity_load($entity_type, array_keys($result[$entity_type]));
+      }
+
+      // We found all bundles for this user for the current entity_type.
+      // Get the appriopriate field values for each of them.
+      if ($entity_profiles) {
+        foreach ($entity_profiles as $entity_id => $entity) {
+          $bundle = $entity->type;
+          $addressfield = $bundles[$bundle];
+          $field = field_get_items($entity_type, $entity, $addressfield);
+          if (is_array($field)) {
+            // @TODO: what if there are multiple values in the addressfield?
+            // Is that a reasonable use case?
+            $address_values = array_shift($field);
+          }
+          // @TODO: make value configurable
+          if (isset($address_values['thoroughfare'])) {
+            $label = $address_values['thoroughfare'];
+          }
+          drupal_alter('commerce_addressbook_label', $label, $entity);
+          $results[$uid][$entity_type][$bundle][$entity_id] = filter_xss($label);
+        }
+      }
+    }
+  }
+  return $results[$uid];
+}
+
+/**
+ * Get a list of entities for which the addressbook functionality could be enabled.
+ * For this to work, the entities would need to have:
+ *  - an addressfield field attached to them
+ *  - a 'uid' field to link the address with a Drupal user
+ * @return array: a list of definitions for entities that work with the Commerce Addressbook module
+ */
+function commerce_addressbook_enabled_entities_info() {
+  $enabled = array(
+    'commerce_customer_profile' => array(
+      'entity_type' => 'commerce_customer_profile',
+    ),
+    // @TODO: enable & test support for user entity
+    /*'user' => array(
+      'entity_type' => 'user',
+    ),*/
+  );
+  drupal_alter('commerce_addressbook_enabled_entities', $enabled);
+  return $enabled;
+}
+
+/**
+ * Get a simple list of enabled entities, based on the definitions provided by
+ * commerce_addressbook_enabled_entities_info()
+ *
+ *  @return array: a list of entity names that work with the Commerce Addressbook module
+ */
+function commerce_addressbook_enabled_entities() {
+  $entities = array();
+  $info = commerce_addressbook_enabled_entities_info();
+  if ($info) {
+    foreach ($info as $key => $entity_definition) {
+      $entities[] = $entity_definition['entity_type'];
+    }
+  }
+  return $entities;
+}
+
+/**
+ * Helper function to get a list of bundles (grouped by entity type)
+ * that contain a certain field type, and each of the fields that are attached to them
+ * @param $field_type
+ *   The field type to look for
+ * @param $only_enabled
+ *   Setting this to TRUE returns only entity types that have been explicitly enabled for usage with
+ *   Commerce Addressbook. Setting this to FALSE might result in errors.
+ *
+ * @return
+ *   Associative array in the form
+ *     [entity_type]
+ *       [bundle] => field_name
+ */
+function commerce_addressbook_get_bundles_with_field($field_type = 'addressfield', $only_enabled = TRUE) {
+  $result = &drupal_static(__FUNCTION__);
+
+  if (!isset($result)) {
+    $entities = entity_get_info();
+
+    // Find bundles that have an addressfield.
+    $field_info = field_info_field_by_ids();
+
+    // Get a list of entity_type / bundles combinations
+    // that actually have an addressfield attached to them
+    foreach ($field_info as $field) {
+      if ($field['type'] == $field_type) {
+        foreach ($field['bundles'] as $entity_type => $bundles) {
+          if ($bundles) {
+            foreach ($bundles as $bundle_name) {
+              // @TODO: support the case where there are multiple addressfields for one bundle
+              // Although that's probably not that common
+              $result[$entity_type][$bundle_name] = $field['field_name'];
+            }
+          }
+        }
+      }
+    }
+    // Remove entities that have not been explicitly defined to work with this module
+    if ($only_enabled) {
+      $enabled_entities = commerce_addressbook_enabled_entities();
+      if ($result) {
+        foreach ($result as $entity_type => $data) {
+          if (!in_array($entity_type, $enabled_entities)) {
+            unset($result[$entity_type]);
+          }
+        }
+      }
+    }
+  }
+
+  return $result;
+}

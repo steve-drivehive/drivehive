@@ -1,0 +1,7 @@
+Commerce Authorize.Net SIM/DPM Payment Methods 7.x-1.0, 2012-01-28
+------------------------------------------------------------------
+by jerry: Changed payment method title to be more customer-friendly.
+
+Commerce Authorize.Net SIM/DPM Payment Methods 7.x-1.0-rc1, 2011-11-10
+----------------------------------------------------------------------
+by jerry: Ported from Ubercart version.

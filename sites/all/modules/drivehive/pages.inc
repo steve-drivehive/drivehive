@@ -1,5 +1,5 @@
 <?php
-function drivehive_event_rss() {
+function drivehive_event_rss() { 
 	$event_nid = arg(1);
 	$event_node = node_load($event_nid);
 	$event_title = $event_node->title;

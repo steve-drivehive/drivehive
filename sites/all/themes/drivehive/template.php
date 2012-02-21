@@ -12,18 +12,7 @@
  */
 
 function drivehive_preprocess_comment(&$vars){
-	/*
-	print '<pre style="color:red; font-size:11px;">';
-	//print_r($vars['content']);
-	foreach($vars['content']['comment_body'] as $key=>$value){
-		unset($value->subject);
-	}
-	foreach($vars['content']['comment_body'] as $key=>$value){
-		print_r($value);
-		print '<hr/>';
-	}
-	print '</pre>';
-	*/
+
 }
 function drivehive_preprocess_comment_wrapper(&$vars){
 	if(arg(0) == 'node'){
@@ -43,11 +32,24 @@ function drivehive_preprocess_node(&$vars) {
 				$vars['related_event_node'] = node_load($last_related_blog);
 			}
 	}
+	if($vars['type'] == 'event'){
+		// grab the last 4 blog posts to print in the right sidebar
+		/*
+		$query = db_select('node', 'n')
+				->condition('type', 'blog')
+				->condition('n.status', 1)
+				->condition()
+				->fields('fdfer', array('entity_id'));
+		$query->leftJoin('node', 'n', 'n.nid = fdfer.entity_id');
+	   $result = $query->execute();
+	*/
+	}
 }
 
 /**
 * Pick an id to apply to the body of the page for different parts of the site.
 */
+
 function drivehive_body_id(){
 	$type = '';
 	if(is_numeric(arg(1)) && arg(0) == 'node'){

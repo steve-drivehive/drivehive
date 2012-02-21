@@ -61,7 +61,7 @@ print drivehive_event_sponsors($nid);
 		                        <ul>
 		                        	<li>
 		                            	<div class="recent-pic">
-		                                	<img alt="" src="img/temp/recent-pic1.jpg">
+		                                	<img alt="" src="/sites/all/themes/drivehive/images/temp/recent-pic1.jpg">
 		                                </div><!-- /recent-pic -->
 		                                <div class="recent-txt">
 		                                	<a href="#">Location for the Concert Event Announced</a>
@@ -71,7 +71,7 @@ print drivehive_event_sponsors($nid);
 		                            </li>
 		                            <li>
 		                            	<div class="recent-pic">
-		                                	<img alt="" src="img/temp/recent-pic2.jpg">
+		                                	<img alt="" src="/sites/all/themes/drivehive/images/temp/recent-pic2.jpg">
 		                                </div><!-- /recent-pic -->
 		                                <div class="recent-txt">
 		                                	<a href="#">Starbucks Giveaway</a>
@@ -81,7 +81,7 @@ print drivehive_event_sponsors($nid);
 		                            </li>
 		                            <li>
 		                            	<div class="recent-pic">
-		                                	<img alt="" src="img/temp/recent-pic3.jpg">
+		                                	<img alt="" src="/sites/all/themes/drivehive/images/temp/recent-pic3.jpg">
 		                                </div><!-- /recent-pic -->
 		                                <div class="recent-txt">
 		                                	<a href="#">Coldplay Preview</a>
@@ -91,7 +91,7 @@ print drivehive_event_sponsors($nid);
 		                            </li>
 		                            <li>
 		                            	<div class="recent-pic">
-		                                	<img alt="" src="img/temp/recent-pic4.jpg">
+		                                	<img alt="" src="/sites/all/themes/drivehive/images/temp/recent-pic4.jpg">
 		                                </div><!-- /recent-pic -->
 		                                <div class="recent-txt">
 		                                	<a href="#">Event Selected!</a>
