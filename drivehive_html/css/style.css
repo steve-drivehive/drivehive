@@ -146,7 +146,7 @@ a:hover {
 #baner-part {
 	height: 797px;
 	width: 100%;
-	background: url(../img/banner.jpg) no-repeat;
+	background: url(../img/bannerke$ha.jpg) no-repeat;
 	margin-bottom: 15px;
 }
 .cols {
@@ -178,14 +178,14 @@ a:hover {
 	text-indent: -22px;
 	line-height: 33px;
 	*/
-	width: 736px;
+	width: 741px;
 	margin-bottom: 31px;
-	height: 131px;
+	height: 146px;
 	float: left;
 	-webkit-box-shadow: 0 5px 14px 0 #b2b2b2;
 	-moz-box-shadow: 0 5px 14px 0 #b2b2b2;
 	box-shadow: 0 5px 14px 0 #b2b2b2;
-	background: url(../img/quote.jpg) no-repeat 18px 16px #efdf11;
+	background: url(../img/quoteke$ha.jpg) no-repeat 18px 16px #efdf11;
 }
 #quote span {
 	float: right;
