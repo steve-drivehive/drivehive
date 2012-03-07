@@ -1,3 +1,34 @@
+<?php if($teaser): ?>
+
+<?php 
+global $base_url;
+$output = '';
+
+$blog_link_alias = $base_url . '/' . drupal_get_path_alias('node/' . $node->nid);
+            
+            $blog_img_file = $node->field_blog_image['und'][0]['filename'];
+            $blog_img_uri = $node->field_blog_image['und'][0]['uri'];
+            $blog_img_path = '/sites/default/files/' . $blog_img_file;
+            $blog_img_alt = $node->field_blog_image['und'][0]['alt'];
+            $blog_img_title = $node->field_blog_image['und'][0]['title'];     
+            $blog_img = '<a href = "' . $blog_link_alias .' ">' . 
+                theme('image_style', array('style_name' => 'blog_teaser_thumb', 
+                            'path' => $blog_img_uri, 
+                            'alt' => 'image alt', 
+                            'title' => $blog_img_title, )) . '</a>';
+            
+                        $blog_title = strlen($node->title) > 30 ? substr($node->title, 0, 30) . '...' : $node->title;
+                        $blog_teaser_body = empty($node->body[0]['value']) ? $node->body['und'][0]['value'] : $node->body[0]['value'];
+            $blog_teaser_body = strip_tags(trim($blog_teaser_body));
+            
+            $blog_teaser_body = strlen($blog_teaser_body) > 50 ? substr($blog_teaser_body, 0, 50) . '...' : $blog_teaser_body;
+$output .= '<div class="recent-pic">' . $blog_img . '</div><!-- /recent-pic -->';
+            $output .= '<div class="recent-txt">' . l($blog_title, $blog_link_alias, array('attributes' => array('title' => $node->title))) . '<p>' . $blog_teaser_body . '</p><span>' . format_date($node->created, 'long') . '</span></div><!-- /recent-text -->';
+
+print $output;
+?>
+<?php else: ?>
+
 <article<?php print $attributes; ?>>
   <?php if (!$page && $title): ?>
   <header>
@@ -49,3 +80,4 @@ if(!empty($parent_event_comment_count)){
  ?>
 
 </article>
+<?php endif; ?>

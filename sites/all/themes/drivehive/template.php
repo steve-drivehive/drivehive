@@ -35,44 +35,20 @@ function drivehive_preprocess_node(&$vars) {
     }
     if($vars['type'] == 'event'){
         // grab the last 4 blog posts to print in the right sidebar
-
         $query = db_select('node', 'n');
         $query->fields('n', array('nid', 'created', 'title'))
             ->condition('n.type', 'blog')
             ->condition('n.status', 1)
             ->orderBy('n.created', 'desc');                        
         $result = $query->execute();
-        //print '<pre style="color:orange;">';
         $recent_blogs = '';
         $recent_blogs .= '<ul>';
         foreach($result as $key=>$value){
             $node = node_load($value->nid);
-            $blog_link_alias = $base_url . '/' . drupal_get_path_alias('node/' . $node->nid);
-            
-            $blog_img_file = $node->field_blog_image['und'][0]['filename'];
-            $blog_img_uri = $node->field_blog_image['und'][0]['uri'];
-            $blog_img_path = '/sites/default/files/' . $blog_img_file;
-            $blog_img_alt = $node->field_blog_image['und'][0]['alt'];
-            $blog_img_title = $node->field_blog_image['und'][0]['title'];     
-            $blog_img = '<a href = "' . $blog_link_alias .' ">' . 
-                theme('image_style', array('style_name' => 'blog_teaser_thumb', 
-                            'path' => $blog_img_uri, 
-                            'alt' => 'image alt', 
-                            'title' => $blog_img_title, )) . '</a>';
-            $recent_blogs .= '<li><div class="recent-pic">' . $blog_img . '</div><!-- /recent-pic -->';
-            $blog_title = strlen($node->title) > 30 ? substr($node->title, 0, 30) . '...' : $node->title;
-            $blog_teaser_body = strip_tags(trim($node->body['und'][0]['value']));
-            
-            $blog_teaser_body = strlen($blog_teaser_body) > 50 ? substr($blog_teaser_body, 0, 50) . '...' : $blog_teaser_body;
-            $recent_blogs .= '<div class="recent-txt">' . l($blog_title, $blog_link_alias, array('attributes' => array('title' => $node->title))) . '<p>' . $blog_teaser_body . '</p><span>' . format_date($node->created, 'long') . '</span></div><!-- /recent-text --></li>';
+            $recent_blogs .= '<li>' . drupal_render(node_view($node, 'teaser')) . '</li>';
         }
-
         $recent_blogs .= '</ul>';
-        
         $vars['recent_blogs'] = $recent_blogs;
-        //print_r($result);
-        //print '</pre>';
-
     }
 }
 
