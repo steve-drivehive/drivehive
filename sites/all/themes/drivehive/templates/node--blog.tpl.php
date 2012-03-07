@@ -3,7 +3,9 @@
   <header>
 	<div class="cols" id="rss_update">
 	                    		<span><h6>UPDATES</h6>
-	                            <a href="/event_rss/<?php print $related_event_node->nid; ?>" target="_blank"> / / / / / / / / / / / / </a></span>
+                                            <?php print l('/ / / / / / / / / / / /', 'event_rss/' . $related_event_node->nid, array(
+                                                'attributes'=> array('target' => '_blank')
+                                            )); ?>
 	                        </div>
     <?php print render($title_prefix); ?>
     <h2><?php print $title ?></h2>
