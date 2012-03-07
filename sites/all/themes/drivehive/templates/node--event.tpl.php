@@ -21,7 +21,6 @@
 </div> <!--#celebrity-wrapper-->
 
 
-
 <div id="sponsors">
 <h3>Sposored <span>by</span></h3>
 <?php

@@ -651,7 +651,7 @@ a:hover {
 	height: 797px;
 }
 #baner-images ul #no1 {
-	background: url(/sites/all/themes/drivehive/images/img1.jpg) no-repeat;
+	/*background: url(/sites/all/themes/drivehive/images/img1.jpg) no-repeat;*/
 }
 #baner-images ul #no2 {
 	background: url(/sites/all/themes/drivehive/images/img2.jpg) no-repeat;

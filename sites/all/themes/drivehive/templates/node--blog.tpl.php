@@ -14,7 +14,7 @@ $blog_link_alias = $base_url . '/' . drupal_get_path_alias('node/' . $node->nid)
             $blog_img = '<a href = "' . $blog_link_alias .' ">' . 
                 theme('image_style', array('style_name' => 'blog_teaser_thumb', 
                             'path' => $blog_img_uri, 
-                            'alt' => 'image alt', 
+                            'alt' => $blog_img_title, 
                             'title' => $blog_img_title, )) . '</a>';
             
                         $blog_title = strlen($node->title) > 30 ? substr($node->title, 0, 30) . '...' : $node->title;
