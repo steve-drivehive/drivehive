@@ -21,6 +21,25 @@ function drivehive_preprocess_comment_wrapper(&$vars){
     }
 }
 
+function drivehive_preprocess_page(&$vars) {
+    $item = menu_get_item();
+    if($item['page_arguments'][0]->type == 'event'){
+            $event_node = $item['page_arguments'][0];
+                                                $event_banner_img_file = $event_node->field_event_detail_banner['und'][0]['filename'];
+            $event_banner_img_uri = $event_node->field_event_detail_banner['und'][0]['uri'];
+            $event_banner_img_path = '/sites/default/files/' . $event_banner_img_file;
+            $event_banner_img_alt = $event_node->field_event_detail_banner['und'][0]['alt'];
+            $event_banner_img_title = $event_node->field_event_detail_banner['und'][0]['title'];
+            $event_banner_img = theme('image_style', array('style_name' => 'event_detail_banner', 
+                            'path' => $event_banner_img_uri, 
+                            'alt' => $event_banner_img_alt, 
+                            'title' => $event_banner_img_title, ));
+        $vars['page_banner'] = $event_banner_img;
+    }else{
+        //todo: grab promoted event banners and create slideshow
+    }
+}
+
 function drivehive_preprocess_node(&$vars) {
     global $base_url;
     $vars['timestamp'] = $vars['created'];
