@@ -7,10 +7,12 @@
 <div<?php print $attributes; ?>>
     <div id="baner-part2">
 	<div id="baner-images">
+                        <div id ="banner-container">
+            <?php print $page_banner; ?>
+            </div>
 		<ul>
 			<li id="no1">
 				<!--<img src="/sites/all/themes/drivehive/images/temp/baner-text.png" alt="" class="fake-text"/>-->
-                            <?php print $page_banner; ?>
 			</li>
 		</ul>
 	</div><!-- /baner-images -->

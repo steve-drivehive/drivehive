@@ -20,9 +20,23 @@ function drivehive_page_alter(&$page){
 */
 function drivehive_form_alter(&$form, &$form_state, $form_id){
 	global $user;
-	if($form_id == 'comment_node_event_form'){
-		$form['actions']['submit']['#value'] = '';
-	}	
+        switch($form_id){
+            case 'commerce_cart_add_to_cart_form_2':
+                $form['submit']['#prefix'] = '<div id = "doyourpart">';
+                $form['submit']['#suffix'] = '</div>';
+                $form['submit']['#type'] = 'image_button';
+                $form['submit']['#src'] = drupal_get_path('theme','drivehive') . '/images/doyourpart_cta.gif';
+                $form['submit']['#value']  = '';
+
+                //drupal_print($form['submit']);
+                break;
+            case 'comment_node_event_form':
+                		$form['actions']['submit']['#value'] = '';
+
+                break;
+            
+        }
+
 }
 
 /**
