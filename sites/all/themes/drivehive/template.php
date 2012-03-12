@@ -21,31 +21,63 @@ function drivehive_preprocess_comment_wrapper(&$vars){
     }
 }
 function drivehive_preprocess_html(&$vars) {
-  //include the js file in the header
-  drupal_add_js(path_to_theme().'/js/drivehive.js');
-  //example :  drupal_add_js(path_to_theme().'/js/google-analytics.js');
+    //include the js file in the header
+    drupal_add_js(path_to_theme().'/js/drivehive.js');
 }
+
+/*
+ * @param $node object
+ */
+function grab_event_banner($node){
+            $event_banner_img_file = $node->field_event_detail_banner['und'][0]['filename'];
+            $event_banner_img_uri = $node->field_event_detail_banner['und'][0]['uri'];
+            $event_banner_img_path = '/sites/default/files/' . $event_banner_img_file;
+            $event_banner_img_alt = $node->field_event_detail_banner['und'][0]['alt'];
+            $event_banner_img_title = $node->field_event_detail_banner['und'][0]['title'];
+            return theme('image_style', array('style_name' => 'event_detail_banner', 
+                        'path' => $event_banner_img_uri, 
+                        'alt' => $event_banner_img_alt, 
+                        'title' => $event_banner_img_title, ));
+}
+
 function drivehive_preprocess_page(&$vars) {
     $item = menu_get_item();
-    if($item['page_arguments'][0]->type == 'event'){
+    
+    $vars['page_banner'] = '';
+    // Grab the first event banner of each promoted event for the home page slider.
+    if(drupal_is_front_page()){
+        // Don't print the promoted content, just grab the banners.
+        unset($vars['page']['content']['content']['content']['system_main']['nodes']);
+            $promoted_query = db_select('node', 'n');
+            $promoted_query->fields('n', array('nid', 'created', 'title'))
+            ->condition('n.promote', 1)
+            ->condition('n.type', 'event')
+            ->condition('n.status', 1)
+            ->orderBy('n.created', 'desc');                        
+        $result = $promoted_query->execute();
+        
+        foreach($result as $key=>$value){
+            $promoted_nid = $value->nid;
+            $event_node = node_load($value->nid);
+            $promoted_banners[] = grab_event_banner($event_node);
+        }
+        //todo: make js slideshow of the banner array.  For now just printing first one.
+        $vars['page_banner'] = $promoted_banners[0];
+    }elseif(!empty($item['page_arguments'][0])){
+        if($item['page_arguments'][0]->type == 'event'){
+            
+
+            
             $event_node = $item['page_arguments'][0];
-            $event_banner_img_file = $event_node->field_event_detail_banner['und'][0]['filename'];
-            $event_banner_img_uri = $event_node->field_event_detail_banner['und'][0]['uri'];
-            $event_banner_img_path = '/sites/default/files/' . $event_banner_img_file;
-            $event_banner_img_alt = $event_node->field_event_detail_banner['und'][0]['alt'];
-            $event_banner_img_title = $event_node->field_event_detail_banner['und'][0]['title'];
-            $event_banner_img = theme('image_style', array('style_name' => 'event_detail_banner', 
-                            'path' => $event_banner_img_uri, 
-                            'alt' => $event_banner_img_alt, 
-                            'title' => $event_banner_img_title, ));
-        $vars['page_banner'] = $event_banner_img;
-    }else{
-        //todo: grab promoted event banners and create slideshow
+            $vars['page_banner'] = grab_event_banner($event_node);
     }
+}
 }
 
 function drivehive_preprocess_node(&$vars) {
     global $base_url;
+    $vars['event_sponsors'] = '';
+    
     $vars['timestamp'] = $vars['created'];
     // if this is a blog post, find what event it is referencing.
     if($vars['type'] == 'blog'){
@@ -57,6 +89,8 @@ function drivehive_preprocess_node(&$vars) {
         }
     }
     if($vars['type'] == 'event'){
+        $vars['event_sponsors'] = '<div id="sponsors">
+<h3>Sposored <span>by</span></h3>' . drivehive_event_sponsors($vars['nid']) . '</div>';
         // grab the last 4 blog posts to print in the right sidebar
         $query = db_select('node', 'n');
         $query->fields('n', array('nid', 'created', 'title'))
@@ -71,7 +105,13 @@ function drivehive_preprocess_node(&$vars) {
             $recent_blogs .= '<li>' . drupal_render(node_view($node, 'teaser')) . '</li>';
         }
         $recent_blogs .= '</ul>';
-        $vars['recent_blogs'] = $recent_blogs;
+        $vars['recent_blogs'] = '<div class="frame-wrapper" id="recent">
+		                	<div class="frame">
+		                    	<h4>Recent posts</h4>' . $recent_blogs . '<div id="see-all">
+		                        	<a href="/blog">see all</a>
+		                        </div><!-- /see-all -->
+		                    </div> <!-- /frame -->
+		                </div> <!-- .frame-wrapper -->';
     }
 }
 
@@ -89,9 +129,12 @@ function drivehive_body_id(){
     }elseif(arg(0) == 'user'){
         return 'user';
     }elseif($type == 'blog' || arg(0) == 'blog'){
-        return 'page-blog';
+        //return 'page-blog';
+        return 'generic';
     }elseif($type == 'event'){
         return 'event-detail';
+    }else{
+        return 'generic';
     }
 }
 

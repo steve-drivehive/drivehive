@@ -10,13 +10,7 @@
 	<div id="baner-images">
             <div id ="banner-container">
             <?php print $page_banner; ?>
-            </div>
-		<ul>
-			<li id="no1">
-				<!--<img src="/sites/all/themes/drivehive/images/temp/baner-text.png" alt="" class="fake-text"/>-->
-                            
-			</li>
-		</ul>
+            </div> <!-- #banner-container -->
 	</div><!-- /baner-images -->
 	<div id="baner-contents">
   <?php if (isset($page['header'])) : ?>

@@ -21,14 +21,7 @@
 </div> <!--#celebrity-wrapper-->
 
 
-<div id="sponsors">
-<h3>Sposored <span>by</span></h3>
-<?php
-$nid = arg(1);
-print drivehive_event_sponsors($nid);
-?>
-
-  </div>
+<?php print $event_sponsors; ?>
   </div>
   	
 		<?php
@@ -54,16 +47,10 @@ print drivehive_event_sponsors($nid);
 		}
 		
 		?>
-		<div class="frame-wrapper" id="recent">
-		                	<div class="frame">
-		                    	<h4>Recent posts</h4>
+
                                         <?php print $recent_blogs; ?>
 		                        
-		                        <div id="see-all">
-		                        	<a href="/blog">see all</a>
-		                        </div><!-- /see-all -->
-		                    </div> <!-- /frame -->
-		                </div> <!-- .frame-wrapper -->
+
 
   <div class="clearfix">
     <?php if (!empty($content['links'])): ?>

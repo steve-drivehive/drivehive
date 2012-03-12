@@ -12,6 +12,9 @@ html, body, div, span, applet, object, iframe, h1, h2, h3, h4, h5, h6, p, blockq
 #user, #page-blog{
 	background:#fff;
 }
+ body#generic{
+    background: #EEEFDD;
+}
 body {
     line-height: 1;
 }
@@ -268,6 +271,9 @@ a:hover {
 	padding: 26;
 	font-size: 15px;
 	letter-spacing: 2px;
+}
+#sponsors img{
+    padding:5px;
 }
 
 #gibson {
@@ -724,7 +730,9 @@ a:hover {
 }
 
 /*=== contact ===*/
-
+#generic #drivehive-header{
+    background:#EEEFDD;
+}
 #header {
 	height: 797px;
 	width: 100%;
@@ -1763,7 +1771,18 @@ width:400px;
 	float:left;
 }
 #doyourpart{
-   // background: url("/sites/all/themes/drivehive/images/doyourpart_cta.gif") no-repeat scroll 0 0 transparent;
     height: 142px;
+    left: 469px;
+    position: relative;
+    top: 654px;
     width: 728px;
+    z-index: 9999;
+}
+#banner-container img{
+    z-index:-9999;
+    position:absolute;
+}
+#banner-container{
+    height:795px;
+    
 }
