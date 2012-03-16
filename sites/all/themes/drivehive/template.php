@@ -55,14 +55,14 @@ function drivehive_preprocess_page(&$vars) {
             ->condition('n.status', 1)
             ->orderBy('n.created', 'desc');                        
         $result = $promoted_query->execute();
-        
+        $promoted_banners = '';
         foreach($result as $key=>$value){
             $promoted_nid = $value->nid;
             $event_node = node_load($value->nid);
-            $promoted_banners[] = grab_event_banner($event_node);
+            $promoted_banners .= '<div id = "each_frontpage_slide">' . grab_event_banner($event_node) . '</div>';
         }
         //todo: make js slideshow of the banner array.  For now just printing first one.
-        $vars['page_banner'] = $promoted_banners[0];
+        $vars['page_banner'] = $promoted_banners;
     }elseif(!empty($item['page_arguments'][0])){
         if($item['page_arguments'][0]->type == 'event'){
             
@@ -90,7 +90,7 @@ function drivehive_preprocess_node(&$vars) {
     }
     if($vars['type'] == 'event'){
         $vars['event_sponsors'] = '<div id="sponsors">
-<h3>Sposored <span>by</span></h3>' . drivehive_event_sponsors($vars['nid']) . '</div>';
+<h3>Sponsored <span>by</span></h3>' . drivehive_event_sponsors($vars['nid']) . '</div>';
         // grab the last 4 blog posts to print in the right sidebar
         $query = db_select('node', 'n');
         $query->fields('n', array('nid', 'created', 'title'))
