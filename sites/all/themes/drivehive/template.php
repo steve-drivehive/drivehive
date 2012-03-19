@@ -46,6 +46,8 @@ function drivehive_preprocess_page(&$vars) {
     $vars['page_banner'] = '';
     // Grab the first event banner of each promoted event for the home page slider.
     if(drupal_is_front_page()){
+        drupal_add_js(path_to_theme() . '/js/drivehive_frontpage.js', 'file');
+
         // Don't print the promoted content, just grab the banners.
         unset($vars['page']['content']['content']['content']['system_main']['nodes']);
             $promoted_query = db_select('node', 'n');
