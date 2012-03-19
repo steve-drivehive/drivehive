@@ -7,12 +7,7 @@
 <div<?php print $attributes; ?>>
     <div id="baner-part2">
 	<div id="baner-images">
-                        <div id ="banner-container">
             <?php print $page_banner; ?>
-                            <div id="pledge-button"></div>
-            </div>
-
-		
 	</div><!-- /baner-images -->
 	<div id="baner-contents">
   <?php if (isset($page['header'])) : ?>

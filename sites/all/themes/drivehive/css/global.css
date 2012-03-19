@@ -1790,3 +1790,25 @@ width:400px;
     position:absolute;
     float:left;
 }
+pre{
+    font-size:11px;
+    color:orange;
+}
+.event-detail-date{
+    font-size:75px;
+    text-align:right;
+}
+.event-detail-banner-overlay{
+    position:absolute;
+    top:180px;
+    width:500px;
+}
+.event-detail-large-banner-txt{
+    font-size:70px;
+    text-align:right;
+}
+
+.event-detail-banner-overlay .date-divider{
+    background: url(/sites/all/themes/drivehive/images/double_divider.png) no-repeat;
+    width:14px;
+}
