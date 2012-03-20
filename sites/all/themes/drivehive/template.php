@@ -65,20 +65,23 @@ function drivehive_preprocess_page(&$vars) {
         }
         //todo: make js slideshow of the banner array.  For now just printing first one.
         $vars['page_banner'] = '<div id ="banner-container">' . $promoted_banners . '</div>';
-    }elseif(!empty($item['page_arguments'][0])){
+    }elseif(!empty($item['page_arguments'][0]->type)){
         if($item['page_arguments'][0]->type == 'event'){
             print '<pre>';
-            $event_banner_large_txt = '<div class="event-detail-large-banner-txt">' . $item['page_arguments'][0]->field_event_banner_large_txt['und'][0]['value'] . '</div>';
-            //print_r($event_banner_large_txt);
+            $event_banner_large_txt = '<div class = "event-detail-large-banner-txt">' . $item['page_arguments'][0]->field_event_banner_large_txt['und'][0]['value'] . '</div>';
+            $event_banner_small_txt = '<div class = "event-detail-small-banner-txt">' . $item['page_arguments'][0]->field_event_banner_small_txt['und'][0]['value'] . '</div>';
+            
+            $overlay_txt_color = $item['page_arguments'][0]->field_event_detail_overlay_color['und'][0]['jquery_colorpicker'];
+            $overlay_style = !empty($overlay_txt_color) ? ' style = "color:#' . $overlay_txt_color . '" ' : ' style="color:#000" ';
             $event_timestamp = strtotime($item['page_arguments'][0]->field_event_date['und'][0]['value']);
             
             $event_day = date('d', $event_timestamp);
             $event_month = date('m', $event_timestamp);
             $event_year = date('y', $event_timestamp);
-            $event_date = '<div class="event-detail-date">' . $event_month . '<span class="date-divider" >&nbsp;</span>' . $event_day . '<span class="date-divider" >&nbsp;</span>' . $event_year . '</div>';
-            $event_banner_overlay =  '<div class="event-detail-banner-overlay">' . $event_banner_large_txt . $event_date . '</div>';
+            //<span class="date-divider" >&nbsp;</span>
+            $event_date = '<div class="event-detail-date">' . $event_month . '.' . $event_day . '.' . $event_year . '</div>';
+            $event_banner_overlay =  '<div class="event-detail-banner-overlay" ' . $overlay_style . '>' . $event_banner_large_txt . $event_banner_small_txt . $event_date . '</div>';
 
-//print_r($item['page_arguments'][0]->field_event_date['und'][0]['value']);
 print '</pre>';
             //$event_date = 
             $event_node = $item['page_arguments'][0];

@@ -1797,6 +1797,7 @@ pre{
 .event-detail-date{
     font-size:75px;
     text-align:right;
+    clear:both;
 }
 .event-detail-banner-overlay{
     position:absolute;
@@ -1807,8 +1808,16 @@ pre{
     font-size:70px;
     text-align:right;
 }
-
+.event-detail-small-banner-txt{
+    float: right;
+    font-size: 20px;
+    margin-bottom: 15px;
+    text-align: right;
+    width: 350px;
+}
 .event-detail-banner-overlay .date-divider{
     background: url(/sites/all/themes/drivehive/images/double_divider.png) no-repeat;
     width:14px;
 }
+.event-detail-date { font-family: 'akzidenzgroteskbe'; font-style: normal; font-weight: bold; }
+.event-detail-large-banner-txt, .event-detail-small-banner-txt { font-family: 'gothamhtf-book'; font-style: normal; font-weight: normal; }
