@@ -1,0 +1,156 @@
+﻿<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+   	<title>Drive Hive</title>
+    
+	<link rel="stylesheet" href="css/reset.css" type="text/css" media="screen, projection"/>
+	<link rel="stylesheet" href="css/style.css" type="text/css" media="screen, projection"/>
+
+	<script src="js/jquery-1.6.1.min.js" type="text/javascript" charset="utf-8"></script>
+	<script src="js/functions.js" type="text/javascript" charset="utf-8"></script>
+      
+</head>
+
+<body>
+	<div id="page">
+		<div class="wrapper">
+        	<div id="header">
+            	<div id="head-static">
+	            	<ul id="top-nav">
+							<li><a href="#">SIGN OUT</a></li>
+		            		<li>LOGGED IN AS <a href="account.html"><span class="blue">JANE DOE</span></a></li>
+							<li><a href="faq.html">HELP</a></li>
+						</ul>
+						<a href="index.html" id="logo" class="linked">Drive Hive</a>
+						<a href="donate.html" id="donate">DONATE</a>
+						<ul id="nav">
+							<li><a href="current_event.html">CURRENT&nbsp;EVENT</a></li>
+							<li>//</li>
+		            		<li><a href="#">PAST EVENTS</a></li>
+		            		<li>//</li>
+							<li><a href="about.html">ABOUT DH</a></li>
+						</ul>
+				</div><!-- /head-static -->
+				<h1 id="account-header">ACCOUNT <strong>INFO</strong></h1>
+				<div id="account">
+					<form action="#" method="post">
+						<div id="ac-col1">
+							<dl>
+								<dt><label for="first_name">FIRST <strong>NAME</strong></label></dt>
+								<dd><input type="text" name="first_name" class="text"/></dd>
+							
+								<dt><label for="last_name">LAST <strong>NAME</strong></label></dt>
+								<dd><input type="text" name="last_name" class="text"/></dd>
+								
+								<dt class="act1 double"><label for="mail">EMAIL <strong>ADDRESS</strong></label></dt>
+								<dd class="act1"><input type="text" name="mail" class="text"/></dd>
+								
+								<dt><label for="subscriptions"><strong>SUBSCRIPTIONS</strong></label></dt>
+								<dd><a href="#">Manage Email Subscriptions</a></dd>
+								
+								<dt class="act2"><label for="picture">CHANGE <strong>PROFILE PIC</strong></label></dt>
+								<dd class="act2"><img src="img/temp/ac-pic.jpg" alt="" /><a href="#">BROWSE...</a></dd>
+								
+								<dt><strong>CHANGE YOUR PASSWORD</strong></dt>
+								<dd></dd>
+								
+								<dt class="double"><label for="new_password">NEW <strong>PASSWORD</strong></label></dt>
+								<dd><input type="password" name="new_password" class="text" /></dd>
+								
+								<dt class="double"><label for="re_password">RETYPE <strong>PASSWORD</strong></label></dt>
+								<dd><input type="password" name="re_password" class="text" /></dd>
+							</dl>
+						</div><!-- /ac-col1 -->
+						<div id="ac-col2">
+							<div class="fl">
+								<label for="payment"><strong>PAYMENT</strong></label>
+								<input type="radio" name="payment" class="radio"/>
+								<div class="payment-radio">
+									we will only take payments when target is reached
+									<img src="img/credit-cards.jpg" alt="" />
+								</div><!-- /payment-radio -->
+								<div class="fix"></div>
+								<input type="radio" name="payment" class="radio" />
+								<div class="payment-radio">
+									We will take payment now, but refund you if the pleade target is not reached.
+									<img src="img/paypal.jpg" alt="" />
+								</div><!-- /payment-radio -->
+							</div><!-- /fl -->
+							<div class="fr">
+								CONNECTIONS
+								<a href="#" id="manage">Click to Manage>></a>
+								<a href="#">FACEBOOK</a>
+								<a href="#">TWITTER</a>
+								<a href="#">BLOGSPOT</a>
+							</div><!-- /fr -->
+							<div id="card-warn">YOUR CARD MUST BE VALID UNTIL DECEMBER, 2011</div>
+							<div id="personal-details">
+								<label for="first_name2" class="act3">FIRST <strong>NAME</strong></label>
+								<label for="last_name2" class="act3 last">LAST <strong>NAME</strong></label>
+								<input type="text" name="first_name2" class="text act3"/>
+								<input type="text" name="last_name2" class="text act3 last"/>
+                                <div class="clear"></div>
+								<label for="address1">ADDRESS <strong>1</strong></label>
+								<input type="text" name="address1" class="text"/>
+                                <div class="clear"></div>
+								<label for="address2">ADDRESS <strong>2</strong></label>
+								<input type="text" name="address2" class="text"/>
+								<div class="clear"></div>
+								<label for="city" class="act4"><strong>CITY</strong></label>
+								<label for="STATE" class="act5 last"><strong>STATE</strong></label>
+								<input type="text" name="city" class="text act4"/>
+								<input type="text" name="state" class="text act5 last"/>
+								<div class="clear"></div>
+								<label for="zip" class="act4"><strong>ZIP/POSTCODE</strong></label>
+								<label for="phone" class="act5 last"><strong>PHONE NO.</strong></label>
+								<input type="text" name="zip" class="text act4"/>
+								<input type="text" name="phone" class="text act5 last"/>
+								<div class="clear"></div>
+								<div id="ac-submit-wrapper">
+									<div class="fl">When your card is charged it may appear as <strong>DRIVEHIVE Donations.</strong>  For full description of funding see FAQ.</div>
+									<input type="submit" id="ac-submit" value="submit"/>
+								</div><!-- /submit-wrapper -->
+							</div><!-- /personal-details -->
+						</div><!-- /ac-col2 -->
+						<div class="fix"></div>
+					</form>
+				</div><!-- /account -->
+            </div><!-- /header -->
+            <div id="footer">
+            	<div id="copyright">Copyright ©2011 DRIVE HIVE, LLC    |   website by onefastbuffalo</div>
+            	<div id="footer-wrap">
+                    <div class="fl">
+                    <ul>
+                        <li><a href="current_event.html">current event</a></li>
+                        <li><a href="#">past events</a></li>
+                        <li><a href="about.html">about drive hive</a></li>
+                        <li><a href="#">privacy &amp; legal</a></li>
+                        <li><a href="news.html">news</a></li>
+                        <li class="last"><a href="contact.html">Contact US</a></li>       
+                    </ul>
+                    
+                    </div>
+                    <div class="fr">
+                        
+                        <ul>
+                            <li><a href="#" id="footer-twitter">twitter</a></li>
+                            <li><a href="#" id="footer-tube">youtube</a></li>
+                            <li><a href="#" id="footer-fb">facebook</a></li>
+                            <li><a href="#" id="footer-in">linkedin</a></li>
+                            <li><a href="#" id="footer-rss">rss</a></li>
+                        </ul>
+                        <div class="fix"></div>
+                        <form action="#" method="post">
+                            <input type="text" name="mail" id="footer-text-input" value="ENTER EMAIL ADDRESS" onfocus="if (this.value == 'ENTER EMAIL ADDRESS') {this.value = '';}" onblur="if (this.value == '') {this.value = 'ENTER EMAIL ADDRESS';}"/>
+                            <input type="submit" name="submit" id="footer-submit" class="linked" />
+                        </form>
+                    </div><!-- /fr -->
+                    <div class="fix"></div>
+                </div><!-- /footer-wrap -->
+            </div><!-- /footer -->
+        </div><!-- /wrapper -->
+	</div><!-- /page -->
+</body>
+</html>
