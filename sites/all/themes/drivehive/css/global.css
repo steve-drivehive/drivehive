@@ -1795,6 +1795,7 @@ pre{
     color:orange;
 }
 .event-detail-date{
+    border-bottom:2px solid;
     font-size:75px;
     text-align:right;
     clear:both;
@@ -1802,7 +1803,7 @@ pre{
 .event-detail-banner-overlay{
     position:absolute;
     top:180px;
-    width:500px;
+    width:440px;
 }
 .event-detail-large-banner-txt{
     font-size:70px;
@@ -1819,5 +1820,18 @@ pre{
     background: url(/sites/all/themes/drivehive/images/double_divider.png) no-repeat;
     width:14px;
 }
-.event-detail-date { font-family: 'akzidenzgroteskbe'; font-style: normal; font-weight: bold; }
-.event-detail-large-banner-txt, .event-detail-small-banner-txt { font-family: 'gothamhtf-book'; font-style: normal; font-weight: normal; }
+
+.goal-overlay{
+    color: #EFDF11;
+    margin-top: 20px;
+    text-align: right;
+}
+.goal-status{
+    font-size:100px;
+}
+.pledged-of{
+    font-size:35px;
+}
+.event-detail-product-id{
+    display:none;
+}

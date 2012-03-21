@@ -68,9 +68,12 @@ function drivehive_preprocess_page(&$vars) {
     }elseif(!empty($item['page_arguments'][0]->type)){
         if($item['page_arguments'][0]->type == 'event'){
             print '<pre>';
+            $event_product_id = $item['page_arguments'][0]->field_event_product['und'][0]['product_id'];
             $event_banner_large_txt = '<div class = "event-detail-large-banner-txt">' . $item['page_arguments'][0]->field_event_banner_large_txt['und'][0]['value'] . '</div>';
             $event_banner_small_txt = '<div class = "event-detail-small-banner-txt">' . $item['page_arguments'][0]->field_event_banner_small_txt['und'][0]['value'] . '</div>';
-            
+            $event_final_goal_amt = number_format($item['page_arguments'][0]->field_event_goal['und'][0]['value']);
+            $goal_status = 0;
+            $goal_section = '<div class="goal-overlay"><div class="goal-status">$' . $goal_status . '</div><div class = "pledged-of">PLEDGED OF $' . $event_final_goal_amt . '</div><div class="event-detail-product-id">' . $event_product_id . '</div></div>';            
             $overlay_txt_color = $item['page_arguments'][0]->field_event_detail_overlay_color['und'][0]['jquery_colorpicker'];
             $overlay_style = !empty($overlay_txt_color) ? ' style = "color:#' . $overlay_txt_color . '" ' : ' style="color:#000" ';
             $event_timestamp = strtotime($item['page_arguments'][0]->field_event_date['und'][0]['value']);
@@ -80,7 +83,7 @@ function drivehive_preprocess_page(&$vars) {
             $event_year = date('y', $event_timestamp);
             //<span class="date-divider" >&nbsp;</span>
             $event_date = '<div class="event-detail-date">' . $event_month . '.' . $event_day . '.' . $event_year . '</div>';
-            $event_banner_overlay =  '<div class="event-detail-banner-overlay" ' . $overlay_style . '>' . $event_banner_large_txt . $event_banner_small_txt . $event_date . '</div>';
+            $event_banner_overlay =  '<div class="event-detail-banner-overlay" ' . $overlay_style . '>' . $event_banner_large_txt . $event_banner_small_txt . $event_date . $goal_section . '</div>';
 
 print '</pre>';
             //$event_date = 

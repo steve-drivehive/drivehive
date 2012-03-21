@@ -43,14 +43,22 @@ function drivehive_form_alter(&$form, &$form_state, $form_id){
 * Implementation of hook_menu()
 */
 function drivehive_menu(){
-	$items['event_rss/%'] = array(
+    $items['event_rss/%'] = array(
     'title' => 'Event Updates',
     'description' => 'Subscibe to this event',
     'page callback' => 'drivehive_event_rss',
     'file' => 'pages.inc',
-	 'access arguments' => array('view content'), 
+    'access arguments' => array('view content'), 
     'file path' => drupal_get_path('module', 'drivehive'),
   );
+    $items['goal_status/%'] = array(
+    'title' => 'Event Updates',
+    'description' => 'Goal Status',
+    'page callback' => 'drivehive_ajax_goal_status',
+    'file' => 'pages.inc',
+    'access arguments' => array('view content'), 
+    'file path' => drupal_get_path('module', 'drivehive'),
+    );
 return $items;
 }
 
@@ -93,4 +101,12 @@ function drivehive_event_sponsors($nid){
 $count++;
 	}
 	return $output;
+}
+
+/*
+ * Retrieve the total amount purchased for this event so far.
+ */
+
+function drivehive_goal_progress($nid){
+    
 }

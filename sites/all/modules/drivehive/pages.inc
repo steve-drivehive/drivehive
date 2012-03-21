@@ -16,3 +16,9 @@ foreach($result as $key=>$value){
   $channel['link'] = url('blog', array('absolute' => TRUE));
   return node_feed($nids, $channel);
 }
+function drivehive_ajax_goal_status(){
+    $product_id = arg(1);
+    //get the total amount of this product_id sold, print here for ajax retrieval on event detail goal counter.
+    print '3000';
+    return null;
+}
