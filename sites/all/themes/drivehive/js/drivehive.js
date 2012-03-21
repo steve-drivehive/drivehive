@@ -3,7 +3,7 @@ jQuery(document).ready(
             driveHive = {
                 getGoalStatus : function(product_id){
                     jQuery.get('/goal_status/' + product_id, function(data) {
-                        jQuery('.goal-status').html(data);
+                        jQuery('.goal-status').html('$' + data);
                     });
                 },
                 initialCount : function(product_id){
@@ -17,12 +17,6 @@ jQuery(document).ready(
                                                 }
                                             }, 10);
 
-            
-
-
-                                              
-                                          
-                        
                     });
                     
                 }
@@ -34,7 +28,7 @@ jQuery(document).ready(
             var bannerOffset = banner.offset();
             doYourPartHeight = jQuery('#doyourpart').height();
             jQuery('#commerce-cart-add-to-cart-form-2').appendTo('#pledge-button');
-            
+            //jQuery('#commerce-cart-add-to-cart-form-2').appendTo('#pledge-button');
             
             
             var product_id = jQuery('.event-detail-product-id').html();
@@ -44,7 +38,7 @@ jQuery(document).ready(
 driveHive.initialCount(product_id);
             setInterval(function(){
             
-//driveHive.getGoalStatus(product_id);
+driveHive.getGoalStatus(product_id);
 
  }, 
       3000);

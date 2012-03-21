@@ -39,16 +39,26 @@ function drivehive_form_alter(&$form, &$form_state, $form_id){
 
 }
 
+function drivehive_permission() {
+  return array(
+    'access drivehive' => array(
+      'title' => t('Access DriveHive'),
+      'description' => t('Basic access to site for anons'),
+      'restrict access' => FALSE,
+    ),
+  );
+}
 /**
 * Implementation of hook_menu()
 */
+
 function drivehive_menu(){
     $items['event_rss/%'] = array(
     'title' => 'Event Updates',
     'description' => 'Subscibe to this event',
     'page callback' => 'drivehive_event_rss',
     'file' => 'pages.inc',
-    'access arguments' => array('view content'), 
+    //'access arguments' => array('access drivehive'), 
     'file path' => drupal_get_path('module', 'drivehive'),
   );
     $items['goal_status/%'] = array(
@@ -56,7 +66,7 @@ function drivehive_menu(){
     'description' => 'Goal Status',
     'page callback' => 'drivehive_ajax_goal_status',
     'file' => 'pages.inc',
-    'access arguments' => array('view content'), 
+    'access arguments' => array('access drivehive'), 
     'file path' => drupal_get_path('module', 'drivehive'),
     );
 return $items;

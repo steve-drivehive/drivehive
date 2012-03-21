@@ -19,6 +19,6 @@ foreach($result as $key=>$value){
 function drivehive_ajax_goal_status(){
     $product_id = arg(1);
     //get the total amount of this product_id sold, print here for ajax retrieval on event detail goal counter.
-    print '3000';
+    print '7000';
     return null;
 }

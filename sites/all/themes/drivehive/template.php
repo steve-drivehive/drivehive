@@ -20,10 +20,6 @@ function drivehive_preprocess_comment_wrapper(&$vars){
         $vars['comment_count'] =  $parent_event_comment_count . ' ' . format_plural($parent_event_comment_count, 'Comment', 'Comments');
     }
 }
-function drivehive_preprocess_html(&$vars) {
-    //include the js file in the header
-    drupal_add_js(path_to_theme().'/js/drivehive.js');
-}
 
 /*
  * @param $node object
@@ -67,7 +63,8 @@ function drivehive_preprocess_page(&$vars) {
         $vars['page_banner'] = '<div id ="banner-container">' . $promoted_banners . '</div>';
     }elseif(!empty($item['page_arguments'][0]->type)){
         if($item['page_arguments'][0]->type == 'event'){
-            print '<pre>';
+	drupal_add_js(path_to_theme().'/js/drivehive.js');
+            //print '<pre>';
             $event_product_id = $item['page_arguments'][0]->field_event_product['und'][0]['product_id'];
             $event_banner_large_txt = '<div class = "event-detail-large-banner-txt">' . $item['page_arguments'][0]->field_event_banner_large_txt['und'][0]['value'] . '</div>';
             $event_banner_small_txt = '<div class = "event-detail-small-banner-txt">' . $item['page_arguments'][0]->field_event_banner_small_txt['und'][0]['value'] . '</div>';
@@ -85,7 +82,7 @@ function drivehive_preprocess_page(&$vars) {
             $event_date = '<div class="event-detail-date">' . $event_month . '.' . $event_day . '.' . $event_year . '</div>';
             $event_banner_overlay =  '<div class="event-detail-banner-overlay" ' . $overlay_style . '>' . $event_banner_large_txt . $event_banner_small_txt . $event_date . $goal_section . '</div>';
 
-print '</pre>';
+//print '</pre>';
             //$event_date = 
             $event_node = $item['page_arguments'][0];
             $vars['page_banner'] = '<div id ="banner-container">' . $event_banner_overlay . grab_event_banner($event_node) . '<div id="pledge-button"></div>
