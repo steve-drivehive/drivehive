@@ -5,8 +5,8 @@
 function drivehive_page_build(&$page) {
 
 
-    
-    
+
+
 }
 /**
 * Implementation of hook_page_alter()
@@ -27,16 +27,11 @@ function drivehive_form_alter(&$form, &$form_state, $form_id){
                 $form['submit']['#type'] = 'image_button';
                 $form['submit']['#src'] = drupal_get_path('theme','drivehive') . '/images/doyourpart_cta.gif';
                 $form['submit']['#value']  = '';
-
-                //drupal_print($form['submit']);
                 break;
             case 'comment_node_event_form':
                 		$form['actions']['submit']['#value'] = '';
-
                 break;
-            
         }
-
 }
 
 function drivehive_permission() {
@@ -58,7 +53,7 @@ function drivehive_menu(){
     'description' => 'Subscibe to this event',
     'page callback' => 'drivehive_event_rss',
     'file' => 'pages.inc',
-    //'access arguments' => array('access drivehive'), 
+    'access arguments' => array('access drivehive'),
     'file path' => drupal_get_path('module', 'drivehive'),
   );
     $items['goal_status/%'] = array(
@@ -66,7 +61,7 @@ function drivehive_menu(){
     'description' => 'Goal Status',
     'page callback' => 'drivehive_ajax_goal_status',
     'file' => 'pages.inc',
-    'access arguments' => array('access drivehive'), 
+    'access arguments' => array('access drivehive'),
     'file path' => drupal_get_path('module', 'drivehive'),
     );
 return $items;
@@ -86,7 +81,7 @@ function drivehive_event_sponsors($nid){
 		$sponsor_node = node_load($sponsor_nid);
 		$sponsor_img_file = $sponsor_node->field_sponsor_logo['und'][0]['filename'];
 		$sponsor_link = $sponsor_node->field_logo_link['und'][0]['value'];
-		
+
 	//	drupal_print($sponsor_node->field_sponsor_logo['und'][0]);
 		if(!empty($sponsor_img_file)){
 			// swtich between large, small image settings (even, odd), stagger
@@ -118,5 +113,5 @@ $count++;
  */
 
 function drivehive_goal_progress($nid){
-    
+
 }
