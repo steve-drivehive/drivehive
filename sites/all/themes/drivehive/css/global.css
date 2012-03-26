@@ -1797,7 +1797,6 @@ pre{
 .event-detail-date{
     border-bottom:2px solid;
     font-size:75px;
-    text-align:right;
     clear:both;
 }
 .event-detail-banner-overlay{
@@ -1807,14 +1806,12 @@ pre{
 }
 .event-detail-large-banner-txt{
     font-size:70px;
-    text-align:right;
+
 }
 .event-detail-small-banner-txt{
-    float: right;
     font-size: 20px;
     margin-bottom: 15px;
-    text-align: right;
-    width: 350px;
+
 }
 .event-detail-banner-overlay .date-divider{
     background: url(/sites/all/themes/drivehive/images/double_divider.png) no-repeat;
@@ -1824,7 +1821,7 @@ pre{
 .goal-overlay{
     color: #EFDF11;
     margin-top: 20px;
-    text-align: right;
+
 }
 .goal-status{
     font-size:100px;
@@ -1834,4 +1831,16 @@ pre{
 }
 .event-detail-product-id{
     display:none;
+}
+.event-detail-with-your-pledge{
+    font-size:12px;
+    font-family:times;
+    margin-top:5px;
+}
+.overlay-left{
+    text-align:right;
+}
+.overlay-right{
+    text-align:left;
+    margin-left:750px;
 }
