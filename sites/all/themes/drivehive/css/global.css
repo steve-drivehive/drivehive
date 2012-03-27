@@ -17,8 +17,9 @@ html, body, div, span, applet, object, iframe, h1, h2, h3, h4, h5, h6, p, blockq
     background: url(/sites/all/themes/drivehive/images/page-bg.png) no-repeat center top #000;
 }
 body#generic #section-content{
-    background: #EEEFDD;
-    padding-bottom:35px;
+    background: url("/sites/all/themes/drivehive/images/swipe_bg.png") no-repeat scroll 0 -100px #EEEFDD;
+    min-height: 655px;
+    padding-bottom: 35px;
 }
 body {
     line-height: 1;
@@ -1096,6 +1097,7 @@ a:hover {
 }
 #faq h4 a{
 	color: #000;
+        font-family: Arial, Helvetica, sans-serif;
 }
 #faq h4 a:hover{
 	text-decoration:none;
@@ -1105,10 +1107,16 @@ a:hover {
 	display: none;
 	width: 318px;
 }
+#faq p span{
+    border: 1px dotted;
+    display: block;
+    margin: 5px 0;
+    padding: 5px;
+}
 #faq p.active {
 	display: block;
 }
-#faq form {
+#faq form,#faq.webform {
 	background-color: #000;
 	color: #fff;
 	padding: 13px 15px 16px;
@@ -1117,7 +1125,7 @@ a:hover {
 	-moz-box-shadow: 0 5px 14px 0 #b2b2b2;
 	box-shadow: 0 5px 14px 0 #b2b2b2;
 }
-#faq form h3 {
+#faq form h3, #faq h3 {
 	font-family: Gotham-b;
 	color: #efdf11;
 	font-size: 18px;
@@ -1129,7 +1137,17 @@ a:hover {
 #faq form label span {
 	font-family: Akzidenz-b;
 }
-#faq form .text {
+#faq.webform{
+        padding-top: 18px;
+    text-align: left;
+    width: 345px;
+}
+#faq.webform .form-actions{
+    left: 275px;
+    position: absolute;
+    top: 250px;
+}
+#faq form .text, #faq.webform .form-text{
 	width: 314px;
 	height: 28px;
 	border-top: 1px solid #bec0b1;
@@ -1139,7 +1157,7 @@ a:hover {
 	margin-bottom: 4px;
 	background-color: #eef0dd;
 }
-#faq form textarea {
+#faq form textarea, #faq.webform .form-textarea {
 	width: 314px;
 	resize: none;
 	height: 169px;
@@ -1148,6 +1166,11 @@ a:hover {
 	border-bottom: 0;
 	padding: 0;
 	background-color: #eef0dd;
+}
+.faq-section{
+    font-weight: bold;
+    margin: 10px 0;
+    text-decoration: underline;
 }
 #sub-wrap {
 	background-color: #eef0dd;
