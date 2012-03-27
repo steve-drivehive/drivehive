@@ -33,8 +33,8 @@ function drivehive_form_alter(&$form, &$form_state, $form_id){
                 $form['actions']['submit']['#value'] = '';
                 break;
             case 'webform_client_form_27':
-                $form['actions']['submit']['#type'] = 'image_button';
-                $form['actions']['submit']['#src'] = drupal_get_path('theme','drivehive') . '/images/faq-submit.jpg';
+                //$form['actions']['submit']['#type'] = 'image_button';
+                //$form['actions']['submit']['#src'] = drupal_get_path('theme','drivehive') . '/images/faq-submit.jpg';
                 break;
         }
 }

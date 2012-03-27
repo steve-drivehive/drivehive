@@ -1116,7 +1116,7 @@ a:hover {
 #faq p.active {
 	display: block;
 }
-#faq form,#faq.webform {
+#faq.webform {
 	background-color: #000;
 	color: #fff;
 	padding: 13px 15px 16px;
@@ -1124,6 +1124,7 @@ a:hover {
 	-webkit-box-shadow: 0 5px 14px 0 #b2b2b2;
 	-moz-box-shadow: 0 5px 14px 0 #b2b2b2;
 	box-shadow: 0 5px 14px 0 #b2b2b2;
+        margin:0;
 }
 #faq form h3, #faq h3 {
 	font-family: Gotham-b;
@@ -1131,7 +1132,7 @@ a:hover {
 	font-size: 18px;
 	text-indent: -2px;
 }
-#faq form label {
+#faq.webform label {
 	font-family: Akzidenz-l;
 }
 #faq form label span {
@@ -1140,14 +1141,14 @@ a:hover {
 #faq.webform{
         padding-top: 18px;
     text-align: left;
-    width: 345px;
+    width: 310px;
 }
 #faq.webform .form-actions{
-    left: 275px;
+    left: 250px;
     position: absolute;
     top: 250px;
 }
-#faq form .text, #faq.webform .form-text{
+#faq.webform .form-text{
 	width: 314px;
 	height: 28px;
 	border-top: 1px solid #bec0b1;
@@ -1157,7 +1158,7 @@ a:hover {
 	margin-bottom: 4px;
 	background-color: #eef0dd;
 }
-#faq form textarea, #faq.webform .form-textarea {
+#faq.webform .form-textarea {
 	width: 314px;
 	resize: none;
 	height: 169px;
