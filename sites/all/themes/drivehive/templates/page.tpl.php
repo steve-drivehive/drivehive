@@ -5,7 +5,7 @@
  */
 ?>
 <div<?php print $attributes; ?>>
-    <div id="baner-part2">
+    <div id="<?php print $banner_class;?>">
 	<div id="baner-images">
             <?php print $page_banner; ?>
 	</div><!-- /baner-images -->
@@ -13,7 +13,8 @@
   <?php if (isset($page['header'])) : ?>
     <?php print render($page['header']); ?>
   <?php endif; ?>
-  
+        </div>
+    </div>
   <?php if (isset($page['content'])) : ?>
     <?php print render($page['content']); ?>
   <?php endif; ?>  

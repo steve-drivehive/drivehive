@@ -38,7 +38,17 @@ function grab_event_banner($node){
 
 function drivehive_preprocess_page(&$vars) {
     $item = menu_get_item();
-    
+    //print '<pre style="color:orange; font-size:11px;">';
+    //print_r($item);
+    if(drupal_is_front_page()){
+        $vars['banner_class'] = 'banner-tall';
+    }
+    elseif($item['page_arguments'][0]->type == 'event'){
+        $vars['banner_class'] = 'banner-tall';
+    }else{
+        $vars['banner_class'] = 'banner-generic';
+    }
+    //print '</pre>';
     $vars['page_banner'] = '';
     // Grab the first event banner of each promoted event for the home page slider.
     if(drupal_is_front_page()){

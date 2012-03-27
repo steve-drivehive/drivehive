@@ -20,6 +20,8 @@ function drivehive_page_alter(&$page){
 */
 function drivehive_form_alter(&$form, &$form_state, $form_id){
 	global $user;
+        //print $form_id;
+        
         switch($form_id){
             case 'commerce_cart_add_to_cart_form_2':
                 $form['submit']['#prefix'] = '<div id = "doyourpart">';
