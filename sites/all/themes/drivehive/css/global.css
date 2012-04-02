@@ -1547,53 +1547,53 @@ dd.act2 a {
         height:100px;
 	background: url(/sites/all/themes/drivehive/images/footer-signes.png) no-repeat #000;
 }
-#footer .fl {
+#footer-wrap .fl {
 	color: #efdf11;
 	font-size: 42px;
 	width: 467px;
 	padding: 14px 0 0 11px;
 }
-#footer .fl ul {
+#footer-wrap .fl ul {
 	display: block;
 	width: 100%;
 	height: 24px;
 }
-#footer .fl ul li {
+#footer-wrap .fl ul li {
 	float: left;
 	font-size: 9px;
 	margin-right: 10px;
 }
-#footer .fl ul li a {
+#footer-wrap .fl ul li a {
 	color: #fcf9f9;
 	text-transform: uppercase;
 	
 }
-#footer .fl span {
+#footer-wrap .fl span {
 	font-family: Akzidenz-b;
 	letter-spacing: -1px;
 	word-spacing: -4px;
 }
-#footer .fr {
+#footer-wrap .fr {
 	color: #40b0ab;
 	font-size: 37px;
 	width: 419px;
 	font-style: italic;
 	padding: 7px 0;
 }
-#footer .fr span {
+#footer-wrap .fr span {
 	font-family: Akzidenz-mci;
 	float: left;
 	padding-left: 3px;
 	word-spacing: -1px;
 }
-#footer .fr ul {
+#footer-wrap .fr ul {
 	width: 185px;
 	float: right;
 }
-#footer .fr ul li {
+#footer-wrap .fr ul li {
 	float: left;
 }
-#footer .fr ul li a {
+#footer-wrap .fr ul li a {
 	display: block;
 	overflow: hidden;
 	text-indent: -999px;
@@ -1884,4 +1884,18 @@ pre{
     float:left;
     clear:both;
     margin-bottom:20px;
+}
+.mailchimp-newsletter-wrapper input{
+    font-size: 16px;
+    position: relative;
+    top:2px;
+}
+#footer-wrap #edit-submit{
+    border: 1px solid;
+    left: 297px;
+    position: relative;
+    top: -65px;
+}
+.mailchimp-newsletter-wrapper label{
+    display:none;
 }

@@ -38,27 +38,16 @@ jQuery(document).ready(
                     
                 }
             }
-            
+            /*
             var banner = jQuery('#banner-container');
             bannerHeight = banner.height();
             bannerWidth = banner.width();
             var bannerOffset = banner.offset();
             doYourPartHeight = jQuery('#doyourpart').height();
-            var addToCartFormId = jQuery('#doyourpart').parent().parent().attr('id');
-            var match = addToCartFormId.match(/commerce-cart-add-to-cart-form-(\d+)(-\d+)?/);;
-            console.log(match);
-            jQuery('#' + match[0]).appendTo('#pledge-button');
-            var product_id = jQuery('.event-detail-product-id').html();
+
+*/
 
 
-
-driveHive.initialCount(product_id);
-            setInterval(function(){
-            
-driveHive.getGoalStatus(product_id);
-
- }, 
-      3000);
       
       
       
