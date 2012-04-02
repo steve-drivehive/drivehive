@@ -28,7 +28,7 @@ jQuery(document).ready(
                                             var x = 0;
                                             var b = setInterval(function(){
                                                 jQuery('.goal-status').text('$' + x);
-                                                x += 7;
+                                                x += 28;
                                                 if(x >= data){
                                                     clearInterval(b);
                                                 }
@@ -44,10 +44,10 @@ jQuery(document).ready(
             bannerWidth = banner.width();
             var bannerOffset = banner.offset();
             doYourPartHeight = jQuery('#doyourpart').height();
-            jQuery('#commerce-cart-add-to-cart-form-2').appendTo('#pledge-button');
-            //jQuery('#commerce-cart-add-to-cart-form-2').appendTo('#pledge-button');
-            
-            
+            var addToCartFormId = jQuery('#doyourpart').parent().parent().attr('id');
+            var match = addToCartFormId.match(/commerce-cart-add-to-cart-form-(\d+)(-\d+)?/);;
+            console.log(match);
+            jQuery('#' + match[0]).appendTo('#pledge-button');
             var product_id = jQuery('.event-detail-product-id').html();
 
 

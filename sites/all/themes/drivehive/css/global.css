@@ -232,21 +232,20 @@ a:hover {
 	width: 133px;
 	margin-right: 15px;
 }
-#quote {
-	/*font-size: 28px;
-	color: #020202;
-	padding: 16px 34px 8px 42px;
-	text-indent: -22px;
-	line-height: 33px;
-	*/
-	width: 736px;
-	margin-bottom: 31px;
-	height: 131px;
-	float: left;
-	-webkit-box-shadow: 0 5px 14px 0 #b2b2b2;
-	-moz-box-shadow: 0 5px 14px 0 #b2b2b2;
-	box-shadow: 0 5px 14px 0 #b2b2b2;
-	background: url(/sites/all/themes/drivehive/images/quote.jpg) no-repeat 18px 16px #efdf11;
+#guest_face_pic{
+    float:left;
+    margin-right:15px;
+}
+.quote {
+    background: none repeat scroll 0 0 #EFDF11;
+    box-shadow: 0 5px 14px 0 #B2B2B2;
+    float: left;
+    font-family: 'gothamhtf-bold';
+    font-size: 23px;
+    margin-bottom: 31px;
+    padding: 10px;
+    width: 600px;
+    line-height:28px;
 }
 #quote span {
 	float: right;
@@ -254,7 +253,7 @@ a:hover {
 	margin-right: -22px;
 }
 #about {
-	width: 733px;
+	width: 620px;
 	float: left;
 	padding-left: 4px;
 }
@@ -583,9 +582,10 @@ a:hover {
 	font-family: Akzidenz-b;
 }
 #media-box {
-	float: right;
-	width: 589px;
-	padding-right: 18px !important;
+	float: left;
+	width: 500px;
+	xpadding-right: 18px !important;
+        margin: 10px 0 0 10px;
 }
 #media-box .frame {
 	border: 3px solid #40b0ab;
@@ -612,7 +612,7 @@ a:hover {
 #media-box .media-txt {
 	/*float:left;*/
 	color: #efdf11;
-	font-size: 16px;
+	font-size: 12px;
 }
 #media-box .media-txt a {
 	color: #40b0ab;
@@ -623,14 +623,14 @@ a:hover {
 	margin-bottom: 23px;
 }
 #media-box ul.tweet .media-txt {
-	width: 520px;
+	width: 435px;
 }
 #media-box ul.face .media-pic {
 	width: 70px;
 	margin-bottom: 14px;
 }
 #media-box ul.face .media-txt {
-	width: 530px;
+	width: 435px;
 }
 #media-box ul.face .media-txt a {
 	display: block;
@@ -1879,4 +1879,9 @@ pre{
 .overlay-right{
     text-align:left;
     margin-left:750px;
+}
+#guest-blurb{
+    float:left;
+    clear:both;
+    margin-bottom:20px;
 }

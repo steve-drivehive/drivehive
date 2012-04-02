@@ -22,7 +22,7 @@ function drivehive_form_alter(&$form, &$form_state, $form_id){
 	global $user;
         
         switch($form_id){
-            case 'commerce_cart_add_to_cart_form_2':
+            case stristr($form_id, 'commerce_cart_add_to_cart_form'):
                 $form['submit']['#prefix'] = '<div id = "doyourpart">';
                 $form['submit']['#suffix'] = '</div>';
                 $form['submit']['#type'] = 'image_button';
@@ -68,6 +68,7 @@ function drivehive_menu(){
     'file' => 'pages.inc',
     'access arguments' => array('access drivehive'),
     'file path' => drupal_get_path('module', 'drivehive'),
+    //'delivery callback' => 'ajax_deliver',
     );
 return $items;
 }
