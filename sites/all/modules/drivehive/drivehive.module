@@ -46,12 +46,12 @@ function drivehive_form_alter(&$form, &$form_state, $form_id){
                 $form['mailchimp_lists']['mailchimp_3']['mergevars']['EMAIL']['#default_value'] = 'ENTER EMAIL ADDRESS';
                 $form['#prefix'] = '<div id="footer-wrap"><div class="fl">
                     <ul>
-                        <li><a href="current_event.html">current event</a></li>
-                        <li><a href="#">past events</a></li>
+                        <li><a href="/current">current event</a></li>
+                        <li><a href="/past-events">past events</a></li>
                         <li><a href="/about">about drive hive</a></li>
-                        <li><a href="#">privacy &amp; legal</a></li>
+                        <li><a href="/privacy-policy">privacy &amp; legal</a></li>
                         <li><a href="/news">news</a></li>
-                        <li class="last"><a href="contact.html">Contact US</a></li>       
+                        <li class="last"><a href="/contact-us">Contact US</a></li>       
                     </ul>
                     </div><div class="fr">
                         <ul>
