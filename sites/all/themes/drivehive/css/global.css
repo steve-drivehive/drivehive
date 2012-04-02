@@ -1887,14 +1887,13 @@ pre{
 }
 .mailchimp-newsletter-wrapper input{
     font-size: 16px;
-    position: relative;
-    top:2px;
+    margin-top:-15px;
 }
-#footer-wrap #edit-submit{
+#footer-wrap .form-submit{
     border: 1px solid;
     left: 297px;
+    margin-top: -163px;
     position: relative;
-    top: -65px;
 }
 .mailchimp-newsletter-wrapper label{
     display:none;

@@ -20,7 +20,6 @@ function drivehive_page_alter(&$page){
 */
 function drivehive_form_alter(&$form, &$form_state, $form_id){
 	global $user;
-        
         switch($form_id){
             case stristr($form_id, 'commerce_cart_add_to_cart_form'):
                 $form['submit']['#prefix'] = '<div id = "doyourpart">';
@@ -35,6 +34,35 @@ function drivehive_form_alter(&$form, &$form_state, $form_id){
             case 'webform_client_form_27':
                 //$form['actions']['submit']['#type'] = 'image_button';
                 //$form['actions']['submit']['#src'] = drupal_get_path('theme','drivehive') . '/images/faq-submit.jpg';
+                break;
+            case 'mailchimp_lists_user_subscribe_form_3':
+                $form['submit']['#type'] = 'image_button';
+                $form['submit']['#src'] = drupal_get_path('theme','drivehive') . '/images/mailchimp_submit.gif';
+                $form['mailchimp_lists']['mailchimp_3']['mergevars']['EMAIL']['#size'] = 29;
+                $form['mailchimp_lists']['mailchimp_3']['mergevars']['EMAIL']['#attributes'] = array(
+                    'onFocus'=>'if (this.value == "ENTER EMAIL ADDRESS") {this.value = "";}', 
+                    'onBlur'=>'if (this.value == "") {this.value = "ENTER EMAIL ADDRESS";}'
+                    );
+                $form['mailchimp_lists']['mailchimp_3']['mergevars']['EMAIL']['#default_value'] = 'ENTER EMAIL ADDRESS';
+                $form['#prefix'] = '<div id="footer-wrap"><div class="fl">
+                    <ul>
+                        <li><a href="current_event.html">current event</a></li>
+                        <li><a href="#">past events</a></li>
+                        <li><a href="/about">about drive hive</a></li>
+                        <li><a href="#">privacy &amp; legal</a></li>
+                        <li><a href="/news">news</a></li>
+                        <li class="last"><a href="contact.html">Contact US</a></li>       
+                    </ul>
+                    </div><div class="fr">
+                        <ul>
+                            <li><a href="https://twitter.com/#!/drivehive" id="footer-twitter">twitter</a></li>
+                            <li><a href="http://youtube.com/drivehive" id="footer-tube">youtube</a></li>
+                            <li><a href="http://www.facebook.com/pages/Drive-Hive" id="footer-fb">facebook</a></li>
+                            <li><a href="#" id="footer-in">linkedin</a></li>
+                            <li><a href="/rss.xml" id="footer-rss">rss</a></li>
+                        </ul>';
+                $form['#suffix'] = '</div><!-- /fr --></div>';
+
                 break;
         }
 }
