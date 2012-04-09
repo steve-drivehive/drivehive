@@ -27,11 +27,11 @@ function drivehive_preprocess_comment_wrapper(&$vars){
  * @param $style the imagecache style to apply to this image
  */
 function grab_node_image($node, $img_field, $style){
-    $img_file = $node->{$img_field}['und'][0]['filename'];
-    $img_uri = $node->{$img_field}['und'][0]['uri'];
+    $img_file = $node->{$img_field}[$node->language][0]['filename'];
+    $img_uri = $node->{$img_field}[$node->language][0]['uri'];
     $img_path = '/sites/default/files/' . $img_file;
-    $img_alt = $node->{$img_field}['und'][0]['alt'];
-    $img_title = $node->{$img_field}['und'][0]['title'];
+    $img_alt = $node->{$img_field}[$node->language][0]['alt'];
+    $img_title = $node->{$img_field}[$node->language][0]['title'];
     return theme('image_style', array('style_name' => $style, 
                 'path' => $img_uri, 
                 'alt' => $img_alt, 

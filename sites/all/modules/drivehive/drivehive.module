@@ -38,7 +38,7 @@ function drivehive_form_alter(&$form, &$form_state, $form_id){
             case 'mailchimp_lists_user_subscribe_form_3':
                 $form['submit']['#type'] = 'image_button';
                 $form['submit']['#src'] = drupal_get_path('theme','drivehive') . '/images/mailchimp_submit.gif';
-                $form['mailchimp_lists']['mailchimp_3']['mergevars']['EMAIL']['#size'] = 29;
+                //$form['mailchimp_lists']['mailchimp_3']['mergevars']['EMAIL']['#size'] = 29;
                 $form['mailchimp_lists']['mailchimp_3']['mergevars']['EMAIL']['#attributes'] = array(
                     'onFocus'=>'if (this.value == "ENTER EMAIL ADDRESS") {this.value = "";}', 
                     'onBlur'=>'if (this.value == "") {this.value = "ENTER EMAIL ADDRESS";}'

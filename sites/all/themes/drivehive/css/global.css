@@ -274,12 +274,12 @@ a:hover {
 }
 #sponsors h3 {
 	color: #fefefe;
-	padding: 26;
+	padding: 26px;
 	font-size: 15px;
 	letter-spacing: 2px;
 }
 #sponsors img{
-    padding:5px;
+    padding:15px;
 }
 
 #gibson {
@@ -1542,7 +1542,7 @@ dd.act2 a {
 }
 #footer-wrap {
 	border: 3px solid #efdf11;
-	margin: 0 0 7px 176px;
+	margin: 20px 0 7px 176px;
 	width: 897px;
         height:100px;
 	background: url(/sites/all/themes/drivehive/images/footer-signes.png) no-repeat #000;
@@ -1888,6 +1888,7 @@ pre{
 .mailchimp-newsletter-wrapper input{
     font-size: 16px;
     margin-top:-15px;
+    width:297px;
 }
 #footer-wrap .form-submit{
     border: 1px solid;
