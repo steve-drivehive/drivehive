@@ -3,7 +3,7 @@ jQuery(document).ready(
         function(){
             	jQuery('#faq h4 a').click(function(){
                     
-                console.log('click');
+                //console.log('click');
 		var clickedPar = jQuery(this).parent().siblings('p');
 		if(clickedPar.hasClass('active')){
 			clickedPar.slideUp().removeClass('active');
@@ -32,25 +32,14 @@ jQuery(document).ready(
                                                 if(x >= data){
                                                     clearInterval(b);
                                                 }
-                                            }, 10);
+                                            }, 100);
 
                     });
                     
                 }
-            }
-            /*
-            var banner = jQuery('#banner-container');
-            bannerHeight = banner.height();
-            bannerWidth = banner.width();
-            var bannerOffset = banner.offset();
-            doYourPartHeight = jQuery('#doyourpart').height();
-
-*/
-
-
+            } 
       
-      
-      
+      driveHive.initialCount();
 
 
 

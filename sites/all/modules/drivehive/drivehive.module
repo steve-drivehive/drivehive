@@ -146,6 +146,16 @@ $count++;
  * Retrieve the total amount purchased for this event so far.
  */
 
-function drivehive_goal_progress($nid){
-
+function drivehive_goal_progress($product_id){
+    $query = db_select('field_data_commerce_line_items', 'fdcli');
+    $query->leftJoin('field_data_commerce_product', 'fdcp', '(fdcli.commerce_line_items_line_item_id = fdcp.entity_id)');
+    $query->leftJoin('commerce_line_item', 'cli', '(fdcp.entity_id = cli.line_item_id)');
+    $query->leftJoin('field_data_commerce_total', 'fdct', '(cli.line_item_id = fdct.entity_id)');
+    $query->leftJoin('commerce_order', 'co', '(cli.order_id = co.order_id)');
+    $query->addExpression('SUM(fdct.commerce_total_amount)', 'total');
+    $query->condition('fdcp.commerce_product_product_id', $product_id);
+    $query->condition('co.status', 'pending');
+    $result = $query->execute()->fetch();
+    return empty($result->total) ? 0 : substr($result->total, 0, 2);
 }
+
