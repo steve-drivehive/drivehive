@@ -27,26 +27,36 @@ function drivehive_preprocess_comment_wrapper(&$vars){
  * @param $style the imagecache style to apply to this image
  */
 function grab_node_image($node, $img_field, $style){
-    $img_file = $node->{$img_field}[$node->language][0]['filename'];
-    $img_uri = $node->{$img_field}[$node->language][0]['uri'];
-    $img_path = '/sites/default/files/' . $img_file;
-    $img_alt = $node->{$img_field}[$node->language][0]['alt'];
-    $img_title = $node->{$img_field}[$node->language][0]['title'];
-    return theme('image_style', array('style_name' => $style, 
-                'path' => $img_uri, 
-                'alt' => $img_alt, 
-                'title' => $img_title, ));
+	$wrapper = entity_metadata_wrapper('node', $node);
+	$img_file_info = $wrapper->{$img_field}->value();
+	
+	
+   return theme('image_style', array('style_name' => $style, 
+'path' => $img_file_info['uri'], 
+'alt' => $img_file_info['alt'], 
+'title' => $img_file_info['title'],
+));
 }
 
 
 
 function drivehive_preprocess_page(&$vars) {
+	
+	 //debug(entity_get_info('commerce_line_item'));
     drupal_add_js(path_to_theme().'/js/drivehive.js');
     drupal_add_js(path_to_theme().'/js/jquery.cycle.all.js');
     drupal_add_js(path_to_theme().'/js/jquery.main.js');
     $item = menu_get_item();
-    //print '<pre style="color:orange; font-size:11px;">';
-    //print_r($item);
+    print '<pre style="color:orange; font-size:11px;">';
+$query = new EntityFieldQuery();
+$query->entityCondition('entity_type', 'commerce_line_item');
+
+
+//$query->entityCondition('entity_type', 'commerce_order');
+$result = $query->execute();
+print_r($result);
+//print_r(field_info_bundles('commerce_line_item'));
+//print_r($query);
     if(drupal_is_front_page()){
         $vars['banner_class'] = 'banner-tall';
     }elseif(!empty($item['page_arguments'][0]->type)){
@@ -60,7 +70,7 @@ function drivehive_preprocess_page(&$vars) {
     else{
         $vars['banner_class'] = 'banner-generic';
     }
-    //print '</pre>';
+    print '</pre>';
     $vars['page_banner'] = '';
     // Grab the first event banner of each promoted event for the home page slider.
     if(drupal_is_front_page()){
