@@ -58,7 +58,6 @@ function drivehive_preprocess_page(&$vars) {
     else{
         $vars['banner_class'] = 'banner-generic';
     }
-    print '</pre>';
     $vars['page_banner'] = '';
     // Grab the first event banner of each promoted event for the home page slider.
     if(drupal_is_front_page()){
@@ -132,10 +131,6 @@ function drivehive_preprocess_node(&$vars) {
         }
     }
     if($vars['type'] == 'event'){
-        //print '<pre style="color:orange;font-size:11px;">';
-        //print_r($vars);
-        //print '</pre>';
-
         if(!empty($vars['field_guest_face_pic'])){
             $vars['guest_face_pic'] = '<div id="guest_face_pic">' . grab_node_image($node, 'field_guest_face_pic', 'guest_face_pic') . '</div>';
         }
@@ -186,18 +181,28 @@ function drivehive_preprocess_node(&$vars) {
 
 function drivehive_body_id(){
     $type = '';
-    if(is_numeric(arg(1)) && arg(0) == 'node'){
-        $type = db_query("select type from {node} where nid = :nid", array('nid' => arg(1)))->fetchField();
+    $item = menu_get_item();
+    //debug($item);
+    if(is_array($item['load_functions'])){
+        if(in_array('node_load', $item['load_functions'])){
+            $node_type = $item['page_arguments'][0]->type;
+        }
+
     }
+        else{
+            $node_type = '';
+        }
     if(drupal_is_front_page()){
         return 'home';
     }elseif(arg(0) == 'user'){
         return 'user';
-    }elseif($type == 'blog' || arg(0) == 'blog'){
+    }elseif($node_type == 'blog' || arg(0) == 'blog'){
         //return 'page-blog';
         return 'generic';
-    }elseif($type == 'event'){
+    }elseif($node_type == 'event'){
         return 'event-detail';
+    }elseif($item['path'] == 'cart'){
+        return 'generic';
     }else{
         return 'generic';
     }

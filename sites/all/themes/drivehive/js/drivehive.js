@@ -15,8 +15,6 @@ jQuery(document).ready(
 		}
 		return false;
 	});
-        
-        
             driveHive = {
                 getGoalStatus : function(product_id){
                     jQuery.get('/goal_status/' + product_id, function(data) {
@@ -28,22 +26,13 @@ jQuery(document).ready(
                                             var x = 0;
                                             var b = setInterval(function(){
                                                 jQuery('.goal-status').text('$' + x);
-                                                x += 28;
+                                                x += 4;
                                                 if(x >= data){
+                                                    jQuery('.goal-status').text('$' + data);
                                                     clearInterval(b);
                                                 }
                                             }, 100);
-
-                    });
-                    
+                    });  
                 }
             } 
-      
-      driveHive.initialCount();
-
-
-
-        }
-        );
-
-
+        });

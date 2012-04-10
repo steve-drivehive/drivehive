@@ -5,5 +5,16 @@ jQuery(document).ready(
             var match = addToCartFormId.match(/commerce-cart-add-to-cart-form-(\d+)(-\d+)?/);;
             jQuery('#' + match[0]).appendTo('#pledge-button');
             var product_id = jQuery('.event-detail-product-id').html();
+                        
             
+driveHive.initialCount(product_id);
+
+
+                        setInterval(function(){
+            
+driveHive.getGoalStatus(product_id);
+
+ }, 
+      3000);
+
         });
