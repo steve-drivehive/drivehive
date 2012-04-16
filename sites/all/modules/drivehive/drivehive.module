@@ -40,7 +40,7 @@ function drivehive_form_alter(&$form, &$form_state, $form_id){
                 $form['submit']['#src'] = drupal_get_path('theme','drivehive') . '/images/mailchimp_submit.gif';
                 //$form['mailchimp_lists']['mailchimp_3']['mergevars']['EMAIL']['#size'] = 29;
                 $form['mailchimp_lists']['mailchimp_3']['mergevars']['EMAIL']['#attributes'] = array(
-                    'onFocus'=>'if (this.value == "ENTER EMAIL ADDRESS") {this.value = "";}', 
+                    'onFocus'=>'if (this.value == "ENTER EMAIL ADDRESS") {this.value = "";}',
                     'onBlur'=>'if (this.value == "") {this.value = "ENTER EMAIL ADDRESS";}'
                     );
                 $form['mailchimp_lists']['mailchimp_3']['mergevars']['EMAIL']['#default_value'] = 'ENTER EMAIL ADDRESS';
@@ -51,7 +51,7 @@ function drivehive_form_alter(&$form, &$form_state, $form_id){
                         <li><a href="/about">about drive hive</a></li>
                         <li><a href="/privacy-policy">privacy &amp; legal</a></li>
                         <li><a href="/news">news</a></li>
-                        <li class="last"><a href="/contact-us">Contact US</a></li>       
+                        <li class="last"><a href="/contact-us">Contact US</a></li>
                     </ul>
                     </div><div class="fr">
                         <ul>
@@ -156,6 +156,6 @@ function drivehive_goal_progress($product_id){
     $query->condition('fdcp.commerce_product_product_id', $product_id);
     $query->condition('co.status', 'pending');
     $result = $query->execute()->fetch();
-    return empty($result->total) ? 0 : substr($result->total, 0, 2);
+    return empty($result->total) ? 0 : number_format(substr($result->total, 0, -2));
 }
 
