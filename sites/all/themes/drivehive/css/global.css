@@ -1822,7 +1822,7 @@ width:400px;
     height:795px;
     
 }
-#each_frontpage_slide{
+#each_frontpage_slide, .slide{
     position:absolute;
     float:left;
 }
@@ -1839,6 +1839,9 @@ pre{
     position:absolute;
     top:180px;
     width:440px;
+}
+.hide{
+    display:none;
 }
 .event-detail-large-banner-txt{
     font-size:70px;

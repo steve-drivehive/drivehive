@@ -54,14 +54,13 @@ function drivehive_preprocess_page(&$vars) {
         }else{
             $vars['banner_class'] = 'banner-generic';
         }
-    }
-    else{
+    }else{
         $vars['banner_class'] = 'banner-generic';
     }
     $vars['page_banner'] = '';
     // Grab the first event banner of each promoted event for the home page slider.
     if(drupal_is_front_page()){
-        drupal_add_js(path_to_theme() . '/js/drivehive_frontpage.js', 'file');
+        
 
         // Don't print the promoted content, just grab the banners.
         unset($vars['page']['content']['content']['content']['system_main']['nodes']);
@@ -73,17 +72,34 @@ function drivehive_preprocess_page(&$vars) {
             ->orderBy('n.created', 'desc');                        
         $result = $promoted_query->execute();
         $promoted_banners = '';
+        $banner_count = 0;
         foreach($result as $key=>$value){
             $promoted_nid = $value->nid;
             $event_node = node_load($value->nid);
-            $promoted_banners .= '<div id = "each_frontpage_slide">' . grab_node_image($event_node, 'field_event_detail_banner', 'event_detail_banner') . '</div>';
+            $wrapper = entity_metadata_wrapper('node', $event_node);
+            $title = $wrapper->title->value();
+            $overlay_alignment = $wrapper->field_overlay_alignment->value();
+            $alignment_class = $overlay_alignment == 'Left' ? 'overlay-left' : 'overlay-right';
+            $overlay_txt_color = $wrapper->field_event_detail_overlay_color->value();
+            $overlay_style = !empty($overlay_txt_color) ? ' style = "color:#' . $overlay_txt_color . '" ' : ' style="color:#000" ';
+            $event_banner_overlay =  '<div class="event-detail-banner-overlay hide ' . $alignment_class . '" ' . $overlay_style . '>' . $title . '</div>';
+            //print '<pre style="color:orange;font-size:11px;">';
+            //print_r($overlay_style);
+            //print '</pre>';
+            
+            $promoted_banners .= '<div id = "banner-container" class="slide" >' . $event_banner_overlay . '<div>' . grab_node_image($event_node, 'field_event_detail_banner', 'event_detail_banner') . '</div></div>';
+            $banner_count ++;
+            
         }
-
-        //todo: make js slideshow of the banner array.  For now just printing first one.
-        $vars['page_banner'] = '<div id ="banner-container">' . $promoted_banners . '</div>';
+        // Only slide if there are multiple front page events.
+        if($banner_count > 1){
+            drupal_add_js(path_to_theme() . '/js/drivehive_frontpage_slide.js', 'file');
+        }
+        
+        $vars['page_banner'] = '<div id ="banner-front-container">' . $promoted_banners . '</div>';
     }elseif(!empty($item['page_arguments'][0]->type)){
         if($item['page_arguments'][0]->type == 'event'){
-
+            
             $event_product_id = $item['page_arguments'][0]->field_event_product['und'][0]['product_id'];
             $event_banner_large_txt = '<div class = "event-detail-large-banner-txt">' . $item['page_arguments'][0]->field_event_banner_large_txt['und'][0]['value'] . '</div>';
             $event_banner_small_txt = '<div class = "event-detail-small-banner-txt">' . $item['page_arguments'][0]->field_event_banner_small_txt['und'][0]['value'] . '</div>';
@@ -205,17 +221,5 @@ function drivehive_body_id(){
         return 'generic';
     }else{
         return 'generic';
-    }
-}
-
-function drupal_print($var, $color = 'blue'){
-    if($color == 'blue'){
-        return drupal_set_message('<pre style="font-size:11px;">' . var_export($var, true) . '</pre>', 'status');
-    }	elseif($color == 'red'){
-        return drupal_set_message('<pre style="font-size:11px;">' . var_export($var, true) . '</pre>', 'error');
-    }	elseif($color == 'yellow'){
-        return drupal_set_message('<pre style="font-size:11px;">' . var_export($var, true) . '</pre>', 'warning');
-    }else{
-        return drupal_set_message('<pre style="font-size:11px;">' . var_export($var, true) . '</pre>', 'white');
     }
 }

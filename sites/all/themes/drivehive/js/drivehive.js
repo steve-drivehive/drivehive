@@ -21,6 +21,19 @@ jQuery(document).ready(
                         jQuery('.goal-status').html('$' + data);
                     });
                 },
+                homepageSlider : function(){
+                    jQuery('#banner-front-container div:last').parent().children().first().show();
+                    setInterval(function(){    
+                        jQuery('#banner-front-container div:last').parent().animate({
+                            left: '+=1200'
+                        }, 2000, 'swing', function() {            
+                            jQuery(this).parent().end().prependTo('#banner-front-container');
+                            jQuery(this).css({'left': 0});
+                            jQuery(this).children().first().hide();
+                            jQuery('#banner-front-container div:last').parent().children().first().fadeIn('fast');
+                        });    
+                    }, 3000);
+                },
                 initialCount : function(product_id){
                                         jQuery.get('/goal_status/' + product_id, function(data) {
                                             var x = 0;
