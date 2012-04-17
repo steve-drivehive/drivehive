@@ -7,7 +7,7 @@
     <?php print render($title_suffix); ?>
   </header>
   <?php endif; ?>
-  
+
   <div<?php print $content_attributes; ?>>
     <?php
       // We hide the comments and links now so that we can render them later.
@@ -26,17 +26,17 @@
 	&nbsp;</div>
             <div class="fl">
 	<?php if(!empty($charity_pic)){print $charity_pic;} ?>
-            
+
             </div>
            <div id="about">
 	<?php print render($content); ?>
-               
 
-<?php 
+
+<?php
 //print '<pre style="color:orange; font-size:11px;">';
 //print_r($content);
 //print '</pre>';
-//print render($content['field_event_product']); 
+//print render($content['field_event_product']);
 ?>
            </div>
 	</div> <!--#celebrity-->
@@ -45,14 +45,16 @@
 
 <?php print $event_sponsors; ?>
   </div>
-  	
+
 		<?php
-		
-		print $last_related_blog;
+
+        if(!empty($last_related_blog)){
+print $last_related_blog;
+}
 		?>
 
                                         <?php print $recent_blogs; ?>
-		                        
+
 
 
   <div class="clearfix">
@@ -60,24 +62,24 @@
       <nav class="links node-links clearfix"><?php //print render($content['links']); ?></nav>
     <?php endif; ?>
 	    <?php  print render($content['comments']); ?>
-      
-      
-      
-      
-      
-      
-      
-      
-      
-      
-      
-      
-      
-      
-      
-      
-      
-      
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 <div class="frame-wrapper" id="media-box">
                 	<div class="frame">
                     	<h4>TWITTER</h4>
@@ -151,8 +153,8 @@
                             </li>
                         </ul>
                     	</div>
-                    	
-                        
+
+
                         <h4>FACEBOOK</h4>
                         <div id="divFace" style="position: relative; width: 530px; height: 262px; overflow: hidden;">
                         <ul class="face" style="position: absolute; top: 0px; left: 0px; display: block; z-index: 3; opacity: 1; width: 530px;">
@@ -161,7 +163,7 @@
                                 	<img alt="" src="/sites/all/themes/drivehive/images/temp/face-pic1.jpg">
                                 </div><!-- /media-pic -->
                                 <div class="media-txt">
-                                	<a href="#">Awwwww snap! Coldplay = Awesome...this is all</a> by Jered Wilkerson 
+                                	<a href="#">Awwwww snap! Coldplay = Awesome...this is all</a> by Jered Wilkerson
                                 </div><!-- /media-txt -->
                             </li>
 							<li>
@@ -195,7 +197,7 @@
                                 	<img alt="" src="/sites/all/themes/drivehive/images/temp/face-pic1.jpg">
                                 </div><!-- /media-pic -->
                                 <div class="media-txt">
-                                	<a href="#">Awwwww snap! Coldplay = Awesome...this is all</a> by Jered Wilkerson 
+                                	<a href="#">Awwwww snap! Coldplay = Awesome...this is all</a> by Jered Wilkerson
                                 </div><!-- /media-txt -->
                             </li>
 							<li>
@@ -224,32 +226,10 @@
                             </li>
                         </ul>
                         </div>
-                        
+
                         <div class="fix"></div>
                     </div><!-- /frame -->
                 </div>
-      
-      
-      
-      
-      
-      
-      
-      
-      
-      
-      
-      
-      
-      
-      
-      
-      
-      
-      
-      
-      
-
 	<div id="event-detail-lower">
 
 

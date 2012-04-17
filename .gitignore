@@ -6,3 +6,4 @@ sites/*/files
 sites/*/private
 nbproject/*
 nbproject/
+.htaccess
