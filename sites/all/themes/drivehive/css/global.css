@@ -1840,12 +1840,55 @@ pre{
     top:180px;
     width:440px;
 }
+.current-goal{
+    font-size:20px;
+    color:#40B0AB;
+    float:right;
+    clear:both;
+}
+.frontpage-banner-overlay{
+    position:absolute;
+    top:450px;
+    width:700px;
+}
+.frontpage-banner-overlay.overlay-left{
+    text-align: left;
+    width:1100px;
+}
+.frontpage-banner-overlay.overlay-right{
+    margin-left: 0;
+    text-align: right;
+    width: 1000px;
+    xmargin-right:40px;
+}
+.frontpage-current-label{
+    background: none repeat scroll 0 0 #FFFFFF;
+    color: #000000;
+    float: right;
+    font-size: 12px;
+    font-weight: bold;
+    line-height: 20px;
+    padding: 0 3px;
+    width: 115px;
+}
+.frontpage-desc{
+    float: right;
+    font-size: 22px;
+    width: 400px;
+    clear:both;
+}
+.overlay-left{
+    text-align:right;
+}
+.overlay-right{
+    text-align:left;
+    margin-left:750px;
+}
 .hide{
     display:none;
 }
 .event-detail-large-banner-txt{
     font-size:70px;
-
 }
 .event-detail-small-banner-txt{
     font-size: 20px;
@@ -1865,6 +1908,7 @@ pre{
 .goal-status{
     font-size:100px;
 }
+
 .pledged-of{
     font-size:35px;
 }
@@ -1875,13 +1919,6 @@ pre{
     font-size:12px;
     font-family:times;
     margin-top:5px;
-}
-.overlay-left{
-    text-align:right;
-}
-.overlay-right{
-    text-align:left;
-    margin-left:750px;
 }
 #guest-blurb{
     float:left;
@@ -1901,4 +1938,10 @@ pre{
 }
 .mailchimp-newsletter-wrapper label{
     display:none;
+}
+.homepage-event-title{
+    float: right;
+    font-family: Georgia,"Times New Roman",Times,serif;
+    font-size: 80px;
+    clear:both;
 }

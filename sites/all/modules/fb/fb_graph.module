@@ -1,0 +1,314 @@
+<?php
+/**
+ * @file
+ * Open Graph Helpers
+ *
+ * This module adds Open Graph metadata to Drupal pages.
+ */
+
+// Menu paths.
+define('FB_GRAPH_PATH_DELETE', 'fb_graph/delete'); // Delete item from Open Graph.
+define('FB_GRAPH_PATH_DELETE_ARGS', 2); // length of path.
+
+// Variable names.
+define('FB_GRAPH_VAR_SMART_TAGS', 'fb_graph_smart_tags'); // Add tags learned from Drupal DB.
+
+define('FB_GRAPH_NOT_AN_OBJECT', 'fb_graph_none'); // deprecated
+
+/**
+ * Implements hook_menu().
+ *
+ * Pages for Facebook graph helper and administration.
+ */
+function fb_graph_menu() {
+  $items = array();
+
+  // @TODO: pages to browse graph items published this application and user.
+
+  // Delete an item from the graph.  Will only succeed when user has necessary permission.
+  $items[FB_GRAPH_PATH_DELETE . '/%'] = array(
+    'title' => 'Facebook Delete',
+    'description' => 'Delete an item from Facebook Open Graph',
+    'page callback' => 'drupal_get_form',
+    'page arguments' => array('fb_graph_delete_confirm_form',
+                              FB_GRAPH_PATH_DELETE_ARGS),
+    'access callback' => TRUE,
+    'type' => MENU_CALLBACK,
+    'file' => 'fb_graph.pages.inc',
+  );
+
+  return $items;
+}
+
+
+/**
+ * Helper function to publish user activity to Facebook's Open Graph.
+ */
+function fb_graph_publish_action($action, $params, $options = array()) {
+  // Defaults.
+  if (isset($options['fb_app'])) {
+    $fb_app = $options['fb_app'];
+  }
+  else {
+    $fb_app = $GLOBALS['_fb_app'];
+  }
+  if (isset($options['fbu'])) {
+    $fbu = $options['fbu'];
+  }
+  else {
+    $fbu = fb_facebook_user();
+  }
+
+  if (!$fbu || !$fb_app) {
+    // We don't have enough information.
+    return;
+  }
+
+  if (isset($options['action_type'])) {
+    $action_type = $options['action_type']; // Human readable verb.
+  }
+  else {
+    $action_type = $action;
+  }
+
+  if (!isset($params['access_token'])) {
+    $fb = fb_api_init($fb_app);
+    $params['access_token'] = fb_get_token($fb, $fbu);
+  }
+
+  try {
+    // @TODO: handle apps that have no canvas page.  how???
+    $path = $fbu . '/' . $fb_app->canvas . ':' . $action;
+    $result = fb_graph($path, $params, 'POST');
+
+    if (isset($result['id'])) {
+      $id = $result['id'];
+    }
+    elseif (isset($result['data']) && count($result['data'])) {
+      // Still needed???
+      $data = $result['data'][0];
+      $id = $data['id'];
+    }
+    else {
+      $id = NULL;
+    }
+    if ($id) {
+      $delete_url = url(FB_GRAPH_PATH_DELETE . '/' . $id, array(
+                          'destination' => $_GET['q'],
+                        ));
+      drupal_set_message(t('Published %action_type activity to Facebook.  (<a href=!delete_url>delete</a>)', array(
+                             '!delete_url' => $delete_url,
+                             '%action_type' => $action_type,
+                           )));
+      return $id;
+    }
+  }
+  catch (Exception $e) {
+    fb_log_exception($e, t('Failed to publish %action_type action.', array(
+                             '%action_type' => $action_type,
+                           )));
+  }
+}
+
+/**
+ * Define a metatag.  It will be published in the html header of the current page.
+ *
+ * @param $key
+ * The property attribute of the meta tag.
+ *
+ * @param $value
+ * The content attribute of the meta tag.
+ */
+function fb_graph_set_tag($key = NULL, $value = NULL) {
+  static $cache = array();
+  if (isset($key)) {
+    $cache[$key] = $value;
+  }
+  else {
+    return $cache;
+  }
+}
+
+/**
+ * Get the metatag values for the current page.
+ *
+ * @see fb_graph_set_tag()
+ */
+function fb_graph_get_tags() {
+  $tags = fb_graph_set_tag();
+  drupal_alter('fb_graph_tags', $tags);
+
+  extract(fb_vars());
+  // Add default tags.
+  if (isset($fb_app) && !isset($tags['fb:app_id'])) {
+    $tags['fb:app_id'] = $fb_app->id;
+  }
+
+  return $tags;
+}
+
+/**
+ * Implements hook_preprocess_page().
+ *
+ * Adds our meta tags to the html header.
+ */
+function fb_graph_preprocess_page(&$vars) {
+  $tags = fb_graph_get_tags();
+  if (count($tags)) {
+    foreach ($tags as $key => $value) {
+      drupal_add_html_head(array(
+                             '#tag' => 'meta',
+                             '#attributes' => array(
+                               'property' => $key,
+                               'content' => $value,
+                             ),
+                           ), $key);
+    }
+    //$vars['head'] = drupal_get_html_head();
+  }
+}
+
+// @deprecated
+function fb_graph_object_type_options($node_type = NULL) {
+  // @TODO it would be great to dynamically determine this.
+  // http://developers.facebook.com/docs/beta/opengraph/objects/builtin/
+  $options = array(
+    FB_GRAPH_NOT_AN_OBJECT => t('Not an Open Graph object'),
+    'article' => t('Article'),
+    'blog' => t('Blog'),
+  );
+  if ($node_type) {
+    $type_options = variable_get('fb_graph_object_types_' . $node_type, array(FB_GRAPH_NOT_AN_OBJECT));
+    foreach ($options as $key => $value) {
+      // Show only options allowed for this content type.
+      if (!in_array($key, $type_options)) {
+        unset($options[$key]);
+      }
+    }
+  }
+  return $options;
+}
+
+function fb_graph_form_alter(&$form, &$form_state, $form_id) {
+  if ($form_id == 'taxonomy_form_vocabulary') {
+    $vid = 0;
+    if (isset($form['vid'])) {
+      $vid = $form['vid']['#value'];
+    }
+    $form['fb_graph'] = array(
+      '#type' => 'fieldset',
+      '#title' => t('Open Graph'),
+      '#collapsible' => TRUE,
+      '#collapsed' => FALSE,
+    );
+    $form['fb_graph']['fb_graph_is_metadata'] = array(
+      '#title' => t('Treat tags as metadata'),
+      '#description' => t('Render terms as HTML header metadata.  The name of the vocabulary becomes the property, and terms become the content.  For example a vocabulary named "og:type" would have terms "article", "blog", etc...', array(
+                            '!url' => 'http://developers.facebook.com/docs/beta/opengraph/objects/builtin/',
+                          )),
+      '#type' => 'checkbox',
+      '#default_value' => variable_get('fb_graph_is_metadata_' . $vid, FALSE),
+    );
+
+    $form['#submit'][] = 'fb_graph_taxonomy_form_vocabulary_submit';
+
+    // Weights on taxonomy form are screwed up.
+    if (!isset($form['submit']['#weight'])) {
+      $form['submit']['#weight'] = 98;
+      $form['delete']['#weight'] = 99;
+    }
+  }
+
+  if ($form_id == 'node_type_form') {
+    // Allow administrator to configure which Object types this content type represents.
+
+    $form['fb_graph'] = array(
+      '#type' => 'fieldset',
+      '#title' => t('Open Graph'),
+      '#collapsible' => TRUE,
+      '#collapsed' => FALSE,
+    );
+    $form['fb_graph']['fb_graph_object_types'] = array(
+      '#title' => t('Object Type'),
+      '#description' => t('Which <a href=!url>object type(s)</a> can this content type represent?', array(
+                            '!url' => 'http://developers.facebook.com/docs/beta/opengraph/objects/builtin/',
+                          )),
+      '#type' => 'checkboxes',
+      '#options' => fb_graph_object_type_options(),
+      '#default_value' => variable_get('fb_graph_object_types_' . $form['#node_type']->type, array(FB_GRAPH_NOT_AN_OBJECT)),
+    );
+  }
+  elseif (isset($form['type']) && isset($form['#node']) && $form['type']['#value'] . '_node_form' == $form_id) {
+    $form['fb_graph'] = array(
+      '#type' => 'fieldset',
+      '#title' => t('Open Graph'),
+      '#collapsible' => TRUE,
+      '#collapsed' => FALSE,
+    );
+    $form['fb_graph']['fb_graph_object_type'] = array(
+      '#title' => t('Object Type'),
+      '#description' => t('Which <a href=!url>object type</a> does this node represent?', array(
+                            '!url' => 'http://developers.facebook.com/docs/beta/opengraph/objects/builtin/',
+                          )),
+      '#type' => 'radios',
+      '#options' => fb_graph_object_type_options($form['#node']->type),
+      '#default_value' => NULL, // ????
+    );
+
+  }
+}
+
+/**
+ * Form API submit handler.
+ *
+ * Save settings for each vocabulary.
+ */
+function fb_graph_taxonomy_form_vocabulary_submit($form, &$form_state) {
+  $values = $form_state['values'];
+  if (isset($values['fb_graph_is_metadata'])) {
+    variable_set('fb_graph_is_metadata_' . $values['vid'], $values['fb_graph_is_metadata']);
+  }
+}
+
+/**
+ * Implements hook_nodeapi().
+ *
+ */
+function fb_graph_nodeapi(&$node, $op, $a3 = NULL, $a4 = NULL) {
+  if ($op == 'view' && $a4) { // Full page view
+    foreach ($node->taxonomy as $tid => $term) {
+      if (variable_get('fb_graph_is_metadata_' . $term->vid, FALSE)) {
+        // Treat this tag as metadata.
+        unset($node->taxonomy[$tid]);
+        $v = taxonomy_vocabulary_load($term->vid);
+        fb_graph_set_tag($v->name, $term->name);
+
+        // @TODO support multiple terms concatinated together.
+      }
+    }
+
+    // Add smart default tags.
+    $tags = fb_graph_get_tags();
+    if (!isset($tags['og:url'])) {
+      fb_graph_set_tag('og:url', url('node/' . $node->nid, array('absolute' => TRUE)));
+    }
+    if (!isset($tags['og:title'])) {
+      fb_graph_set_tag('og:title', t($node->title));
+    }
+
+    if (isset($tags['og:type']) && variable_get(FB_GRAPH_VAR_SMART_TAGS, TRUE)) {
+      if ($tags['og:type'] == 'article') {
+        if (!isset($tags['article:author']) && $node->uid) {
+          fb_graph_set_tag('article:author', url('user/' . $node->uid, array('absolute' => TRUE)));
+        }
+        if (!isset($tags['article:published_time'])) {
+          fb_graph_set_tag('article:published_time', format_date($node->created, 'custom', 'Y-m-dTH:iZ'));
+        }
+        if (!isset($tags['article:modified_time'])) {
+          fb_graph_set_tag('article:modified_time', format_date($node->changed, 'custom', 'Y-m-dTH:iZ'));
+        }
+      }
+    }
+
+  }
+}

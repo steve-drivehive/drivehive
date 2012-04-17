@@ -1,8 +1,9 @@
 jQuery(document).ready(
 
         function(){
+            jQuery('#banner-front-container div:last').parent().children().first().show();
             	jQuery('#faq h4 a').click(function(){
-                    
+                
                 //console.log('click');
 		var clickedPar = jQuery(this).parent().siblings('p');
 		if(clickedPar.hasClass('active')){
@@ -18,6 +19,7 @@ jQuery(document).ready(
             driveHive = {
                 getGoalStatus : function(product_id){
                     jQuery.get('/goal_status/' + product_id, function(data) {
+                        
                         jQuery('.goal-status').html('$' + data);
                     });
                 },
@@ -32,7 +34,7 @@ jQuery(document).ready(
                             jQuery(this).children().first().hide();
                             jQuery('#banner-front-container div:last').parent().children().first().fadeIn('fast');
                         });    
-                    }, 3000);
+                    }, 9000);
                 },
                 initialCount : function(product_id){
                                         jQuery.get('/goal_status/' + product_id, function(data) {

@@ -156,6 +156,11 @@ function drivehive_goal_progress($product_id){
     $query->condition('fdcp.commerce_product_product_id', $product_id);
     $query->condition('co.status', 'pending');
     $result = $query->execute()->fetch();
-    return empty($result->total) ? 0 : number_format(substr($result->total, 0, -2));
+    $amount = empty($result->total) ? 0 : substr($result->total, 0, -2);
+    if(arg(0) == 'goal_status'){
+        return number_format($amount);
+    }else{
+        return $amount;
+    }
 }
 

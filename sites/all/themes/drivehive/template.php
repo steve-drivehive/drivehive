@@ -60,8 +60,6 @@ function drivehive_preprocess_page(&$vars) {
     $vars['page_banner'] = '';
     // Grab the first event banner of each promoted event for the home page slider.
     if(drupal_is_front_page()){
-        
-
         // Don't print the promoted content, just grab the banners.
         unset($vars['page']['content']['content']['content']['system_main']['nodes']);
         $promoted_query = db_select('node', 'n');
@@ -77,14 +75,22 @@ function drivehive_preprocess_page(&$vars) {
             $promoted_nid = $value->nid;
             $event_node = node_load($value->nid);
             $wrapper = entity_metadata_wrapper('node', $event_node);
-            $title = $wrapper->title->value();
+            $title = '<div class = "frontpage-current-label">CURRENT EVENT:</div><div class="homepage-event-title">' . strtoupper($wrapper->title->value()) . '</div>';
             $overlay_alignment = $wrapper->field_overlay_alignment->value();
             $alignment_class = $overlay_alignment == 'Left' ? 'overlay-left' : 'overlay-right';
             $overlay_txt_color = $wrapper->field_event_detail_overlay_color->value();
             $overlay_style = !empty($overlay_txt_color) ? ' style = "color:#' . $overlay_txt_color . '" ' : ' style="color:#000" ';
-            $event_banner_overlay =  '<div class="event-detail-banner-overlay hide ' . $alignment_class . '" ' . $overlay_style . '>' . $title . '</div>';
+            $product_id = $wrapper->field_event_product->product_id->value();
+            $amount_pledged = drivehive_goal_progress($product_id);
+            
+            $goal = $wrapper->field_event_goal->value();
+            $goal_percent = '<div class="frontpage-percent">' . substr(round($amount_pledged / $goal, 2), -2) . '</div>';
+            
+            $frontpage_desc = empty($wrapper->field_frontpage_desc) ? '' : '<div class="frontpage-desc">' . strtoupper($wrapper->field_frontpage_desc->value()) . '</div>';
+            $event_banner_overlay =  '<div class="frontpage-banner-overlay hide ' . $alignment_class . '" ' . $overlay_style . '>' . $title . $frontpage_desc . '<div class="current-goal">CURRENT GOAL:</div></div>';
+            
             //print '<pre style="color:orange;font-size:11px;">';
-            //print_r($overlay_style);
+            //print $goal . '<br/>' . $amount_pledged . '<br/>' . $goal_percent;
             //print '</pre>';
             
             $promoted_banners .= '<div id = "banner-container" class="slide" >' . $event_banner_overlay . '<div>' . grab_node_image($event_node, 'field_event_detail_banner', 'event_detail_banner') . '</div></div>';
@@ -94,6 +100,8 @@ function drivehive_preprocess_page(&$vars) {
         // Only slide if there are multiple front page events.
         if($banner_count > 1){
             drupal_add_js(path_to_theme() . '/js/drivehive_frontpage_slide.js', 'file');
+        }else{
+            //drupal_add_js();
         }
         
         $vars['page_banner'] = '<div id ="banner-front-container">' . $promoted_banners . '</div>';
