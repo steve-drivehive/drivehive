@@ -76,18 +76,23 @@ function drivehive_preprocess_page(&$vars) {
             $event_node = node_load($value->nid);
             $wrapper = entity_metadata_wrapper('node', $event_node);
             $title = '<div class = "frontpage-current-label">CURRENT EVENT:</div><div class="homepage-event-title">' . strtoupper($wrapper->title->value()) . '</div>';
+            /*
+            //ability to use event overlay alignment on front page, disabled for now, css for that not built, maybe not needed.
             $overlay_alignment = $wrapper->field_overlay_alignment->value();
             $alignment_class = $overlay_alignment == 'Left' ? 'overlay-left' : 'overlay-right';
+            */
+            $alignment_class = 'overlay-right';
             $overlay_txt_color = $wrapper->field_event_detail_overlay_color->value();
             $overlay_style = !empty($overlay_txt_color) ? ' style = "color:#' . $overlay_txt_color . '" ' : ' style="color:#000" ';
             $product_id = $wrapper->field_event_product->product_id->value();
             $amount_pledged = drivehive_goal_progress($product_id);
             
             $goal = $wrapper->field_event_goal->value();
-            $goal_percent = '<div class="frontpage-percent">' . substr(round($amount_pledged / $goal, 2), -2) . '</div>';
+            $goal_percent = substr(round($amount_pledged / $goal, 2), -2);
+            $thermometer_section = '<div id = "therm-container"><div class="therm-fg"></div><div class="therm-bg"></div><div class="frontpage-percent">' . $goal_percent . '%</div></div>';
             
             $frontpage_desc = empty($wrapper->field_frontpage_desc) ? '' : '<div class="frontpage-desc">' . strtoupper($wrapper->field_frontpage_desc->value()) . '</div>';
-            $event_banner_overlay =  '<div class="frontpage-banner-overlay hide ' . $alignment_class . '" ' . $overlay_style . '>' . $title . $frontpage_desc . '<div class="current-goal">CURRENT GOAL:</div></div>';
+            $event_banner_overlay =  '<div class="frontpage-banner-overlay hide ' . $alignment_class . '" ' . $overlay_style . '>' . $title . $frontpage_desc . '<div class="current-goal">CURRENT GOAL:</div>' . $thermometer_section . '</div>';
             
             //print '<pre style="color:orange;font-size:11px;">';
             //print $goal . '<br/>' . $amount_pledged . '<br/>' . $goal_percent;
