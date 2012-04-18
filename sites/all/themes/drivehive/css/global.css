@@ -13,7 +13,7 @@ html, body, div, span, applet, object, iframe, h1, h2, h3, h4, h5, h6, p, blockq
 	background:#fff;
 }
  body#generic{
-    
+
     background: url(/sites/all/themes/drivehive/images/page-bg.png) no-repeat center top #000;
 }
 body#generic #section-content{
@@ -157,7 +157,7 @@ table {
 	font-family: Arial,Helvetica,Sans-Serif;
 }
 body {
-	background: url(/sites/all/themes/drivehive/images/page-bg.png) no-repeat center top #000; 
+	background: url(/sites/all/themes/drivehive/images/page-bg.png) no-repeat center top #000;
 }
 .fix{
 	clear: both;
@@ -309,7 +309,7 @@ a:hover {
 .frame-wrapper {
 	background-color: #eef0dd;
 	padding: 15px;
-	
+
 }
 .frame {
 	border: 3px solid #efdf11;
@@ -329,7 +329,7 @@ a:hover {
 }
 #blog .frame-wrapper{
 		width: 614px;
-	
+
 }
 #blog .frame h2 {
 	font-size: 30px;
@@ -496,7 +496,7 @@ a:hover {
 	float: left;
     height: 23px;
     margin-top: 13px;
-    width: 80px; 
+    width: 80px;
 }
 #leave-comment form label {
 	display: block;
@@ -1333,7 +1333,7 @@ a:hover {
 	margin-right: 12px;
 	background: url(/sites/all/themes/drivehive/images/slogan-underline.png) no-repeat right bottom;
 	padding-bottom: 20px;
-	
+
 }
 
 /*=== account ===*/
@@ -1438,7 +1438,7 @@ a:hover {
 	float: left;
 	width: 15px;
 	height: 70px;
-	margin-right: 9px;  
+	margin-right: 9px;
 }
 .payment-radio {
 	font-family: Gotham-bki;
@@ -1542,16 +1542,15 @@ dd.act2 a {
 }
 #footer-wrap {
 	border: 3px solid #efdf11;
-	margin: 20px 0 7px 176px;
-	width: 897px;
+        margin: 20px 0 0 0;
         height:100px;
-	background: url(/sites/all/themes/drivehive/images/footer-signes.png) no-repeat #000;
+	background: url(/sites/all/themes/drivehive/images/footer-signes.png) no-repeat  scroll 145px 0 #000;
 }
 #footer-wrap .fl {
 	color: #efdf11;
-	font-size: 42px;
-	width: 467px;
 	padding: 14px 0 0 11px;
+        position:absolute;
+        left:25px;
 }
 #footer-wrap .fl ul {
 	display: block;
@@ -1560,13 +1559,13 @@ dd.act2 a {
 }
 #footer-wrap .fl ul li {
 	float: left;
-	font-size: 9px;
+        font-size:12px;
 	margin-right: 10px;
 }
 #footer-wrap .fl ul li a {
 	color: #fcf9f9;
 	text-transform: uppercase;
-	
+
 }
 #footer-wrap .fl span {
 	font-family: Akzidenz-b;
@@ -1587,8 +1586,8 @@ dd.act2 a {
 	word-spacing: -1px;
 }
 #footer-wrap .fr ul {
-	width: 185px;
-	float: right;
+    left:860px;
+    position:absolute;
 }
 #footer-wrap .fr ul li {
 	float: left;
@@ -1788,11 +1787,11 @@ dd.act2 a {
 	margin-right:0 !important;
 }
 .container-12 .grid-12{
-width:1200px !important;	
+width:1200px !important;
 }
 #block-block-3{
 float:right;
-width:400px;	
+width:400px;
 }
 #block-block-2{
 	float:left;
@@ -1820,7 +1819,7 @@ width:400px;
 }
 #banner-container{
     height:795px;
-    
+
 }
 #each_frontpage_slide, .slide{
     position:absolute;
@@ -1872,7 +1871,6 @@ pre{
     font-weight: bold;
     line-height: 20px;
     padding: 0 3px;
-    width: 115px;
 }
 .frontpage-desc{
     float: right;
@@ -1931,16 +1929,19 @@ pre{
     clear:both;
     margin-bottom:20px;
 }
+.block-mailchimp-lists{
+left:625px;
+position:absolute;
+}
 .mailchimp-newsletter-wrapper input{
     font-size: 16px;
     margin-top:-15px;
     width:297px;
 }
 #footer-wrap .form-submit{
-    border: 1px solid;
     left: 297px;
-    margin-top: -163px;
-    position: relative;
+    position: absolute;
+    top:0px;
 }
 .mailchimp-newsletter-wrapper label{
     display:none;
@@ -1976,4 +1977,7 @@ pre{
     font-family:'Akzidenz-b';
     color:#EFDF11;
     float:right;
+}
+#mailchimp-lists-user-subscribe-form-3 > div{
+        position:relative;
 }
