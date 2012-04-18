@@ -88,56 +88,47 @@ function drivehive_preprocess_page(&$vars) {
             $amount_pledged = drivehive_goal_progress($product_id);
             
             $goal = $wrapper->field_event_goal->value();
-            $goal_percent = substr(round($amount_pledged / $goal, 2), -2);
-            $thermometer_section = '<div id = "therm-container"><div class="therm-fg"></div><div class="therm-bg"></div><div class="frontpage-percent">' . $goal_percent . '%</div></div>';
-            
+            $goal_percent = round($amount_pledged / $goal, 2);
+            $goal_percent_printed = substr(round($amount_pledged / $goal, 2), -2);
+            // thermometer image width is 197px, need to calculate percentage of width to move yellow image over
+            $thermometer_width = round(($goal_percent * 197), 0) . 'px';
+            $therm_fg_style = "width:" . $thermometer_width;
+            //print '<pre style="color:orange;font-size:11px;">';
+            //print $therm_fg_style;
+            //print '</pre>';
+            $thermometer_section = '<div id = "therm-container"><div style="' . $therm_fg_style . '" class="therm-fg"></div><div class="therm-bg"></div><div class="frontpage-percent">' . $goal_percent_printed . '%</div></div>';
             $frontpage_desc = empty($wrapper->field_frontpage_desc) ? '' : '<div class="frontpage-desc">' . strtoupper($wrapper->field_frontpage_desc->value()) . '</div>';
             $event_banner_overlay =  '<div class="frontpage-banner-overlay hide ' . $alignment_class . '" ' . $overlay_style . '>' . $title . $frontpage_desc . '<div class="current-goal">CURRENT GOAL:</div>' . $thermometer_section . '</div>';
-            
-            //print '<pre style="color:orange;font-size:11px;">';
-            //print $goal . '<br/>' . $amount_pledged . '<br/>' . $goal_percent;
-            //print '</pre>';
-            
             $promoted_banners .= '<div id = "banner-container" class="slide" >' . $event_banner_overlay . '<div>' . grab_node_image($event_node, 'field_event_detail_banner', 'event_detail_banner') . '</div></div>';
             $banner_count ++;
-            
         }
         // Only slide if there are multiple front page events.
         if($banner_count > 1){
             drupal_add_js(path_to_theme() . '/js/drivehive_frontpage_slide.js', 'file');
-        }else{
-            //drupal_add_js();
         }
-        
         $vars['page_banner'] = '<div id ="banner-front-container">' . $promoted_banners . '</div>';
     }elseif(!empty($item['page_arguments'][0]->type)){
         if($item['page_arguments'][0]->type == 'event'){
-            
             $event_product_id = $item['page_arguments'][0]->field_event_product['und'][0]['product_id'];
             $event_banner_large_txt = '<div class = "event-detail-large-banner-txt">' . $item['page_arguments'][0]->field_event_banner_large_txt['und'][0]['value'] . '</div>';
             $event_banner_small_txt = '<div class = "event-detail-small-banner-txt">' . $item['page_arguments'][0]->field_event_banner_small_txt['und'][0]['value'] . '</div>';
             $with_your_pledge = '<div class="event-detail-with-your-pledge">' . $item['page_arguments'][0]->field_with_your_pledge['und'][0]['value'] . '</div>';
-
             $overlay_alignment = $item['page_arguments'][0]->field_overlay_alignment['und'][0]['value'];
             $alignment_class = $overlay_alignment == 'Left' ? 'overlay-left' : 'overlay-right';
-
             $event_final_goal_amt = number_format($item['page_arguments'][0]->field_event_goal['und'][0]['value']);
             $goal_status = 0;
             $goal_section = '<div class="goal-overlay"><div class="goal-status">$' . $goal_status . '</div><div class = "pledged-of">PLEDGED OF $' . $event_final_goal_amt . '</div><div class="event-detail-product-id">' . $event_product_id . '</div></div>';            
             $overlay_txt_color = $item['page_arguments'][0]->field_event_detail_overlay_color['und'][0]['jquery_colorpicker'];
             $overlay_style = !empty($overlay_txt_color) ? ' style = "color:#' . $overlay_txt_color . '" ' : ' style="color:#000" ';
             $event_timestamp = strtotime($item['page_arguments'][0]->field_event_date['und'][0]['value']);
-
             $event_day = date('d', $event_timestamp);
             $event_month = date('m', $event_timestamp);
             $event_year = date('y', $event_timestamp);
-            //<span class="date-divider" >&nbsp;</span>
             $event_date = '<div class="event-detail-date">' . $event_month . '.' . $event_day . '.' . $event_year . '</div>';
             $event_banner_overlay =  '<div class="event-detail-banner-overlay ' . $alignment_class . '" ' . $overlay_style . '>' . $event_banner_large_txt . $event_banner_small_txt . $event_date . $goal_section . $with_your_pledge . '</div>';
             $event_node = $item['page_arguments'][0];
             $vars['page_banner'] = '<div id ="banner-container" >' . $event_banner_overlay . grab_node_image($event_node, 'field_event_detail_banner', 'event_detail_banner') . '<div id="pledge-button"></div>
                 </div>';
-
         }
     }
 }
@@ -209,14 +200,14 @@ function drivehive_preprocess_node(&$vars) {
  */
 
 function drivehive_body_id(){
-    $type = '';
+    $node_type = '';
+    
     $item = menu_get_item();
     //debug($item);
     if(is_array($item['load_functions'])){
         if(in_array('node_load', $item['load_functions'])){
             $node_type = $item['page_arguments'][0]->type;
         }
-
     }
         else{
             $node_type = '';
