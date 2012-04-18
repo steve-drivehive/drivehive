@@ -1860,7 +1860,7 @@ pre{
 .frontpage-banner-overlay.overlay-right{
     margin-left: 0;
     text-align: right;
-    width: 1000px;
+    width: 1080px;
 }
 
 .frontpage-current-label{
@@ -1968,7 +1968,7 @@ position:absolute;
 }
 .therm-fg{
     background: url("/sites/all/themes/drivehive/images/drivehive_therm_yellow.png") no-repeat scroll 0 0 transparent;
-    left: 800px;
+    left: 880px;
     position: absolute;
     width: 128px;
 }
