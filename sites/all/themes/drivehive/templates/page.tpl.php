@@ -6,10 +6,10 @@
 ?>
 <div<?php print $attributes; ?>>
     <div id="<?php print $banner_class;?>">
-	<div id="baner-images">
+	<div id="banner-images">
             <?php print $page_banner; ?>
-	</div><!-- /baner-images -->
-	<div id="baner-contents">
+	</div><!-- /banner-images -->
+	<div id="banner-contents">
   <?php if (isset($page['header'])) : ?>
     <?php print render($page['header']); ?>
   <?php endif; ?>
