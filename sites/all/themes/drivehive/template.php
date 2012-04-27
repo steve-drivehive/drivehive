@@ -22,11 +22,15 @@ function drivehive_preprocess_comment_wrapper(&$vars){
 }
 
 /*
- * @param $node object
- * @param $img_field the image field you want to return, themed
- * @param $style the imagecache style to apply to this image
+ * @param $node
+ *   A node object
+ * @param $img_field 
+ *   The image field you want to return, themed
+ * @param $style 
+ *   The imagecache style to apply to this image
+ * @return 
+ *   fully themed image markup
  * 
- * @return fully themed image markup
  */
 function grab_node_image($node, $img_field, $style){
 	$wrapper = entity_metadata_wrapper('node', $node);
@@ -39,7 +43,7 @@ function grab_node_image($node, $img_field, $style){
 }
 
 function drivehive_preprocess_page(&$vars) {
-	
+    global $base_url;
     drupal_add_js(path_to_theme().'/js/drivehive.js');
     drupal_add_js(path_to_theme().'/js/jquery.cycle.all.js');
     drupal_add_js(path_to_theme().'/js/jquery.main.js');
@@ -75,12 +79,7 @@ function drivehive_preprocess_page(&$vars) {
             $promoted_nid = $value->nid;
             $event_node = node_load($value->nid);
             $wrapper = entity_metadata_wrapper('node', $event_node);
-            $title = '<div class = "frontpage-current-label">CURRENT EVENT:</div><div class="homepage-event-title">' . strtoupper($wrapper->title->value()) . '</div>';
-            /*
-            //ability to use event overlay alignment on front page, disabled for now, css for that not built, maybe not needed.
-            $overlay_alignment = $wrapper->field_overlay_alignment->value();
-            $alignment_class = $overlay_alignment == 'Left' ? 'overlay-left' : 'overlay-right';
-            */
+            $title = t('<div class = "frontpage-current-label">CURRENT EVENT:</div><div class="homepage-event-title">@title</div>', array('@title' => strtoupper($wrapper->title->value())));
             $alignment_class = 'overlay-right';
             $overlay_txt_color = $wrapper->field_event_detail_overlay_color->value();
             $overlay_style = !empty($overlay_txt_color) ? ' style = "color:#' . $overlay_txt_color . '" ' : ' style="color:#000" ';
@@ -90,7 +89,11 @@ function drivehive_preprocess_page(&$vars) {
             $goal = $wrapper->field_event_goal->value();
             $goal_percent = round($amount_pledged / $goal, 2);
             $goal_percent_printed = substr(round($amount_pledged / $goal, 2), -2);
-            // thermometer image width is 197px, need to calculate percentage of width to move yellow image over
+            
+            /*
+             *  Thermometer image width is 197px, need to calculate percentage of width to move yellow image over
+             */
+            
             $thermometer_width = round(($goal_percent * 197), 0) . 'px';
             $therm_fg_style = "width:" . $thermometer_width;
             //print '<pre style="color:orange;font-size:11px;">';
@@ -99,7 +102,8 @@ function drivehive_preprocess_page(&$vars) {
             $thermometer_section = '<div id = "therm-container"><div style="' . $therm_fg_style . '" class="therm-fg"></div><div class="therm-bg"></div><div class="frontpage-percent">' . $goal_percent_printed . '%</div></div>';
             $frontpage_desc = empty($wrapper->field_frontpage_desc) ? '' : '<div class="frontpage-desc">' . strtoupper($wrapper->field_frontpage_desc->value()) . '</div>';
             $event_banner_overlay =  '<div class="frontpage-banner-overlay hide ' . $alignment_class . '" ' . $overlay_style . '>' . $title . $frontpage_desc . '<div class="current-goal">CURRENT GOAL:</div>' . $thermometer_section . '</div>';
-            $promoted_banners .= '<div id = "banner-container" class="slide" >' . $event_banner_overlay . '<div>' . grab_node_image($event_node, 'field_event_detail_banner', 'event_detail_banner') . '</div></div>';
+            $event_alias = $base_url . '/' . drupal_get_path_alias('node/' . $value->nid);
+            $promoted_banners .= '<div id = "banner-container" class="slide" ><a href="' . $event_alias . '">' . $event_banner_overlay . '</a><div>' . grab_node_image($event_node, 'field_event_detail_banner', 'event_detail_banner') . '</div></div>';
             $banner_count ++;
         }
         // Only slide if there are multiple front page events.
@@ -134,12 +138,10 @@ function drivehive_preprocess_page(&$vars) {
 }
 
 function drivehive_preprocess_node(&$vars) {
-
     global $base_url;
     $nid = $vars['nid'];
     $node = node_load($nid);
     $vars['event_sponsors'] = '';
-
     $vars['timestamp'] = $vars['created'];
     // if this is a blog post, find what event it is referencing.
     if($vars['type'] == 'blog'){

@@ -1,4 +1,5 @@
 jQuery(document).ready(
         function(){
-            driveHive.homepageSlider();        
+            driveHive.homepageSlider();     
+            driveHive.swapHomePledgeLink();
         });

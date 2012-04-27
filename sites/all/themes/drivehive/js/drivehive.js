@@ -1,5 +1,4 @@
 jQuery(document).ready(
-
         function(){
             jQuery('#banner-front-container div:last').parent().children().first().show();
             	jQuery('#faq h4 a').click(function(){
@@ -24,17 +23,18 @@ jQuery(document).ready(
                     });
                 },
                 homepageSlider : function(){
-                    jQuery('#banner-front-container div:last').parent().children().first().show();
+                    jQuery('#banner-front-container div:last').parent().children().children().first().show();
                     setInterval(function(){    
                         jQuery('#banner-front-container div:last').parent().animate({
                             left: '+=1200'
                         }, 2000, 'swing', function() {            
                             jQuery(this).parent().end().prependTo('#banner-front-container');
                             jQuery(this).css({'left': 0});
-                            jQuery(this).children().first().hide();
-                            jQuery('#banner-front-container div:last').parent().children().first().fadeIn('fast');
+                            jQuery(this).children().children().first().hide();
+                            jQuery('#banner-front-container div:last').parent().children().children().first().fadeIn('fast');
+                            driveHive.swapHomePledgeLink();
                         });    
-                    }, 9000);
+                    }, 2000);
                 },
                 initialCount : function(product_id){
                                         jQuery.get('/goal_status/' + product_id, function(data) {
@@ -48,6 +48,11 @@ jQuery(document).ready(
                                                 }
                                             }, 100);
                     });  
+                },
+                swapHomePledgeLink : function(){
+                             pledgeLink = jQuery('#banner-front-container div:last').parent().children().first().attr('href');
+                            jQuery('#donate').attr('href', pledgeLink);
                 }
+               
             } 
         });

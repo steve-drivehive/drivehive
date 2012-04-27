@@ -92,17 +92,13 @@ function hive_menu(){
     $items['goal_status/%'] = array(
     'title' => 'Event Updates',
     'description' => 'Goal Status',
-    'page callback' => 'hive_ajax_goal_status',
+    'page callback' => 'drivehive_ajax_goal_status',
     'file' => 'pages.inc',
     'access arguments' => array('access drivehive'),
     'file path' => drupal_get_path('module', 'hive'),
     //'delivery callback' => 'ajax_deliver',
     );
-    /*
-        $items['test'] = array(
-    'page callback' => 'test_callback',
-    'access arguments' => array('access drivehive'),
-    );*/
+
 return $items;
 }
 
