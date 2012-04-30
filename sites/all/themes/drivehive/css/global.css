@@ -203,7 +203,7 @@ a:hover {
 
 /*=== current-event ===*/
 
-#baner-part {
+#banner-part {
 	height: 797px;
 	width: 100%;
 	background: url(/sites/all/themes/drivehive/images/banner.jpg) no-repeat;
@@ -650,7 +650,7 @@ a:hover {
         width: 100%;
         height:130px;
 }
-#baner-images {
+#banner-images {
 	position: absolute;
 	top: 0;
 	left: 0;
@@ -658,29 +658,29 @@ a:hover {
 	height: 795px;
 	overflow: hidden;
 }
-#baner-images ul {
+#banner-images ul {
 	position: absolute;
 	top: 0;
 	left: 0;
 }
-#baner-images ul li {
+#banner-images ul li {
 	float: left;
 	width: 1200px;
 	height: 795px;
 }
-#baner-images ul #no1 {
+#banner-images ul #no1 {
 	/*background: url(/sites/all/themes/drivehive/images/img1.jpg) no-repeat;*/
 }
-#baner-images ul #no2 {
+#banner-images ul #no2 {
 	background: url(/sites/all/themes/drivehive/images/img2.jpg) no-repeat;
 }
-#baner-images ul #no3 {
+#banner-images ul #no3 {
 	background: url(/sites/all/themes/drivehive/images/img3.jpg) no-repeat;
 }
-#baner-images ul #no4 {
+#banner-images ul #no4 {
 	background: url(/sites/all/themes/drivehive/images/img4.jpg) no-repeat;
 }
-#baner-contents {
+#banner-contents {
 	position: absolute;
 	top: 0;
 	left: 0
